@@ -1,0 +1,16 @@
+image: node:12
+
+pipelines:
+  default:
+    - step:
+        name: Test and Build
+        caches:
+          - node
+        script:
+          - npm ci
+          - npm run lint
+          - npm run build
+          - pipe: atlassian/aws-s3-deploy:0.4.5
+            variables:
+              S3_BUCKET: 'imagine-cruising-app-nirvana-dev'
+              LOCAL_PATH: 'dist'
