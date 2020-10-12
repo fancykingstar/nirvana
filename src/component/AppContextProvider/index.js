@@ -1,5 +1,11 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import {
+    Redirect,
+    Route,
+    Switch,
+    useHistory,
+    useRouteMatch,
+} from "react-router-dom";
 
 import usePersistedState from "../../hooks/usePersistedState";
 
@@ -21,9 +27,9 @@ export function useAPIFetch() {
 
 export default function AppContextProvider({ children }) {
     const history = useHistory();
-    const {
-        params: { env },
-    } = useRouteMatch("/:env");
+    const routeMatch = useRouteMatch("/:env");
+
+    const env = routeMatch?.params?.env ?? "prod";
 
     const [session, setSession] = usePersistedState(
         {
@@ -68,5 +74,17 @@ export default function AppContextProvider({ children }) {
         [env, session],
     );
 
-    return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+    return (
+        <AppContext.Provider value={value}>
+            {children}
+            <Switch>
+                <Route path="/prod" />
+                <Route path="/dev" />
+                <Route path="/local" />
+                <Route>
+                    <Redirect to="/prod" />
+                </Route>
+            </Switch>
+        </AppContext.Provider>
+    );
 }
