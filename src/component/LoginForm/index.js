@@ -7,32 +7,29 @@ function formNoop(e) {
 }
 
 export default function LoginForm({ setJWT }) {
-    const { url: networkEnvUrl } = useAppContext();
-    const [email, setEmail] = React.useState("developer@imaginecruising.co.uk");
-    const [password, setPassword] = React.useState("Swordfish123!");
+    const { setSession, apiFetch } = useAppContext();
 
-    async function requestJWT() {
-        const {
-            data: { token },
-        } = await fetch(`${networkEnvUrl}/admin/login`, {
+    const [identifier, setIdentifier] = React.useState("Content Management");
+    const [password, setPassword] = React.useState("password");
+
+    function requestJWT() {
+        apiFetch("/auth/local", {
             method: "POST",
             body: JSON.stringify({
-                email,
+                identifier,
                 password,
             }),
-
-            headers: {},
-        }).then((x) => x.json());
-
-        setJWT(token);
+        })
+            .then((x) => x.json())
+            .then(setSession);
     }
 
     return (
         <form onSubmit={formNoop}>
             <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
             />
             <input
                 type="password"

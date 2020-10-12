@@ -19,35 +19,27 @@ export function useAPIFetch() {
 }
 
 export default function AppContextProvider({ children }) {
-    const [appContext, setAppContext] = usePersistedState(
+    const [env, setEnv] = usePersistedState("prod", "app-env");
+
+    const [session, setSession] = usePersistedState(
         {
-            env: "prod",
-            jwt: {},
+            jwt: null,
         },
-        "api-env",
+        `app-session-${env}`,
     );
 
     const value = React.useMemo(
         () => ({
-            ...appContext,
+            env,
+            session,
 
-            jwt: appContext.jwt[appContext.env] || null,
-            url: urls[appContext.env],
+            url: urls[env],
 
-            setJWT: (jwt) =>
-                setAppContext((appContext) => ({
-                    ...appContext,
-                    jwt,
-                })),
-
-            setEnv: (env) =>
-                setAppContext((appContext) => ({
-                    ...appContext,
-                    env,
-                })),
+            setSession,
+            setEnv,
 
             apiFetch: (url, options) =>
-                fetch([appContext.url, url].join("/"), {
+                fetch(`${urls[env]}${url}`, {
                     ...options,
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",
@@ -55,7 +47,7 @@ export default function AppContextProvider({ children }) {
                     },
                 }),
         }),
-        [appContext],
+        [env, session],
     );
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

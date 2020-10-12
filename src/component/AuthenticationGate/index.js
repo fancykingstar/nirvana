@@ -6,10 +6,13 @@ import { useAppContext } from "../AppContextProvider";
 import LoginForm from "../LoginForm";
 
 export default function AuthenticationGate({ children }) {
-    const { jwt, setJWT } = useAppContext();
+    const {
+        session: { jwt },
+        setJWT,
+    } = useAppContext();
 
     const jwtIsValid = React.useMemo(() => {
-        if (jwt === null) {
+        if (!jwt) {
             return false;
         }
 
