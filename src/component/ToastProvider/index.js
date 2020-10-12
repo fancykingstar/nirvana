@@ -10,15 +10,15 @@ const ToastsContainer = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding: 0.5rem;
+    padding: ${(x) => x.theme.size[0]};
 `;
 
 const ToastWrapper = styled.div`
-    padding: 0.5rem;
+    padding: ${(x) => x.theme.size[2]};
 `;
 
 const ToastContainer = styled.div`
-    padding: 0.5rem;
+    padding: ${(x) => x.theme.size[2]};
     border-style: solid;
     border-width: 2px;
     border-color: ${({ color }) => color || "grey"};
@@ -26,8 +26,8 @@ const ToastContainer = styled.div`
 `;
 
 const ToastTitle = styled.div`
-    padding: 0.25rem 0;
-    font-size: 1.25em;
+    padding: ${(x) => x.theme.size[1]} 0;
+    font-size: ${(x) => x.theme.text[2]};
     font-weight: bold;
 `;
 
@@ -93,7 +93,10 @@ export default function ToastProvider({ children }) {
                 <ToastsContainer>
                     {toastsSorted.map(({ id, color, title, message }) => (
                         <ToastWrapper key={id}>
-                            <ToastContainer color={color}>
+                            <ToastContainer
+                                color={color}
+                                onClick={() => dispatch({ type: "REMOVE", id })}
+                            >
                                 <ToastTitle>{title}</ToastTitle>
                                 {message}
                             </ToastContainer>

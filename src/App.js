@@ -2,28 +2,33 @@ import React from "react";
 
 import { Route, BrowserRouter as RouterProvider } from "react-router-dom";
 
+import ThemeProvider from "./component/ThemeProvider";
 import AppContextProvider from "./component/AppContextProvider";
 import ToastProvider from "./component/ToastProvider";
+import AuthenticationGate from "./component/AuthenticationGate";
 
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import Main from "./component/Main";
-import AuthenticationGate from "./component/AuthenticationGate";
 
 export default function App() {
     return (
-        <RouterProvider>
-            <Route>
-                <AppContextProvider>
-                    <ToastProvider>
-                        <Header />
-                        <AuthenticationGate>
-                            <Main>here be content</Main>
-                        </AuthenticationGate>
-                        <Footer />
-                    </ToastProvider>
-                </AppContextProvider>
-            </Route>
-        </RouterProvider>
+        <ThemeProvider>
+            <RouterProvider>
+                <Route>
+                    <AppContextProvider>
+                        <ToastProvider>
+                            <Header />
+                            <Main>
+                                <AuthenticationGate>
+                                    here be content
+                                </AuthenticationGate>
+                            </Main>
+                            <Footer />
+                        </ToastProvider>
+                    </AppContextProvider>
+                </Route>
+            </RouterProvider>
+        </ThemeProvider>
     );
 }
