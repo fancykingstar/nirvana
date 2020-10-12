@@ -19,9 +19,7 @@ export default function LoginForm() {
                 identifier,
                 password,
             }),
-        })
-            .then((x) => x.json())
-            .then(setSession);
+        }).then(setSession);
     }
 
     return (

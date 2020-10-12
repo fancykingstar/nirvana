@@ -38,14 +38,22 @@ export default function AppContextProvider({ children }) {
             setSession,
             setEnv,
 
-            apiFetch: (url, options) =>
+            apiFetch: (url, options = {}) =>
                 fetch(`${urls[env]}${url}`, {
                     ...options,
                     headers: {
                         "Content-Type": "application/json;charset=utf-8",
-                        ...options.headers,
+                        ...(session.jwt
+                            ? {
+                                  Authorization: `Bearer ${session.jwt}`,
+                              }
+                            : {}),
+
+                        ...(options.headers || {}),
                     },
-                }),
+                })
+                    .then((x) => x.json())
+                    .catch(console.error),
         }),
         [env, session],
     );
