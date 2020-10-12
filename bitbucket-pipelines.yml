@@ -26,6 +26,8 @@ pipelines:
               variables:
                 S3_BUCKET: 'dev.nirvana.imaginecruising.net'
                 LOCAL_PATH: 'dist'
+                DELETE_FLAG: 'true'
+
       - step:
           name: Deploy to Production
           deployment: production
