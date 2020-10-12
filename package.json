@@ -41,8 +41,8 @@
         }
     },
     "lint-staged": {
-        "*.js": "eslint --fix",
-        "*.{html,js,scss,md,json}": "prettier --write"
+        "**/*.js": "eslint --fix",
+        "**/*.{html,js,scss,md,json}": "prettier --write"
     },
     "jest": {
         "testPathIgnorePatterns": [

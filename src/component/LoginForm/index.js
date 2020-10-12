@@ -6,7 +6,7 @@ function formNoop(e) {
     e.preventDefault();
 }
 
-export default function LoginForm({ setJWT }) {
+export default function LoginForm() {
     const { setSession, apiFetch } = useAppContext();
 
     const [identifier, setIdentifier] = React.useState("Content Management");
