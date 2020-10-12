@@ -15,11 +15,25 @@ pipelines:
     master:
       - step:
           name: Test and Build
+          deployment: staging
           caches:
             - node
           script:
             - npm ci
             - npm run lint
+            - npm run build
+            - pipe: atlassian/aws-s3-deploy:0.4.5
+              variables:
+                S3_BUCKET: 'dev.nirvana.imaginecruising.net'
+                LOCAL_PATH: 'dist'
+      - step:
+          name: Deploy to Production
+          deployment: production
+          trigger: manual
+          caches:
+            - node
+          script:
+            - npm ci
             - npm run build
             - pipe: atlassian/aws-s3-deploy:0.4.5
               variables:
