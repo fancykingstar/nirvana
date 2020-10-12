@@ -9,19 +9,20 @@
         "test:watch": "jest --watch"
     },
     "devDependencies": {
+        "@babel/preset-env": "^7.11.5",
+        "@babel/preset-react": "^7.10.4",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.10.0",
         "eslint-plugin-react": "^7.21.3",
         "husky": "^4.3.0",
         "jest": "^26.5.2",
         "lint-staged": "^10.4.0",
-        "parcel-bundler": "^1.12.4",
+        "parcel": "^2.0.0-beta.1",
         "prettier": "^2.1.2",
         "sass": "^1.27.0"
     },
     "dependencies": {
-        "babel-core": "^6.26.3",
-        "babel-polyfill": "^6.26.0",
+        "core-js": "^3.6.5",
         "jwt-decode": "^3.0.0",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
@@ -50,5 +51,24 @@
             ".cache"
         ],
         "testEnvironment": "node"
+    },
+    "babel": {
+        "plugins": [
+            "@babel/plugin-syntax-jsx"
+        ],
+        "presets": [
+            "@babel/preset-react",
+            [
+                "@babel/preset-env",
+                {
+                    "targets": [
+                        "defaults",
+                        "not IE 11"
+                    ],
+                    "corejs": 3,
+                    "useBuiltIns": "entry"
+                }
+            ]
+        ]
     }
 }
