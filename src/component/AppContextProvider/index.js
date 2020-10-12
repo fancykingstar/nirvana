@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import usePersistedState from "../../hooks/usePersistedState";
 
@@ -19,7 +20,10 @@ export function useAPIFetch() {
 }
 
 export default function AppContextProvider({ children }) {
-    const [env, setEnv] = usePersistedState("prod", "app-env");
+    const history = useHistory();
+    const {
+        params: { env },
+    } = useRouteMatch("/:env");
 
     const [session, setSession] = usePersistedState(
         {
@@ -36,7 +40,13 @@ export default function AppContextProvider({ children }) {
             url: urls[env],
 
             setSession,
-            setEnv,
+
+            setEnv: (env) => {
+                const path = history.location.pathname.split("/");
+                path[1] = env;
+                const newPath = path.join("/");
+                history.push(newPath);
+            },
 
             apiFetch: (url, options = {}) =>
                 fetch(`${urls[env]}${url}`, {
