@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useNetworkEnv } from "../NetworkProvider";
+import { useAppContext } from "../AppContextProvider";
 
 const HeaderContainer = styled.header`
     align-items: center;
@@ -21,17 +21,14 @@ const EnvSelectorContainer = styled.div`
 `;
 
 export default function Header() {
-    const { env: apiEnv, updateEnv } = useNetworkEnv();
+    const { env: apiEnv, setEnv } = useAppContext();
 
     return (
         <HeaderContainer>
             <Title>Nirvana</Title>
             <EnvSelectorContainer>
                 environment:{" "}
-                <select
-                    onChange={(e) => updateEnv(e.target.value)}
-                    value={apiEnv}
-                >
+                <select onChange={(e) => setEnv(e.target.value)} value={apiEnv}>
                     <option value="prod">production</option>
                     <option value="dev">develop</option>
                     <option value="local">local</option>

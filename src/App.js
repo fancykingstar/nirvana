@@ -1,17 +1,20 @@
 import React from "react";
 
+import AppContextProvider from "./component/AppContextProvider";
+
 import Header from "./component/Header";
-import NetworkProvider from "./component/NetworkProvider";
+import Footer from "./component/Footer";
+import Main from "./component/Main";
 import AuthenticationGate from "./component/AuthenticationGate";
 
 export default function App() {
     return (
-        <NetworkProvider>
+        <AppContextProvider>
             <Header />
             <AuthenticationGate>
-                <main>main</main>
+                <Main>here be content</Main>
             </AuthenticationGate>
-            <footer>footer</footer>
-        </NetworkProvider>
+            <Footer />
+        </AppContextProvider>
     );
 }

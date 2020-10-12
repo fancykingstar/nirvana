@@ -1,40 +1,33 @@
 import React from "react";
 
-import { useNetworkEnv } from "../NetworkProvider";
+import { useAppContext } from "../AppContextProvider";
 
 function formNoop(e) {
     e.preventDefault();
 }
 
-export default function LoginForm({ setJWT }) {
-    const { url: networkEnvUrl } = useNetworkEnv();
-    const [email, setEmail] = React.useState("developer@imaginecruising.co.uk");
-    const [password, setPassword] = React.useState("Swordfish123!");
+export default function LoginForm() {
+    const { setSession, apiFetch } = useAppContext();
 
-    async function requestJWT() {
-        const {
-            data: { token },
-        } = await fetch(`${networkEnvUrl}/admin/login`, {
+    const [identifier, setIdentifier] = React.useState("Content Management");
+    const [password, setPassword] = React.useState("password");
+
+    function requestJWT() {
+        apiFetch("/auth/local", {
             method: "POST",
             body: JSON.stringify({
-                email,
+                identifier,
                 password,
             }),
-
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-        }).then((x) => x.json());
-
-        setJWT(token);
+        }).then(setSession);
     }
 
     return (
         <form onSubmit={formNoop}>
             <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
             />
             <input
                 type="password"
