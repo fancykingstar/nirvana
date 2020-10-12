@@ -9,6 +9,10 @@ const FooterContainer = styled.footer`
     padding: 1rem;
 `;
 
+const FooterInfo = styled.span`
+    padding: 0 0.25rem;
+`;
+
 export default function Footer() {
     if (!process.env.CI) {
         return <FooterContainer>development build</FooterContainer>;
@@ -16,11 +20,9 @@ export default function Footer() {
 
     return (
         <FooterContainer>
-            <span> {process.env.BITBUCKET_BUILD_NUMBER}</span>
-            <span> | </span>
-            <span> {process.env.BITBUCKET_COMMIT}</span>
-            <span> | </span>
-            <span> {process.env.BITBUCKET_BRANCH}</span>
+            <FooterInfo>{process.env.BITBUCKET_BRANCH}</FooterInfo>
+            <FooterInfo>{process.env.BITBUCKET_BUILD_NUMBER}</FooterInfo>
+            <FooterInfo>{process.env.BITBUCKET_COMMIT}</FooterInfo>
         </FooterContainer>
     );
 }
