@@ -1,15 +1,12 @@
 import React from "react";
 import jwtDecode from "jwt-decode";
 
-import { useNetworkEnv } from "../NetworkProvider";
+import { useAppContext } from "../AppContextProvider";
 
 import LoginForm from "../LoginForm";
 
-import usePersistedState from "../../hooks/usePersistedState";
-
 export default function AuthenticationGate({ children }) {
-    const { env: networkEnv } = useNetworkEnv();
-    const [jwt, setJWT] = usePersistedState(null, `${networkEnv}-jwt`);
+    const { jwt, setJWT } = useAppContext();
 
     const jwtIsValid = React.useMemo(() => {
         if (jwt === null) {

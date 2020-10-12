@@ -1,13 +1,13 @@
 import React from "react";
 
-import { useNetworkEnv } from "../NetworkProvider";
+import { useAppContext } from "../AppContextProvider";
 
 function formNoop(e) {
     e.preventDefault();
 }
 
 export default function LoginForm({ setJWT }) {
-    const { url: networkEnvUrl } = useNetworkEnv();
+    const { url: networkEnvUrl } = useAppContext();
     const [email, setEmail] = React.useState("developer@imaginecruising.co.uk");
     const [password, setPassword] = React.useState("Swordfish123!");
 
@@ -21,9 +21,7 @@ export default function LoginForm({ setJWT }) {
                 password,
             }),
 
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
+            headers: {},
         }).then((x) => x.json());
 
         setJWT(token);
