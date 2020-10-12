@@ -14,3 +14,18 @@ pipelines:
             variables:
               S3_BUCKET: 'dev.nirvana.imaginecruising.net'
               LOCAL_PATH: 'dist'
+
+  #branches:
+    #master:
+      #- step:
+          #name: Test and Build
+          #caches:
+            #- node
+          #script:
+            #- npm ci
+            #- npm run lint
+            #- npm run build
+            #- pipe: atlassian/aws-s3-deploy:0.4.5
+              #variables:
+                #S3_BUCKET: 'prod.nirvana.imaginecruising.net'
+                #LOCAL_PATH: 'dist'
