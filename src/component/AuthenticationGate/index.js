@@ -26,11 +26,5 @@ export default function AuthenticationGate({ children }) {
         return children;
     }
 
-    return (
-        <div>
-            {jwt === null ? "Please Login" : "Session Expired, Please Login"}
-
-            <LoginForm setJWT={setJWT} />
-        </div>
-    );
+    return <LoginForm setJWT={setJWT} />;
 }
