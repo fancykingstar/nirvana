@@ -12,7 +12,7 @@ export default function App() {
         <AppContextProvider>
             <Header />
             <AuthenticationGate>
-                <main>main</main>
+                <Main>here be content</Main>
             </AuthenticationGate>
             <Footer />
         </AppContextProvider>

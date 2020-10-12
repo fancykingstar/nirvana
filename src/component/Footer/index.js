@@ -1,19 +1,26 @@
 import React from "react";
+import styled from "styled-components";
+
+const FooterContainer = styled.footer`
+    align-items: center;
+    background-color: aliceblue;
+    color: darkgray;
+    display: flex;
+    padding: 1rem;
+`;
 
 export default function Footer() {
     if (!process.env.CI) {
-        return <footer>development build</footer>;
+        return <FooterContainer>development build</FooterContainer>;
     }
 
     return (
-        <footer>
+        <FooterContainer>
             <span> {process.env.BITBUCKET_BUILD_NUMBER}</span>
             <span> | </span>
             <span> {process.env.BITBUCKET_COMMIT}</span>
             <span> | </span>
             <span> {process.env.BITBUCKET_BRANCH}</span>
-            <span> | </span>
-            <span> {new Date().toISOString()}</span>
-        </footer>
+        </FooterContainer>
     );
 }
