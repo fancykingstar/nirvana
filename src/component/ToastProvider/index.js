@@ -15,19 +15,29 @@ const ToastsContainer = styled.div`
 
 const ToastWrapper = styled.div`
     padding: ${(x) => x.theme.size[2]};
+    pointer-events: all;
 `;
 
 const ToastContainer = styled.div`
-    padding: ${(x) => x.theme.size[2]};
+    background-color: white;
+    border-color: ${({ color }) => color || "grey"};
     border-style: solid;
     border-width: 2px;
-    border-color: ${({ color }) => color || "grey"};
-    background-color: white;
+    padding: ${(x) => x.theme.size[3]} ${(x) => x.theme.size[4]};
+    position: relative;
+    font-size: ${(x) => x.theme.text[2]};
+`;
+
+const ToastClose = styled.div`
+    position: absolute;
+    top: ${(x) => x.theme.size[1]};
+    right: ${(x) => x.theme.size[1]};
+    font-size: ${(x) => x.theme.text[3]};
 `;
 
 const ToastTitle = styled.div`
-    padding: ${(x) => x.theme.size[1]} 0;
-    font-size: ${(x) => x.theme.text[2]};
+    padding-bottom: ${(x) => x.theme.size[1]};
+    font-size: ${(x) => x.theme.text[3]};
     font-weight: bold;
 `;
 
@@ -59,7 +69,7 @@ export function useToast() {
 }
 
 export default function ToastProvider({ children }) {
-    const [toasts, dispatch] = React.useReducer((state = {}, action) => {
+    const [toasts, dispatch] = React.useReducer((state, action) => {
         switch (action.type) {
             case "ADD":
                 return {
@@ -97,6 +107,7 @@ export default function ToastProvider({ children }) {
                                 color={color}
                                 onClick={() => dispatch({ type: "REMOVE", id })}
                             >
+                                <ToastClose>✕</ToastClose>
                                 <ToastTitle>{title}</ToastTitle>
                                 {message}
                             </ToastContainer>

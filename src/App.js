@@ -19,11 +19,9 @@ export default function App() {
                     <AppContextProvider>
                         <ToastProvider>
                             <Header />
-                            <Main>
-                                <AuthenticationGate>
-                                    here be content
-                                </AuthenticationGate>
-                            </Main>
+                            <AuthenticationGate>
+                                <Main />
+                            </AuthenticationGate>
                             <Footer />
                         </ToastProvider>
                     </AppContextProvider>
