@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useFormField } from "../FormProvider";
+import { useFormField } from "../../hooks/useFormContext";
 
 export default function FormFieldString({ required, prop, label }) {
     const [state, setState, changed] = useFormField(prop, "");

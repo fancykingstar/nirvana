@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useFormField } from "../FormProvider";
+import { useFormField } from "../../hooks/useFormContext";
 
 export default function FormFieldLatLong({ required }) {
     const [latitude, setLatitude] = useFormField("latitude");
