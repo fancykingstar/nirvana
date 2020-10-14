@@ -2,8 +2,9 @@ import React from "react";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
-import FormEditableContentLoader from "../FormEditableContentLoader";
+import FormContentLoaderEditable from "../FormContentLoaderEditable";
 
+import FormFieldCountry from "../FormFieldCountry";
 import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldString from "../FormFieldString";
 
@@ -14,7 +15,7 @@ export default function FormEditCity({
 }) {
     return (
         <FormProvider>
-            <FormEditableContentLoader
+            <FormContentLoaderEditable
                 id={id}
                 nameProp="name"
                 getRoute="/cities/:id"
@@ -25,6 +26,7 @@ export default function FormEditCity({
                         <FormFieldString prop="name" label="Name" />
                         <FormFieldString required prop="label" label="Label" />
                         <FormFieldLatLong required />
+                        <FormFieldCountry />
 
                         <div>
                             <button onClick={onReset}>reset</button>
@@ -32,7 +34,7 @@ export default function FormEditCity({
                         </div>
                     </React.Fragment>
                 )}
-            </FormEditableContentLoader>
+            </FormContentLoaderEditable>
         </FormProvider>
     );
 }
