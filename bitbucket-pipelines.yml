@@ -1,27 +1,51 @@
 image: node:12
 
+definitions:
+  services:
+    utopia:
+      image:
+        name: 741978104214.dkr.ecr.eu-west-2.amazonaws.com/utopia-strapi:test-145
+        aws:
+          access-key: $AWS_ACCESS_KEY_ID
+          secret-key: $AWS_SECRET_ACCESS_KEY
+
 pipelines:
   default:
     - step:
-        name: Test and Build
+        name: Test and Verify
+        services:
+          - utopia
         caches:
           - node
         script:
           - npm ci
           - npm run lint
+          - npm run test
           - npm run build
 
   branches:
     master:
       - step:
-          name: Test and Build
+          name: Test and Verify
           deployment: staging
+          services:
+            - utopia
           caches:
             - node
           script:
             - npm ci
             - npm run lint
+            - npm run test
             - npm run build
+
+      - step:
+          name: Deploy to Dev
+          deployment: staging
+          trigger: manual
+          caches:
+            - node
+          script:
+            - npm ci
             - pipe: atlassian/aws-s3-deploy:0.4.5
               variables:
                 S3_BUCKET: 'dev.nirvana.imaginecruising.net'
@@ -36,7 +60,6 @@ pipelines:
             - node
           script:
             - npm ci
-            - npm run build
             - pipe: atlassian/aws-s3-deploy:0.4.5
               variables:
                 S3_BUCKET: 'prod.nirvana.imaginecruising.net'
