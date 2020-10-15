@@ -27,7 +27,6 @@ pipelines:
     master:
       - step:
           name: Test and Verify
-          deployment: staging
           services:
             - utopia
           caches:
