@@ -4,7 +4,7 @@ definitions:
   services:
     utopia:
       image:
-        name: 741978104214.dkr.ecr.eu-west-2.amazonaws.com/utopia-strapi:test-145
+        name: 741978104214.dkr.ecr.eu-west-2.amazonaws.com/utopia-strapi:test-151
         aws:
           access-key: $AWS_ACCESS_KEY_ID
           secret-key: $AWS_SECRET_ACCESS_KEY

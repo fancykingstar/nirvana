@@ -12,14 +12,17 @@
         "@babel/core": "^7.11.6",
         "@babel/preset-env": "^7.11.5",
         "@babel/preset-react": "^7.10.4",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
         "babel-eslint": "^10.1.0",
         "eslint": "^7.11.0",
         "eslint-plugin-react": "^7.21.3",
         "husky": "^4.3.0",
-        "jest": "^26.5.2",
+        "jest": "^26.5.3",
         "lint-staged": "^10.4.0",
         "prettier": "^2.1.2",
-        "sass": "^1.27.0"
+        "sass": "^1.27.0",
+        "whatwg-fetch": "^3.4.1"
     },
     "dependencies": {
         "babel-core": "^6.26.3",
@@ -55,7 +58,10 @@
             ".tmp",
             ".cache"
         ],
-        "testEnvironment": "node"
+        "setupFilesAfterEnv": [
+            "./test/setup.js"
+        ],
+        "testEnvironment": "jsdom"
     },
     "babel": {
         "plugins": [

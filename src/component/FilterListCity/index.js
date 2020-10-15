@@ -40,6 +40,7 @@ function CityRow(props) {
 export default function FilterListCity() {
     return (
         <FilterList
+            title="Cities"
             entityUrl="/cities"
             HeaderComponent={CityHeader}
             FooterComponent={CityHeader}

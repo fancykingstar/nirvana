@@ -61,6 +61,7 @@ function PageNavigation({ pageNumber, pageSize, count }) {
 }
 
 export default function FilterList({
+    title,
     entityUrl,
     RowComponent,
     HeaderComponent,
@@ -89,11 +90,14 @@ export default function FilterList({
 
     return (
         <React.Fragment>
+            <h1>{title}</h1>
             <div>{count} entries matching current filter</div>
             <PageNavigation {...{ pageNumber, pageSize, count }} />
             <table>
                 <thead>
-                    <HeaderComponent />
+                    <tr>
+                        <HeaderComponent />
+                    </tr>
                 </thead>
                 <tbody>
                     {(data || []).map((x, i) => (
@@ -103,7 +107,9 @@ export default function FilterList({
                     ))}
                 </tbody>
                 <tfoot>
-                    <FooterComponent />
+                    <tr>
+                        <FooterComponent />
+                    </tr>
                 </tfoot>
             </table>
         </React.Fragment>
