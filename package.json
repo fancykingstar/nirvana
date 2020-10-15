@@ -5,7 +5,7 @@
         "build": "NODE_ENV=production parcel build ./src/index.html",
         "format": "eslint . --cache --fix && prettier --write **/*.{js,scss,md,json,html}",
         "lint": "eslint . && prettier --check **/*.{js,scss,md,json}",
-        "test": "jest",
+        "test": "jest --runInBand",
         "test:watch": "jest --watch"
     },
     "devDependencies": {

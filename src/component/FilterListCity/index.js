@@ -22,11 +22,11 @@ function CityRow(props) {
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <Link to={`/${env}/edit/city/${props.id}`}>{props.id}</Link>
+                <Link to={`/${env}/city/edit/${props.id}`}>{props.id}</Link>
             </FilterList.Cell>
             <FilterList.Cell>{props.name}</FilterList.Cell>
             <FilterList.Cell>
-                <Link to={`/${env}/edit/country/${props.country.id}`}>
+                <Link to={`/${env}/country/edit/${props.country.id}`}>
                     {props.country.name}
                 </Link>
             </FilterList.Cell>
