@@ -8,8 +8,8 @@ export default function Main() {
     return (
         <main>
             <Switch>
-                <Route path="/:env/edit/city/:id" component={FormEditCity} />
-                <Route path="/:env/list/city" component={FilterListCity} />
+                <Route path="/:env/city/edit/:id" component={FormEditCity} />
+                <Route path="/:env/city/list" component={FilterListCity} />
             </Switch>
         </main>
     );

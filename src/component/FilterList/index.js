@@ -28,7 +28,7 @@ function PageNavigationLink({ pageNumber, children }) {
     );
 }
 
-function PageNavigation({ pageNumber, pageSize, count }) {
+function PageNavigation({ pageNumber = 0, pageSize = 1, count = 0 }) {
     const firstPage = 0;
     const lastPage = Math.floor(count / pageSize);
 
