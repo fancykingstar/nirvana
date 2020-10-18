@@ -6,17 +6,11 @@ import styled from "styled-components";
 import useQueryStringState from "../../hooks/useQueryStringState";
 
 import PageNavigation from "./PageNavigation";
+import SearchFilter from "./SearchFilter";
 
-function useSetPageNumber(setState) {
-    return React.useCallback(
-        (pageNumber) =>
-            setState((state) => ({
-                ...state,
-                pageNumber,
-            })),
-        [setState],
-    );
-}
+const TableStyled = styled.table`
+    width: 100%;
+`;
 
 function useOnChangeSort(setState) {
     return React.useCallback(
@@ -49,6 +43,29 @@ function useOnChangeSort(setState) {
     );
 }
 
+function useSetPageNumber(setState) {
+    return React.useCallback(
+        (pageNumber) =>
+            setState((state) => ({
+                ...state,
+                pageNumber,
+            })),
+        [setState],
+    );
+}
+
+function useSetSearchFilter(setState) {
+    return React.useCallback(
+        (searchFilter) =>
+            setState((state) => ({
+                ...state,
+                searchFilter,
+                pageNumber: 0,
+            })),
+        [setState],
+    );
+}
+
 export default function FilterList({
     title,
     entityUrl,
@@ -61,18 +78,26 @@ export default function FilterList({
     const {
         pageNumber = 0,
         pageSize = 20,
+        searchFilter = null,
         sortBy,
         sortDirection = "ASC",
     } = state;
 
-    const setPageNumber = useSetPageNumber(setState);
     const onChangeSort = useOnChangeSort(setState);
+    const setPageNumber = useSetPageNumber(setState);
+    const setSearchFilter = useSetSearchFilter(setState);
 
     // query utopia
     const { data, error } = useSWR(
         `${entityUrl}?${qs.stringify({
             _limit: pageSize,
             _start: pageNumber * pageSize,
+
+            ...(searchFilter
+                ? {
+                      _where: [{ name_contains: searchFilter }],
+                  }
+                : null),
 
             ...(sortBy
                 ? {
@@ -82,7 +107,15 @@ export default function FilterList({
         })}`,
     );
 
-    const { data: count } = useSWR(`${entityUrl}/count?${qs.stringify({})}`);
+    const { data: count } = useSWR(
+        `${entityUrl}/count?${qs.stringify({
+            ...(searchFilter
+                ? {
+                      _where: [{ name_contains: searchFilter }],
+                  }
+                : null),
+        })}`,
+    );
 
     if (error) {
         return null;
@@ -92,10 +125,14 @@ export default function FilterList({
         <React.Fragment>
             <h1>{title}</h1>
             <div>{count} entries matching current filter</div>
+
             <PageNavigation
                 {...{ pageNumber, pageSize, count, setPageNumber }}
             />
-            <table>
+
+            <SearchFilter {...{ searchFilter, setSearchFilter }} />
+
+            <TableStyled>
                 <thead>
                     <tr>
                         <HeaderComponent
@@ -117,7 +154,7 @@ export default function FilterList({
                         />
                     </tr>
                 </tfoot>
-            </table>
+            </TableStyled>
         </React.Fragment>
     );
 }
@@ -125,6 +162,7 @@ export default function FilterList({
 FilterList.Cell = styled.td``;
 FilterList.ControlCell = styled.td`
     position: relative;
+    width: ${(p) => p.width};
 
     &:after {
         position: absolute;

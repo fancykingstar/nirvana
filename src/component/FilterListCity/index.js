@@ -7,19 +7,22 @@ function CityHeader({ onChangeSort, sortBy, sortDirection }) {
     return (
         <React.Fragment>
             <FilterList.ControlCell
+                width="10%"
                 onClick={onChangeSort.bind(null, "id")}
                 arrowDirection={sortBy === "id" ? sortDirection : null}
             >
                 Id
             </FilterList.ControlCell>
             <FilterList.ControlCell
+                width="30%"
                 onClick={onChangeSort.bind(null, "name")}
                 arrowDirection={sortBy === "name" ? sortDirection : null}
             >
                 Name
             </FilterList.ControlCell>
-            <FilterList.ControlCell>City</FilterList.ControlCell>
+            <FilterList.ControlCell width="30%">City</FilterList.ControlCell>
             <FilterList.ControlCell
+                width="30%"
                 onClick={onChangeSort.bind(null, "latitude")}
                 arrowDirection={sortBy === "latitude" ? sortDirection : null}
             >
