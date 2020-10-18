@@ -1,18 +1,38 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Redirect, Switch, Route } from "react-router-dom";
 
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
 import FilterListCity from "../FilterListCity";
-import FormEditCity from "../FormEditCity";
+
+import FormCityCreate from "../FormCityCreate";
+import FormCityEdit from "../FormCityEdit";
+
+function EntityRootRedirect({ path, to }) {
+    function Redirecter({
+        match: {
+            params: { env },
+        },
+    }) {
+        return <Redirect to={`/${env}/${to}`} />;
+    }
+
+    return <Route path={path} component={Redirecter} />;
+}
 
 export default function Main() {
     return (
         <main>
             <Breadcrumb />
             <Switch>
-                <Route path="/:env/cities/edit/:id" component={FormEditCity} />
+                <Route path="/:env/cities/create" component={FormCityCreate} />
+                <Route path="/:env/cities/edit/:id" component={FormCityEdit} />
                 <Route path="/:env/cities" component={FilterListCity} />
+                <EntityRootRedirect
+                    path="/:env/cities/:foo"
+                    to="/:env/cities"
+                />
+
                 <Route component={EntityList} />
             </Switch>
         </main>

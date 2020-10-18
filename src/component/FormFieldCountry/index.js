@@ -17,16 +17,12 @@ export default function FormFieldCountry() {
         fetcher,
     );
 
-    const [country, setCountry] = useFormField("country");
-
-    if (!country) {
-        return <CountryContainer>Loading</CountryContainer>;
-    }
+    const [country, setCountry] = useFormField("country", {});
 
     return (
         <CountryContainer>
             <h4>Country:</h4>
-            <div>{country.name}</div>
+            <div>{country.name ?? "No Country"}</div>
 
             <select
                 value={country.id}
