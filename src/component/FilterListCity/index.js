@@ -3,13 +3,28 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 import FilterList from "../FilterList";
 
-function CityHeader() {
+function CityHeader({ onChangeSort, sortBy, sortDirection }) {
     return (
         <React.Fragment>
-            <FilterList.Cell>Id</FilterList.Cell>
-            <FilterList.Cell>Name</FilterList.Cell>
-            <FilterList.Cell>City</FilterList.Cell>
-            <FilterList.Cell>Coords</FilterList.Cell>
+            <FilterList.ControlCell
+                onClick={onChangeSort.bind(null, "id")}
+                arrowDirection={sortBy === "id" ? sortDirection : null}
+            >
+                Id
+            </FilterList.ControlCell>
+            <FilterList.ControlCell
+                onClick={onChangeSort.bind(null, "name")}
+                arrowDirection={sortBy === "name" ? sortDirection : null}
+            >
+                Name
+            </FilterList.ControlCell>
+            <FilterList.ControlCell>City</FilterList.ControlCell>
+            <FilterList.ControlCell
+                onClick={onChangeSort.bind(null, "latitude")}
+                arrowDirection={sortBy === "latitude" ? sortDirection : null}
+            >
+                Coords
+            </FilterList.ControlCell>
         </React.Fragment>
     );
 }

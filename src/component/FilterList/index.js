@@ -2,61 +2,50 @@ import React from "react";
 import useSWR from "swr";
 import qs from "qs";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
 
-import { useAPIFetch } from "../AppContextProvider";
+import useQueryStringState from "../../hooks/useQueryStringState";
 
-const PageNavigationLinkStyled = styled(Link)`
-    padding: ${(p) => p.theme.size[0]};
-`;
+import PageNavigation from "./PageNavigation";
 
-function PageNavigationLink({ pageNumber, children }) {
-    const location = useLocation();
-
-    return (
-        <PageNavigationLinkStyled
-            to={{
-                ...location,
-                search: qs.stringify({
-                    ...qs.parse(location.search.slice(1)),
-                    pageNumber: pageNumber,
-                }),
-            }}
-        >
-            {children}
-        </PageNavigationLinkStyled>
+function useSetPageNumber(setState) {
+    return React.useCallback(
+        (pageNumber) =>
+            setState((state) => ({
+                ...state,
+                pageNumber,
+            })),
+        [setState],
     );
 }
 
-function PageNavigation({ pageNumber = 0, pageSize = 1, count = 0 }) {
-    const firstPage = 0;
-    const lastPage = Math.floor(count / pageSize);
+function useOnChangeSort(setState) {
+    return React.useCallback(
+        (key) =>
+            setState((state) => {
+                const { sortBy, sortDirection } = state;
+                if (sortBy !== key) {
+                    return {
+                        ...state,
+                        sortBy: key,
+                        sortDirection: "ASC",
+                    };
+                }
 
-    const localPages = new Array(5)
-        .fill(null)
-        .map((_, i) => pageNumber + i - 2)
-        .filter((x) => firstPage < x && x < lastPage);
+                if (sortDirection === "ASC") {
+                    return {
+                        ...state,
+                        sortBy: key,
+                        sortDirection: "DESC",
+                    };
+                }
 
-    return (
-        <div>
-            <PageNavigationLink pageNumber={firstPage}>
-                {firstPage}
-            </PageNavigationLink>
+                const newState = { ...state };
+                delete newState.sortBy;
+                delete newState.sortDirection;
 
-            {localPages[0] === firstPage + 1 ? null : "..."}
-
-            {localPages.map((x) => (
-                <PageNavigationLink key={x} pageNumber={x}>
-                    {x}
-                </PageNavigationLink>
-            ))}
-
-            {localPages[4] === lastPage - 1 ? null : "..."}
-
-            <PageNavigationLink pageNumber={lastPage}>
-                {lastPage}
-            </PageNavigationLink>
-        </div>
+                return newState;
+            }),
+        [setState],
     );
 }
 
@@ -67,36 +56,51 @@ export default function FilterList({
     HeaderComponent,
     FooterComponent,
 }) {
-    const fetcher = useAPIFetch();
-    const { search } = useLocation();
+    const [state, setState] = useQueryStringState();
 
-    const query = qs.parse(search.slice(1));
+    const {
+        pageNumber = 0,
+        pageSize = 20,
+        sortBy,
+        sortDirection = "ASC",
+    } = state;
 
-    const pageNumber = Number(query.pageNumber || 0);
-    const pageSize = Number(query.pageSize || 20);
+    const setPageNumber = useSetPageNumber(setState);
+    const onChangeSort = useOnChangeSort(setState);
 
-    const { data } = useSWR(
+    // query utopia
+    const { data, error } = useSWR(
         `${entityUrl}?${qs.stringify({
             _limit: pageSize,
             _start: pageNumber * pageSize,
+
+            ...(sortBy
+                ? {
+                      _sort: `${sortBy}:${sortDirection}`,
+                  }
+                : null),
         })}`,
-        fetcher,
     );
 
-    const { data: count } = useSWR(
-        `${entityUrl}/count?${qs.stringify({})}`,
-        fetcher,
-    );
+    const { data: count } = useSWR(`${entityUrl}/count?${qs.stringify({})}`);
+
+    if (error) {
+        return null;
+    }
 
     return (
         <React.Fragment>
             <h1>{title}</h1>
             <div>{count} entries matching current filter</div>
-            <PageNavigation {...{ pageNumber, pageSize, count }} />
+            <PageNavigation
+                {...{ pageNumber, pageSize, count, setPageNumber }}
+            />
             <table>
                 <thead>
                     <tr>
-                        <HeaderComponent />
+                        <HeaderComponent
+                            {...{ onChangeSort, sortBy, sortDirection }}
+                        />
                     </tr>
                 </thead>
                 <tbody>
@@ -108,7 +112,9 @@ export default function FilterList({
                 </tbody>
                 <tfoot>
                     <tr>
-                        <FooterComponent />
+                        <FooterComponent
+                            {...{ onChangeSort, sortBy, sortDirection }}
+                        />
                     </tr>
                 </tfoot>
             </table>
@@ -117,3 +123,24 @@ export default function FilterList({
 }
 
 FilterList.Cell = styled.td``;
+FilterList.ControlCell = styled.td`
+    position: relative;
+
+    &:after {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        ${({ arrowDirection }) => {
+            if (arrowDirection === "ASC") {
+                return `content: "▲"`;
+            }
+
+            if (arrowDirection === "DESC") {
+                return `content: "▼"`;
+            }
+
+            return "";
+        }};
+    }
+`;
