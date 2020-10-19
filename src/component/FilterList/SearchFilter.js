@@ -1,14 +1,17 @@
 import React from "react";
 
-export default function SearchFilter({ searchFilter, setSearchFilter }) {
+import { ControlSectionContainer } from "./styled";
+
+export default function SearchFilter({ count, searchFilter, setSearchFilter }) {
     return (
-        <React.Fragment>
-            <span>Search for Name:</span>
+        <ControlSectionContainer>
+            <div>{count} entries matching current filter</div>
+            <span>Search:</span>
             <input
                 type="text"
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
             />
-        </React.Fragment>
+        </ControlSectionContainer>
     );
 }
