@@ -7,6 +7,7 @@ import AppContextProvider, {
     useAppContext,
 } from "../src/component/AppContextProvider";
 import ToastProvider from "../src/component/ToastProvider";
+import SWRErrorProvider from "../src/component/SWRErrorProvider";
 
 function LoggIner() {
     const { setSession, apiFetch } = useAppContext();
@@ -44,10 +45,12 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
                 <RouterProvider initialEntries={history}>
                     <AppContextProvider>
                         <ToastProvider>
-                            {loggedIn ? <LoggIner /> : null}
-                            <Route render={setLocationFromRender} />
+                            <SWRErrorProvider>
+                                {loggedIn ? <LoggIner /> : null}
+                                <Route render={setLocationFromRender} />
 
-                            {children}
+                                {children}
+                            </SWRErrorProvider>
                         </ToastProvider>
                     </AppContextProvider>
                 </RouterProvider>

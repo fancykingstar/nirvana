@@ -9,6 +9,7 @@ import { BrowserRouter as RouterProvider } from "react-router-dom";
 import ThemeProvider from "./component/ThemeProvider";
 import AppContextProvider from "./component/AppContextProvider";
 import ToastProvider from "./component/ToastProvider";
+import SWRErrorProvider from "./component/SWRErrorProvider";
 
 import App from "./App";
 
@@ -17,7 +18,9 @@ render(
         <RouterProvider>
             <AppContextProvider>
                 <ToastProvider>
-                    <App />
+                    <SWRErrorProvider>
+                        <App />
+                    </SWRErrorProvider>
                 </ToastProvider>
             </AppContextProvider>
         </RouterProvider>

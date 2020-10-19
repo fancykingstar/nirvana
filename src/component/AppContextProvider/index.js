@@ -67,9 +67,13 @@ export default function AppContextProvider({ children }) {
 
                         ...(options.headers || {}),
                     },
-                })
-                    .then((x) => x.json())
-                    .catch(console.error),
+                }).then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.json().then((x) => Promise.reject(x));
+                    }
+                }),
         }),
         [env, session],
     );

@@ -2,61 +2,67 @@ import React from "react";
 import useSWR from "swr";
 import qs from "qs";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
 
-import { useAPIFetch } from "../AppContextProvider";
+import useQueryStringState from "../../hooks/useQueryStringState";
 
-const PageNavigationLinkStyled = styled(Link)`
-    padding: ${(p) => p.theme.size[0]};
+import PageNavigation from "./PageNavigation";
+import SearchFilter from "./SearchFilter";
+
+const TableStyled = styled.table`
+    width: 100%;
 `;
 
-function PageNavigationLink({ pageNumber, children }) {
-    const location = useLocation();
+function useOnChangeSort(setState) {
+    return React.useCallback(
+        (key) =>
+            setState((state) => {
+                const { sortBy, sortDirection } = state;
+                if (sortBy !== key) {
+                    return {
+                        ...state,
+                        sortBy: key,
+                        sortDirection: "ASC",
+                    };
+                }
 
-    return (
-        <PageNavigationLinkStyled
-            to={{
-                ...location,
-                search: qs.stringify({
-                    ...qs.parse(location.search.slice(1)),
-                    pageNumber: pageNumber,
-                }),
-            }}
-        >
-            {children}
-        </PageNavigationLinkStyled>
+                if (sortDirection === "ASC") {
+                    return {
+                        ...state,
+                        sortBy: key,
+                        sortDirection: "DESC",
+                    };
+                }
+
+                const newState = { ...state };
+                delete newState.sortBy;
+                delete newState.sortDirection;
+
+                return newState;
+            }),
+        [setState],
     );
 }
 
-function PageNavigation({ pageNumber = 0, pageSize = 1, count = 0 }) {
-    const firstPage = 0;
-    const lastPage = Math.floor(count / pageSize);
+function useSetPageNumber(setState) {
+    return React.useCallback(
+        (pageNumber) =>
+            setState((state) => ({
+                ...state,
+                pageNumber,
+            })),
+        [setState],
+    );
+}
 
-    const localPages = new Array(5)
-        .fill(null)
-        .map((_, i) => pageNumber + i - 2)
-        .filter((x) => firstPage < x && x < lastPage);
-
-    return (
-        <div>
-            <PageNavigationLink pageNumber={firstPage}>
-                {firstPage}
-            </PageNavigationLink>
-
-            {localPages[0] === firstPage + 1 ? null : "..."}
-
-            {localPages.map((x) => (
-                <PageNavigationLink key={x} pageNumber={x}>
-                    {x}
-                </PageNavigationLink>
-            ))}
-
-            {localPages[4] === lastPage - 1 ? null : "..."}
-
-            <PageNavigationLink pageNumber={lastPage}>
-                {lastPage}
-            </PageNavigationLink>
-        </div>
+function useSetSearchFilter(setState) {
+    return React.useCallback(
+        (searchFilter) =>
+            setState((state) => ({
+                ...state,
+                searchFilter,
+                pageNumber: 0,
+            })),
+        [setState],
     );
 }
 
@@ -67,36 +73,71 @@ export default function FilterList({
     HeaderComponent,
     FooterComponent,
 }) {
-    const fetcher = useAPIFetch();
-    const { search } = useLocation();
+    const [state, setState] = useQueryStringState();
 
-    const query = qs.parse(search.slice(1));
+    const {
+        pageNumber = 0,
+        pageSize = 20,
+        searchFilter = null,
+        sortBy,
+        sortDirection = "ASC",
+    } = state;
 
-    const pageNumber = Number(query.pageNumber || 0);
-    const pageSize = Number(query.pageSize || 20);
+    const onChangeSort = useOnChangeSort(setState);
+    const setPageNumber = useSetPageNumber(setState);
+    const setSearchFilter = useSetSearchFilter(setState);
 
-    const { data } = useSWR(
+    // query utopia
+    const { data, error } = useSWR(
         `${entityUrl}?${qs.stringify({
             _limit: pageSize,
             _start: pageNumber * pageSize,
+
+            ...(searchFilter
+                ? {
+                      _where: [{ name_contains: searchFilter }],
+                  }
+                : null),
+
+            ...(sortBy
+                ? {
+                      _sort: `${sortBy}:${sortDirection}`,
+                  }
+                : null),
         })}`,
-        fetcher,
     );
 
     const { data: count } = useSWR(
-        `${entityUrl}/count?${qs.stringify({})}`,
-        fetcher,
+        `${entityUrl}/count?${qs.stringify({
+            ...(searchFilter
+                ? {
+                      _where: [{ name_contains: searchFilter }],
+                  }
+                : null),
+        })}`,
     );
+
+    if (error) {
+        return null;
+    }
 
     return (
         <React.Fragment>
             <h1>{title}</h1>
             <div>{count} entries matching current filter</div>
-            <PageNavigation {...{ pageNumber, pageSize, count }} />
-            <table>
+
+            <PageNavigation
+                {...{ pageNumber, pageSize, count, setPageNumber }}
+            />
+
+            <SearchFilter {...{ searchFilter, setSearchFilter }} />
+
+            <TableStyled>
                 <thead>
                     <tr>
-                        <HeaderComponent />
+                        <HeaderComponent
+                            {...{ onChangeSort, sortBy, sortDirection }}
+                        />
                     </tr>
                 </thead>
                 <tbody>
@@ -108,12 +149,36 @@ export default function FilterList({
                 </tbody>
                 <tfoot>
                     <tr>
-                        <FooterComponent />
+                        <FooterComponent
+                            {...{ onChangeSort, sortBy, sortDirection }}
+                        />
                     </tr>
                 </tfoot>
-            </table>
+            </TableStyled>
         </React.Fragment>
     );
 }
 
 FilterList.Cell = styled.td``;
+FilterList.ControlCell = styled.td`
+    position: relative;
+    width: ${(p) => p.width};
+
+    &:after {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        ${({ arrowDirection }) => {
+            if (arrowDirection === "ASC") {
+                return `content: "▲"`;
+            }
+
+            if (arrowDirection === "DESC") {
+                return `content: "▼"`;
+            }
+
+            return "";
+        }};
+    }
+`;
