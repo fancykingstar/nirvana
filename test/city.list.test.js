@@ -9,7 +9,7 @@ import App from "../src/App";
 describe("city/list", () => {
     it("can get a list of cities", async () => {
         const { wrapper } = createWrapper({
-            route: "/local/city/list",
+            route: "/local/cities/list",
         });
 
         const { findByText } = render(<App />, { wrapper });
@@ -19,7 +19,7 @@ describe("city/list", () => {
 
     it("can navigate to the last page", async () => {
         const { getCurrentLocation, wrapper } = createWrapper({
-            route: "/local/city/list",
+            route: "/local/cities/list",
         });
 
         const { findByText, getByText } = render(<App />, { wrapper });
@@ -29,7 +29,7 @@ describe("city/list", () => {
         fireEvent.click(getByText("774"));
 
         expect(getCurrentLocation()).toMatchObject({
-            pathname: "/local/city/list",
+            pathname: "/local/cities/list",
             query: {
                 pageNumber: "774",
             },
@@ -40,7 +40,7 @@ describe("city/list", () => {
 
     it("can load directly to the last page", async () => {
         const { wrapper } = createWrapper({
-            route: "/local/city/list?pageNumber=774",
+            route: "/local/cities/list?pageNumber=774",
         });
 
         const { findByText } = render(<App />, { wrapper });

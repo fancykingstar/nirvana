@@ -2,39 +2,38 @@ import React from "react";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
-import FormContentLoaderEditable from "../FormContentLoaderEditable";
+import FormContentLoaderCreate from "../FormContentLoaderCreate";
 
+import FormFieldUUID from "../FormFieldUUID";
 import FormFieldCountry from "../FormFieldCountry";
 import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldString from "../FormFieldString";
 
-export default function FormEditCity({
-    match: {
-        params: { id },
-    },
-}) {
+export default function FormCityCreate() {
     return (
         <FormProvider>
-            <FormContentLoaderEditable
-                id={id}
+            <FormContentLoaderCreate
                 nameProp="name"
+                createRoute="/cities"
                 getRoute="/cities/:id"
-                updateRoute="/cities/:id"
+                listRoute="/cities"
+                pushToEditRoute="/:env/cities/edit/:id"
             >
-                {({ onReset, onSave }) => (
+                {({ onCreate }) => (
                     <React.Fragment>
+                        <FormFieldUUID prop="uid" />
+
                         <FormFieldString prop="name" label="Name" />
                         <FormFieldString required prop="label" label="Label" />
                         <FormFieldLatLong required />
                         <FormFieldCountry />
 
                         <div>
-                            <button onClick={onReset}>reset</button>
-                            <button onClick={onSave}>save</button>
+                            <button onClick={onCreate}>create</button>
                         </div>
                     </React.Fragment>
                 )}
-            </FormContentLoaderEditable>
+            </FormContentLoaderCreate>
         </FormProvider>
     );
 }
