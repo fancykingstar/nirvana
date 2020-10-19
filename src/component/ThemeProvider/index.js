@@ -6,10 +6,23 @@ const theme = {
         black: "#111",
         blue: "#33b",
         red: "#b33",
+        green: "#3b3",
         gray: "#666",
         white: "#ededed",
     },
-    size: ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px"],
+
+    size: [
+        "4px",
+        "8px",
+        "12px",
+        "16px",
+        "24px",
+        "32px",
+        "48px",
+        "64px",
+        "128px",
+        "256px",
+    ],
     text: ["8px", "12px", "16px", "24px", "32px", "48px", "64px"],
 
     shadow: [

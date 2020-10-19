@@ -64,5 +64,5 @@ export default function FormEditableContentLoader({
         mutate(pathToFunction(getRoute)({ id }));
     }
 
-    return children({ onReset, onSave });
+    return children({ onReset, onSave, name: local[nameProp] });
 }

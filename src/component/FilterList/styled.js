@@ -1,24 +1,6 @@
 import styled from "styled-components";
 import { transparentize, mix } from "polished";
 
-export const FilterListContainer = styled.div`
-    align-items: stretch;
-    border-radius: ${(p) => p.theme.size[1]};
-    display: flex;
-    flex-direction: column;
-    margin: ${(p) => p.theme.size[1]};
-
-    ${(p) => p.theme.shadow[1]};
-`;
-
-export const Title = styled.h1`
-    background-color: ${(p) => p.theme.color.white};
-    color: ${(p) => p.theme.color.black};
-    padding: ${(p) => p.theme.size[1]};
-    border-top-right-radius: ${(p) => p.theme.size[1]};
-    border-top-left-radius: ${(p) => p.theme.size[1]};
-`;
-
 export const TableContainer = styled.div`
     display: block;
     padding: ${(p) => p.theme.size[1]};
