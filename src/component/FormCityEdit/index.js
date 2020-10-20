@@ -11,7 +11,7 @@ import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldString from "../FormFieldString";
 import { FormFieldButton, FormFieldButtonBlock } from "../FormFieldButton";
 
-export default function FormEditCity({
+export default function FormCityEdit({
     match: {
         params: { id },
     },

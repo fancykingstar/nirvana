@@ -15,6 +15,7 @@ export default function FormEditableContentLoader({
     nameProp,
     getRoute,
     updateRoute,
+    listRoute,
     children,
 }) {
     const {
@@ -45,7 +46,7 @@ export default function FormEditableContentLoader({
             message: local[nameProp],
         });
 
-        mutate(pathToFunction(getRoute)({ id }), data, false);
+        mutate(pathToFunction(getRoute)({ id }), local, false);
 
         await fetcher(pathToFunction(updateRoute)({ id }), {
             method: "PUT",
@@ -62,6 +63,7 @@ export default function FormEditableContentLoader({
         });
 
         mutate(pathToFunction(getRoute)({ id }));
+        mutate(listRoute);
     }
 
     return children({ onReset, onSave, name: local[nameProp] });
