@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
+import { ControlSectionContainer } from "./styled";
+
 const PageNavigationLink = styled.span`
-    color: ${(p) => p.theme.color.blue};
+    color: ${(p) => (p.current ? p.theme.color.red : p.theme.color.blue)};
     cursor: pointer;
     padding: ${(p) => p.theme.size[0]};
     text-decoration: underline;
@@ -23,8 +25,11 @@ export default function PageNavigation({
         .filter((x) => firstPage < x && x < lastPage);
 
     return (
-        <div>
-            <PageNavigationLink onClick={setPageNumber.bind(null, firstPage)}>
+        <ControlSectionContainer>
+            <PageNavigationLink
+                onClick={setPageNumber.bind(null, firstPage)}
+                current={firstPage === pageNumber}
+            >
                 {firstPage}
             </PageNavigationLink>
 
@@ -34,6 +39,7 @@ export default function PageNavigation({
                 <PageNavigationLink
                     key={x}
                     onClick={setPageNumber.bind(null, x)}
+                    current={x === pageNumber}
                 >
                     {x}
                 </PageNavigationLink>
@@ -41,9 +47,12 @@ export default function PageNavigation({
 
             {localPages[4] === lastPage - 1 ? null : "..."}
 
-            <PageNavigationLink onClick={setPageNumber.bind(null, lastPage)}>
+            <PageNavigationLink
+                onClick={setPageNumber.bind(null, lastPage)}
+                current={lastPage === pageNumber}
+            >
                 {lastPage}
             </PageNavigationLink>
-        </div>
+        </ControlSectionContainer>
     );
 }

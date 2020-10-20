@@ -3,10 +3,13 @@ import React from "react";
 import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoaderEditable from "../FormContentLoaderEditable";
+import FormFieldGrid from "../FormFieldGrid";
+import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
 import FormFieldCountry from "../FormFieldCountry";
 import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldString from "../FormFieldString";
+import { FormFieldButton, FormFieldButtonBlock } from "../FormFieldButton";
 
 export default function FormCityEdit({
     match: {
@@ -21,18 +24,40 @@ export default function FormCityEdit({
                 getRoute="/cities/:id"
                 updateRoute="/cities/:id"
             >
-                {({ onReset, onSave }) => (
-                    <React.Fragment>
-                        <FormFieldString prop="name" label="Name" />
-                        <FormFieldString required prop="label" label="Label" />
-                        <FormFieldLatLong required />
-                        <FormFieldCountry />
+                {({ onReset, onSave, name }) => (
+                    <TitleBoxPadder>
+                        <TitleBox title={`Edit ${name ?? "..."}`}>
+                            <FormFieldGrid>
+                                <FormFieldString
+                                    required
+                                    prop="name"
+                                    label="Name"
+                                />
+                                <FormFieldString
+                                    required
+                                    prop="label"
+                                    label="Label"
+                                />
+                                <FormFieldLatLong required />
+                                <FormFieldCountry />
 
-                        <div>
-                            <button onClick={onReset}>reset</button>
-                            <button onClick={onSave}>save</button>
-                        </div>
-                    </React.Fragment>
+                                <FormFieldButtonBlock>
+                                    <FormFieldButton
+                                        color="red"
+                                        onClick={onReset}
+                                    >
+                                        Reset
+                                    </FormFieldButton>
+                                    <FormFieldButton
+                                        color="green"
+                                        onClick={onSave}
+                                    >
+                                        Save
+                                    </FormFieldButton>
+                                </FormFieldButtonBlock>
+                            </FormFieldGrid>
+                        </TitleBox>
+                    </TitleBoxPadder>
                 )}
             </FormContentLoaderEditable>
         </FormProvider>

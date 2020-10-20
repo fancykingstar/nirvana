@@ -1,16 +1,22 @@
 import React from "react";
 import useSWR from "swr";
 import qs from "qs";
-import styled from "styled-components";
 
 import useQueryStringState from "../../hooks/useQueryStringState";
+
+import TitleBox from "../TitleBox";
 
 import PageNavigation from "./PageNavigation";
 import SearchFilter from "./SearchFilter";
 
-const TableStyled = styled.table`
-    width: 100%;
-`;
+import {
+    LoadingOverlay,
+    Cell,
+    LoadingCell,
+    ControlCell,
+    TableContainer,
+    TableStyled,
+} from "./styled";
 
 function useOnChangeSort(setState) {
     return React.useCallback(
@@ -67,6 +73,7 @@ function useSetSearchFilter(setState) {
 }
 
 export default function FilterList({
+    rows,
     title,
     entityUrl,
     RowComponent,
@@ -87,7 +94,7 @@ export default function FilterList({
     const setPageNumber = useSetPageNumber(setState);
     const setSearchFilter = useSetSearchFilter(setState);
 
-    // query utopia
+    //query utopia
     const { data, error } = useSWR(
         `${entityUrl}?${qs.stringify({
             _limit: pageSize,
@@ -122,63 +129,56 @@ export default function FilterList({
     }
 
     return (
-        <React.Fragment>
-            <h1>{title}</h1>
-            <div>{count} entries matching current filter</div>
-
+        <TitleBox title={title}>
+            <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
             <PageNavigation
                 {...{ pageNumber, pageSize, count, setPageNumber }}
             />
-
-            <SearchFilter {...{ searchFilter, setSearchFilter }} />
-
-            <TableStyled>
-                <thead>
-                    <tr>
-                        <HeaderComponent
-                            {...{ onChangeSort, sortBy, sortDirection }}
-                        />
-                    </tr>
-                </thead>
-                <tbody>
-                    {(data || []).map((x, i) => (
-                        <tr key={x.id}>
-                            <RowComponent i={i} {...x} />
+            <TableContainer>
+                <TableStyled>
+                    <thead>
+                        <tr>
+                            <HeaderComponent
+                                {...{ onChangeSort, sortBy, sortDirection }}
+                            />
                         </tr>
-                    ))}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <FooterComponent
-                            {...{ onChangeSort, sortBy, sortDirection }}
-                        />
-                    </tr>
-                </tfoot>
-            </TableStyled>
-        </React.Fragment>
+                    </thead>
+                    <tbody>
+                        {data
+                            ? data.map((x, i) => (
+                                  <tr key={x.id}>
+                                      <RowComponent i={i} {...x} />
+                                  </tr>
+                              ))
+                            : new Array(pageSize).fill(null).map((_, i) => (
+                                  <tr key={i}>
+                                      {new Array(rows)
+                                          .fill(null)
+                                          .map((_, i) => (
+                                              <LoadingCell key={i}>
+                                                  &nbsp;
+                                              </LoadingCell>
+                                          ))}
+                                  </tr>
+                              ))}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <FooterComponent
+                                {...{ onChangeSort, sortBy, sortDirection }}
+                            />
+                        </tr>
+                    </tfoot>
+                </TableStyled>
+                {data ? null : (
+                    <LoadingOverlay>
+                        <div>Loading</div>
+                    </LoadingOverlay>
+                )}
+            </TableContainer>
+        </TitleBox>
     );
 }
 
-FilterList.Cell = styled.td``;
-FilterList.ControlCell = styled.td`
-    position: relative;
-    width: ${(p) => p.width};
-
-    &:after {
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        ${({ arrowDirection }) => {
-            if (arrowDirection === "ASC") {
-                return `content: "▲"`;
-            }
-
-            if (arrowDirection === "DESC") {
-                return `content: "▼"`;
-            }
-
-            return "";
-        }};
-    }
-`;
+FilterList.Cell = Cell;
+FilterList.ControlCell = ControlCell;

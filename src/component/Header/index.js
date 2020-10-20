@@ -5,10 +5,11 @@ import { useAppContext } from "../AppContextProvider";
 
 const HeaderContainer = styled.header`
     align-items: center;
-    background-color: aliceblue;
-    color: darkgray;
+    background-color: ${(p) => p.theme.color.white};
+    color: ${(p) => p.theme.color.black};
     display: flex;
     padding: 1rem;
+    ${(p) => p.theme.shadow[1]}
 `;
 
 const Title = styled.h1`

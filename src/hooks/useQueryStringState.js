@@ -11,10 +11,10 @@ export default function useQueryStringState() {
 
         return Object.fromEntries(
             Object.entries(parsed).map(([key, value]) => {
-                if (Number(value)) {
-                    return [key, Number(value)];
-                } else {
+                if (Number.isNaN(Number(value))) {
                     return [key, value];
+                } else {
+                    return [key, Number(value)];
                 }
             }),
         );

@@ -66,5 +66,5 @@ export default function FormEditableContentLoader({
         mutate(listRoute);
     }
 
-    return children({ onReset, onSave });
+    return children({ onReset, onSave, name: local[nameProp] });
 }

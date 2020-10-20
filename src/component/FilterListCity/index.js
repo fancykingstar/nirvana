@@ -63,6 +63,7 @@ export default function FilterListCity() {
             HeaderComponent={CityHeader}
             FooterComponent={CityHeader}
             RowComponent={CityRow}
+            rows={4}
         />
     );
 }
