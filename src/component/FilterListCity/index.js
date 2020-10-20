@@ -20,7 +20,7 @@ function CityHeader({ onChangeSort, sortBy, sortDirection }) {
             >
                 Name
             </FilterList.ControlCell>
-            <FilterList.ControlCell width="30%">City</FilterList.ControlCell>
+            <FilterList.ControlCell width="30%">Country</FilterList.ControlCell>
             <FilterList.ControlCell
                 width="30%"
                 onClick={onChangeSort.bind(null, "latitude")}
@@ -44,7 +44,7 @@ function CityRow(props) {
             </FilterList.Cell>
             <FilterList.Cell>{props.name}</FilterList.Cell>
             <FilterList.Cell>
-                <Link to={`/${env}/country/edit/${props.country.id}`}>
+                <Link to={`/${env}/countries/edit/${props.country.id}`}>
                     {props.country.name}
                 </Link>
             </FilterList.Cell>

@@ -2,25 +2,34 @@ import React from "react";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
-import FormContentLoaderCreate from "../FormContentLoaderCreate";
+import FormFieldGrid from "../FormFieldGrid";
+import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldCountry from "../FormFieldCountry";
 import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldString from "../FormFieldString";
 
-export default function FormCityCreate() {
+import {
+    FormFieldButtonBlock,
+    FormFieldButtonReset,
+    FormFieldButtonCreate,
+} from "../FormFieldButton";
+
+export default function FormCityCreate({
+    match: {
+        params: { env },
+    },
+}) {
+    const createRoute = "/cities";
+    const listRoute = "/cities";
+    const pushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
+
     return (
         <FormProvider>
-            <FormContentLoaderCreate
-                nameProp="name"
-                createRoute="/cities"
-                getRoute="/cities/:id"
-                listRoute="/cities"
-                pushToEditRoute="/:env/cities/edit/:id"
-            >
-                {({ onCreate }) => (
-                    <React.Fragment>
+            <TitleBoxPadder>
+                <TitleBox title="Create City">
+                    <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
                         <FormFieldString prop="name" label="Name" />
@@ -28,12 +37,18 @@ export default function FormCityCreate() {
                         <FormFieldLatLong required />
                         <FormFieldCountry />
 
-                        <div>
-                            <button onClick={onCreate}>create</button>
-                        </div>
-                    </React.Fragment>
-                )}
-            </FormContentLoaderCreate>
+                        <FormFieldButtonBlock>
+                            <FormFieldButtonReset />
+                            <FormFieldButtonCreate
+                                nameProp="name"
+                                createRoute={createRoute}
+                                listRoute={listRoute}
+                                pushToEditRoute={pushToEditRoute}
+                            />
+                        </FormFieldButtonBlock>
+                    </FormFieldGrid>
+                </TitleBox>
+            </TitleBoxPadder>
         </FormProvider>
     );
 }

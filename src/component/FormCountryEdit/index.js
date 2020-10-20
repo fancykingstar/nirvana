@@ -6,8 +6,7 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
-import FormFieldCountry from "../FormFieldCountry";
-import FormFieldLatLong from "../FormFieldLatLong";
+import FormFieldLinkedMany from "../FormFieldLinkedMany";
 import FormFieldString from "../FormFieldString";
 
 import {
@@ -16,26 +15,50 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-export default function FormCityEdit({
+function LinkedCity({ id, name, remove }) {
+    return <li onClick={remove.bind(null, id)}>{name}</li>;
+}
+
+function SearchResultCity({ id, name, add }) {
+    return <li onClick={add.bind(null, id)}>{name}</li>;
+}
+
+export default function FormCountryEdit({
     match: {
         params: { id },
     },
 }) {
-    const getRoute = `/cities/${id}`;
-    const listRoute = "/cities";
-    const putRoute = `/cities/${id}`;
+    const getRoute = `/countries/${id}`;
+    const listRoute = "/countries";
+    const putRoute = `/countries/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getRoute={getRoute} />
-
             <TitleBoxPadder>
-                <TitleBox title="Edit City">
+                <TitleBox title="Edit Country">
                     <FormFieldGrid>
                         <FormFieldString required prop="name" label="Name" />
                         <FormFieldString required prop="label" label="Label" />
-                        <FormFieldLatLong required />
-                        <FormFieldCountry />
+                        <FormFieldString
+                            required
+                            prop="iso_2"
+                            label="ISO (2)"
+                        />
+                        <FormFieldString
+                            required
+                            prop="iso_3"
+                            label="ISO (3)"
+                        />
+
+                        <FormFieldLinkedMany
+                            label="Cities"
+                            prop="cities"
+                            searchUrl="/cities"
+                            searchProp="name"
+                            RenderLinked={LinkedCity}
+                            RenderSearchResult={SearchResultCity}
+                        />
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
