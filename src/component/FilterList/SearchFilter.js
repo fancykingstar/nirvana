@@ -9,7 +9,7 @@ export default function SearchFilter({ count, searchFilter, setSearchFilter }) {
             <span>Search:</span>
             <input
                 type="text"
-                value={searchFilter}
+                value={searchFilter || ""}
                 onChange={(e) => setSearchFilter(e.target.value)}
             />
         </ControlSectionContainer>

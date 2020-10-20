@@ -14,7 +14,6 @@ import {
     Cell,
     LoadingCell,
     ControlCell,
-    FilterListContainer,
     TableContainer,
     TableStyled,
 } from "./styled";
@@ -95,7 +94,7 @@ export default function FilterList({
     const setPageNumber = useSetPageNumber(setState);
     const setSearchFilter = useSetSearchFilter(setState);
 
-    // query utopia
+    //query utopia
     const { data, error } = useSWR(
         `${entityUrl}?${qs.stringify({
             _limit: pageSize,
@@ -130,58 +129,54 @@ export default function FilterList({
     }
 
     return (
-        <FilterListContainer>
-            <TitleBox title={title}>
-                <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
-
-                <PageNavigation
-                    {...{ pageNumber, pageSize, count, setPageNumber }}
-                />
-
-                <TableContainer>
-                    <TableStyled>
-                        <thead>
-                            <tr>
-                                <HeaderComponent
-                                    {...{ onChangeSort, sortBy, sortDirection }}
-                                />
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data
-                                ? data.map((x, i) => (
-                                      <tr key={x.id}>
-                                          <RowComponent i={i} {...x} />
-                                      </tr>
-                                  ))
-                                : new Array(pageSize).fill(null).map((_, i) => (
-                                      <tr key={i}>
-                                          {new Array(rows)
-                                              .fill(null)
-                                              .map((_, i) => (
-                                                  <LoadingCell key={i}>
-                                                      &nbsp;
-                                                  </LoadingCell>
-                                              ))}
-                                      </tr>
-                                  ))}
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <FooterComponent
-                                    {...{ onChangeSort, sortBy, sortDirection }}
-                                />
-                            </tr>
-                        </tfoot>
-                    </TableStyled>
-                    {data ? null : (
-                        <LoadingOverlay>
-                            <div>Loading</div>
-                        </LoadingOverlay>
-                    )}
-                </TableContainer>
-            </TitleBox>
-        </FilterListContainer>
+        <TitleBox title={title}>
+            <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
+            <PageNavigation
+                {...{ pageNumber, pageSize, count, setPageNumber }}
+            />
+            <TableContainer>
+                <TableStyled>
+                    <thead>
+                        <tr>
+                            <HeaderComponent
+                                {...{ onChangeSort, sortBy, sortDirection }}
+                            />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data
+                            ? data.map((x, i) => (
+                                  <tr key={x.id}>
+                                      <RowComponent i={i} {...x} />
+                                  </tr>
+                              ))
+                            : new Array(pageSize).fill(null).map((_, i) => (
+                                  <tr key={i}>
+                                      {new Array(rows)
+                                          .fill(null)
+                                          .map((_, i) => (
+                                              <LoadingCell key={i}>
+                                                  &nbsp;
+                                              </LoadingCell>
+                                          ))}
+                                  </tr>
+                              ))}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <FooterComponent
+                                {...{ onChangeSort, sortBy, sortDirection }}
+                            />
+                        </tr>
+                    </tfoot>
+                </TableStyled>
+                {data ? null : (
+                    <LoadingOverlay>
+                        <div>Loading</div>
+                    </LoadingOverlay>
+                )}
+            </TableContainer>
+        </TitleBox>
     );
 }
 
