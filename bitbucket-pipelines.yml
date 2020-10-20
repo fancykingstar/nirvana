@@ -36,11 +36,12 @@ pipelines:
             - npm run lint
             - npm run test
             - npm run build
+          artifacts:
+            - dist/**
 
       - step:
           name: Deploy to Dev
           deployment: staging
-          trigger: manual
           caches:
             - node
           script:
