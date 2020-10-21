@@ -2,6 +2,7 @@ import React from "react";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
+import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
@@ -14,9 +15,21 @@ import {
     FormFieldButtonBlock,
     FormFieldButtonReset,
     FormFieldButtonCreate,
+    FormFieldButtonSave,
 } from "../FormFieldButton";
 
-export default function FormCityCreate({
+function FormFields() {
+    return (
+        <React.Fragment>
+            <FormFieldString prop="name" label="Name" />
+            <FormFieldString required prop="label" label="Label" />
+            <FormFieldLatLong required />
+            <FormFieldCountry />
+        </React.Fragment>
+    );
+}
+
+export function FormCityCreate({
     match: {
         params: { env },
     },
@@ -32,10 +45,7 @@ export default function FormCityCreate({
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
-                        <FormFieldString prop="name" label="Name" />
-                        <FormFieldString required prop="label" label="Label" />
-                        <FormFieldLatLong required />
-                        <FormFieldCountry />
+                        <FormFields />
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
@@ -44,6 +54,40 @@ export default function FormCityCreate({
                                 createRoute={createRoute}
                                 listRoute={listRoute}
                                 pushToEditRoute={pushToEditRoute}
+                            />
+                        </FormFieldButtonBlock>
+                    </FormFieldGrid>
+                </TitleBox>
+            </TitleBoxPadder>
+        </FormProvider>
+    );
+}
+
+export function FormCityEdit({
+    match: {
+        params: { id },
+    },
+}) {
+    const getRoute = `/cities/${id}`;
+    const listRoute = "/cities";
+    const putRoute = `/cities/${id}`;
+
+    return (
+        <FormProvider>
+            <FormContentLoader getRoute={getRoute} />
+
+            <TitleBoxPadder>
+                <TitleBox title="Edit City">
+                    <FormFieldGrid>
+                        <FormFields />
+
+                        <FormFieldButtonBlock>
+                            <FormFieldButtonReset />
+                            <FormFieldButtonSave
+                                nameProp="name"
+                                putRoute={putRoute}
+                                getRoute={getRoute}
+                                listRoute={listRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

@@ -6,10 +6,8 @@ import EntityList from "../EntityList";
 
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
-import FormCityCreate from "../FormCityCreate";
-import FormCityEdit from "../FormCityEdit";
-import FormCountryCreate from "../FormCountryCreate";
-import FormCountryEdit from "../FormCountryEdit";
+import { FormCityCreate, FormCityEdit } from "../FormCity";
+import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
