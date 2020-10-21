@@ -1,8 +1,7 @@
 import React from "react";
 
 export const FormContext = React.createContext({
-    local: {},
-    remote: {},
+    state: { local: {}, remote: {} },
     dispatch: () => {},
 });
 
@@ -14,14 +13,17 @@ export function useFormField(prop, defaultState) {
     const changed = remote[prop] !== subState;
 
     const setState = React.useCallback(
-        (value) => {
+        (updater) => {
+            const value =
+                typeof updater === "function" ? updater(subState) : updater;
+
             dispatch({
                 type: "SET_LOCAL",
                 prop,
                 value,
             });
         },
-        [prop],
+        [prop, subState],
     );
 
     return [subState, setState, changed];
@@ -38,6 +40,12 @@ export function FormProvider({ children }) {
                         ...state,
                         local: action.data,
                         remote: action.data,
+                    };
+
+                case "RESET":
+                    return {
+                        ...state,
+                        local: state.remote,
                     };
 
                 case "SET_LOCAL":

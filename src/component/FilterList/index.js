@@ -4,7 +4,7 @@ import qs from "qs";
 
 import useQueryStringState from "../../hooks/useQueryStringState";
 
-import TitleBox from "../TitleBox";
+import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
 import PageNavigation from "./PageNavigation";
 import SearchFilter from "./SearchFilter";
@@ -129,54 +129,56 @@ export default function FilterList({
     }
 
     return (
-        <TitleBox title={title}>
-            <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
-            <PageNavigation
-                {...{ pageNumber, pageSize, count, setPageNumber }}
-            />
-            <TableContainer>
-                <TableStyled>
-                    <thead>
-                        <tr>
-                            <HeaderComponent
-                                {...{ onChangeSort, sortBy, sortDirection }}
-                            />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data
-                            ? data.map((x, i) => (
-                                  <tr key={x.id}>
-                                      <RowComponent i={i} {...x} />
-                                  </tr>
-                              ))
-                            : new Array(pageSize).fill(null).map((_, i) => (
-                                  <tr key={i}>
-                                      {new Array(rows)
-                                          .fill(null)
-                                          .map((_, i) => (
-                                              <LoadingCell key={i}>
-                                                  &nbsp;
-                                              </LoadingCell>
-                                          ))}
-                                  </tr>
-                              ))}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <FooterComponent
-                                {...{ onChangeSort, sortBy, sortDirection }}
-                            />
-                        </tr>
-                    </tfoot>
-                </TableStyled>
-                {data ? null : (
-                    <LoadingOverlay>
-                        <div>Loading</div>
-                    </LoadingOverlay>
-                )}
-            </TableContainer>
-        </TitleBox>
+        <TitleBoxPadder>
+            <TitleBox title={title}>
+                <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
+                <PageNavigation
+                    {...{ pageNumber, pageSize, count, setPageNumber }}
+                />
+                <TableContainer>
+                    <TableStyled>
+                        <thead>
+                            <tr>
+                                <HeaderComponent
+                                    {...{ onChangeSort, sortBy, sortDirection }}
+                                />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data
+                                ? data.map((x, i) => (
+                                      <tr key={x.id}>
+                                          <RowComponent i={i} {...x} />
+                                      </tr>
+                                  ))
+                                : new Array(pageSize).fill(null).map((_, i) => (
+                                      <tr key={i}>
+                                          {new Array(rows)
+                                              .fill(null)
+                                              .map((_, i) => (
+                                                  <LoadingCell key={i}>
+                                                      &nbsp;
+                                                  </LoadingCell>
+                                              ))}
+                                      </tr>
+                                  ))}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <FooterComponent
+                                    {...{ onChangeSort, sortBy, sortDirection }}
+                                />
+                            </tr>
+                        </tfoot>
+                    </TableStyled>
+                    {data ? null : (
+                        <LoadingOverlay>
+                            <div>Loading</div>
+                        </LoadingOverlay>
+                    )}
+                </TableContainer>
+            </TitleBox>
+        </TitleBoxPadder>
     );
 }
 

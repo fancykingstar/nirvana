@@ -3,10 +3,11 @@ import { Redirect, Switch, Route } from "react-router-dom";
 
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
-import FilterListCity from "../FilterListCity";
 
-import FormCityCreate from "../FormCityCreate";
-import FormCityEdit from "../FormCityEdit";
+import FilterListCity from "../FilterListCity";
+import FilterListCountry from "../FilterListCountry";
+import { FormCityCreate, FormCityEdit } from "../FormCity";
+import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -31,6 +32,20 @@ export default function Main() {
                 <EntityRootRedirect
                     path="/:env/cities/:foo"
                     to="/:env/cities"
+                />
+
+                <Route
+                    path="/:env/countries/create"
+                    component={FormCountryCreate}
+                />
+                <Route
+                    path="/:env/countries/edit/:id"
+                    component={FormCountryEdit}
+                />
+                <Route path="/:env/countries" component={FilterListCountry} />
+                <EntityRootRedirect
+                    path="/:env/countries/:foo"
+                    to="/:env/countries"
                 />
 
                 <Route component={EntityList} />

@@ -18,14 +18,12 @@ const CountryInput = styled.div`
 `;
 
 export default function FormFieldCountry({ required }) {
-    const [country, setCountry] = useFormField("country");
+    const [country, setCountry] = useFormField("country", {});
 
     const { data: countriesList = [] } = useSWR(
-        country
-            ? `/countries?${qs.stringify({
-                  _limit: 999,
-              })}`
-            : null,
+        `/countries?${qs.stringify({
+            _limit: 999,
+        })}`,
     );
 
     return (

@@ -51,7 +51,6 @@ export default function FormContentLoaderCreate({
         });
 
         const { id } = response;
-        console.log({ response });
 
         mutate(pathToFunction(getRoute)({ id }));
         mutate(listRoute);

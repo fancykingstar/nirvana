@@ -9,17 +9,30 @@ import AppContextProvider, {
 import ToastProvider from "../src/component/ToastProvider";
 import SWRErrorProvider from "../src/component/SWRErrorProvider";
 
-function LoggIner() {
-    const { setSession, apiFetch } = useAppContext();
-
-    React.useEffect(() => {
-        apiFetch("/auth/local", {
+let cachedJWT = null;
+async function getJWT(apiFetch) {
+    if (cachedJWT) {
+        return cachedJWT;
+    } else {
+        const jwt = await apiFetch("/auth/local", {
             method: "POST",
             body: JSON.stringify({
                 identifier: "Content Management",
                 password: "password",
             }),
-        }).then(setSession);
+        });
+
+        cachedJWT = jwt;
+
+        return jwt;
+    }
+}
+
+function LoggIner() {
+    const { setSession, apiFetch } = useAppContext();
+
+    React.useEffect(() => {
+        getJWT(apiFetch).then(setSession);
     }, []);
 
     return null;

@@ -6,7 +6,7 @@ import { createWrapper } from "./utils";
 
 import App from "../src/App";
 
-describe("city/list", () => {
+describe("cities/list", () => {
     it("can get a list of cities", async () => {
         const { wrapper } = createWrapper({
             route: "/local/cities/list",
@@ -47,5 +47,58 @@ describe("city/list", () => {
 
         await findByText(/15494 entries matching current filter/);
         await findByText("Zurich");
+    });
+
+    it("can navigate to a city's edit page", async () => {
+        const { getCurrentLocation, wrapper } = createWrapper({
+            route: "/local/cities/list",
+        });
+
+        const { findByText, getByText } = render(<App />, { wrapper });
+
+        await findByText(/15494 entries matching current filter/);
+
+        fireEvent.click(getByText("20"));
+
+        expect(getCurrentLocation()).toMatchObject({
+            pathname: "/local/cities/edit/20",
+        });
+    });
+
+    it("can navigate to a country's edit page", async () => {
+        const { getCurrentLocation, wrapper } = createWrapper({
+            route: "/local/cities/list",
+        });
+
+        const { findByText, getByText } = render(<App />, { wrapper });
+
+        await findByText(/15494 entries matching current filter/);
+
+        fireEvent.click(getByText("Russia"));
+
+        expect(getCurrentLocation()).toMatchObject({
+            pathname: "/local/countries/edit/165",
+        });
+    });
+
+    it("can search for cities by name", async () => {
+        const { wrapper } = createWrapper({
+            route: "/local/cities/list",
+        });
+
+        const { findByText, getByLabelText, queryByText } = render(<App />, {
+            wrapper,
+        });
+
+        await findByText(/15494 entries matching current filter/);
+
+        expect(queryByText(/addis ababa/i)).not.toBeInTheDocument();
+
+        fireEvent.change(getByLabelText(/search/i), {
+            target: { value: "aba" },
+        });
+
+        await findByText(/158 entries matching current filter/);
+        await findByText(/addis ababa/i);
     });
 });
