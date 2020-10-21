@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
 
 import FilterList from "../FilterList";
+import EnvLink from "../EnvLink";
 
 function CityHeader({ onChangeSort, sortBy, sortDirection }) {
     return (
@@ -33,20 +33,16 @@ function CityHeader({ onChangeSort, sortBy, sortDirection }) {
 }
 
 function CityRow(props) {
-    const {
-        params: { env },
-    } = useRouteMatch("/:env");
-
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <Link to={`/${env}/cities/edit/${props.id}`}>{props.id}</Link>
+                <EnvLink to={`/cities/edit/${props.id}`}>{props.id}</EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>{props.name}</FilterList.Cell>
             <FilterList.Cell>
-                <Link to={`/${env}/countries/edit/${props.country.id}`}>
+                <EnvLink to={`/countries/edit/${props.country.id}`}>
                     {props.country.name}
-                </Link>
+                </EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>
                 {props.latitude},{props.longitude}
