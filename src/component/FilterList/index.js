@@ -6,13 +6,14 @@ import useQueryStringState from "../../hooks/useQueryStringState";
 
 import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
+import DeleteSelected from "./DeleteSelected";
 import PageNavigation from "./PageNavigation";
 import SearchFilter from "./SearchFilter";
+import TableBody from "./TableBody";
 
 import {
     LoadingOverlay,
     Cell,
-    LoadingCell,
     ControlCell,
     TableContainer,
     TableStyled,
@@ -75,7 +76,9 @@ function useSetSearchFilter(setState) {
 export default function FilterList({
     rows,
     title,
-    entityUrl,
+    listRoute,
+    deleteRoute,
+
     RowComponent,
     HeaderComponent,
     FooterComponent,
@@ -93,10 +96,11 @@ export default function FilterList({
     const onChangeSort = useOnChangeSort(setState);
     const setPageNumber = useSetPageNumber(setState);
     const setSearchFilter = useSetSearchFilter(setState);
+    const [checked, setChecked] = React.useState({});
 
     //query utopia
     const { data, error } = useSWR(
-        `${entityUrl}?${qs.stringify({
+        `${listRoute}?${qs.stringify({
             _limit: pageSize,
             _start: pageNumber * pageSize,
 
@@ -115,7 +119,7 @@ export default function FilterList({
     );
 
     const { data: count } = useSWR(
-        `${entityUrl}/count?${qs.stringify({
+        `${listRoute}/count?${qs.stringify({
             ...(searchFilter
                 ? {
                       _where: [{ name_contains: searchFilter }],
@@ -135,36 +139,35 @@ export default function FilterList({
                 <PageNavigation
                     {...{ pageNumber, pageSize, count, setPageNumber }}
                 />
+
+                <DeleteSelected {...{ checked, listRoute, deleteRoute }} />
+
                 <TableContainer>
                     <TableStyled>
                         <thead>
                             <tr>
+                                <Cell width="1%"></Cell>
+
                                 <HeaderComponent
                                     {...{ onChangeSort, sortBy, sortDirection }}
                                 />
                             </tr>
                         </thead>
                         <tbody>
-                            {data
-                                ? data.map((x, i) => (
-                                      <tr key={x.id}>
-                                          <RowComponent i={i} {...x} />
-                                      </tr>
-                                  ))
-                                : new Array(pageSize).fill(null).map((_, i) => (
-                                      <tr key={i}>
-                                          {new Array(rows)
-                                              .fill(null)
-                                              .map((_, i) => (
-                                                  <LoadingCell key={i}>
-                                                      &nbsp;
-                                                  </LoadingCell>
-                                              ))}
-                                      </tr>
-                                  ))}
+                            <TableBody
+                                {...{
+                                    rows,
+                                    data,
+                                    checked,
+                                    setChecked,
+                                    RowComponent,
+                                    pageSize,
+                                }}
+                            />
                         </tbody>
                         <tfoot>
                             <tr>
+                                <Cell width="1%"></Cell>
                                 <FooterComponent
                                     {...{ onChangeSort, sortBy, sortDirection }}
                                 />
