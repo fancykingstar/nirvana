@@ -18,6 +18,14 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
+function LinkedAirport({ name }) {
+    return <span>{name}</span>;
+}
+
+function SearchResultAirport({ id, name, set }) {
+    return <li onClick={set.bind(null, id)}>{name}</li>;
+}
+
 function LinkedCity({ name }) {
     return <span>{name}</span>;
 }
@@ -35,6 +43,16 @@ function FormFields() {
 
             <FormFieldLinkedSingle
                 required
+                label="Nearest Airport"
+                prop="nearest_airport"
+                searchProp="name"
+                searchUrl="/airports"
+                RenderLinked={LinkedAirport}
+                RenderSearchResult={SearchResultAirport}
+            />
+
+            <FormFieldLinkedSingle
+                required
                 label="City"
                 prop="city"
                 searchProp="name"
@@ -46,19 +64,19 @@ function FormFields() {
     );
 }
 
-export function FormCityCreate({
+export function FormPortCreate({
     match: {
         params: { env },
     },
 }) {
-    const createRoute = "/cities";
-    const listRoute = "/cities";
-    const pushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
+    const listRoute = "/ports";
+    const createRoute = "/ports";
+    const pushToEditRoute = (id) => `/${env}/ports/edit/${id}`;
 
     return (
         <FormProvider>
             <TitleBoxPadder>
-                <TitleBox title="Create City">
+                <TitleBox title="Create Port">
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -80,21 +98,20 @@ export function FormCityCreate({
     );
 }
 
-export function FormCityEdit({
+export function FormPortEdit({
     match: {
         params: { id },
     },
 }) {
-    const getRoute = `/cities/${id}`;
-    const listRoute = "/cities";
-    const putRoute = `/cities/${id}`;
+    const getRoute = `/ports/${id}`;
+    const listRoute = "/ports";
+    const putRoute = `/ports/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getRoute={getRoute} />
-
             <TitleBoxPadder>
-                <TitleBox title="Edit City">
+                <TitleBox title="Edit Port">
                     <FormFieldGrid>
                         <FormFields />
 
