@@ -28,8 +28,6 @@ export default function FormFieldLinkedMany({
     const [search, setSearch] = React.useState("");
     const [linked, setLinked] = useFormField(prop, []);
 
-    console.log({ linked });
-
     const { data } = useSWR(
         search.length
             ? `${searchUrl}?${qs.stringify({

@@ -59,7 +59,8 @@ export default function FilterListCountries() {
     return (
         <FilterList
             title="Countries"
-            entityUrl="/countries"
+            listRoute="/countries"
+            deleteRoute={(id) => `/countries/${id}`}
             HeaderComponent={CountryHeader}
             FooterComponent={CountryHeader}
             RowComponent={CountryRow}
