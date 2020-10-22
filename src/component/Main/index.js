@@ -12,6 +12,7 @@ import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
+import { FormCurrencyCreate } from "../FormCurrency";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -69,6 +70,11 @@ export default function Main() {
                 <EntityRootRedirect
                     path="/:env/airports/:foo"
                     to="/:env/airports"
+                />
+
+                <Route
+                    path="/:env/currencies/create"
+                    component={FormCurrencyCreate}
                 />
 
                 <Route component={EntityList} />
