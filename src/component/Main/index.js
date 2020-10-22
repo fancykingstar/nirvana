@@ -8,10 +8,12 @@ import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListPort from "../FilterListPort";
 import FilterListAirport from "../FilterListAirport";
+import FilterListCurrency from "../FilterListCurrency";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
+import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -70,6 +72,16 @@ export default function Main() {
                     path="/:env/airports/:foo"
                     to="/:env/airports"
                 />
+
+                <Route
+                    path="/:env/currencies/create"
+                    component={FormCurrencyCreate}
+                />
+                <Route
+                    path="/:env/currencies/edit/:id"
+                    component={FormCurrencyEdit}
+                />
+                <Route path="/:env/currencies" component={FilterListCurrency} />
 
                 <Route component={EntityList} />
             </Switch>
