@@ -53,7 +53,9 @@ export default function FilterListPort() {
     return (
         <FilterList
             title="Ports"
-            entityUrl="/ports"
+            listApi="/ports"
+            getDeleteApi={(id) => `/ports/${id}`}
+            createRoute="/ports/create"
             HeaderComponent={PortHeader}
             FooterComponent={PortHeader}
             RowComponent={PortRow}

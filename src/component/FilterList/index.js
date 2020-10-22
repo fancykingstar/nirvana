@@ -139,14 +139,14 @@ export default function FilterList({
     return (
         <TitleBoxPadder>
             <TitleBox title={title}>
+                <EnvLink to={createRoute}> Create New</EnvLink>
+
                 <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
                 <PageNavigation
                     {...{ pageNumber, pageSize, count, setPageNumber }}
                 />
 
                 <DeleteSelected {...{ checked, listApi, getDeleteApi }} />
-
-                <EnvLink to={createRoute}> Create New</EnvLink>
 
                 <TableContainer>
                     <TableStyled>

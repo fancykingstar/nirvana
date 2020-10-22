@@ -61,6 +61,7 @@ export default function FilterListCountries() {
             title="Countries"
             listApi="/countries"
             getDeleteApi={(id) => `/countries/${id}`}
+            createRoute="/countries/create"
             HeaderComponent={CountryHeader}
             FooterComponent={CountryHeader}
             RowComponent={CountryRow}
