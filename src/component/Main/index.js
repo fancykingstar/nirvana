@@ -7,9 +7,11 @@ import EntityList from "../EntityList";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListPort from "../FilterListPort";
+import FilterListAirport from "../FilterListAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
+import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -54,6 +56,20 @@ export default function Main() {
                 <Route path="/:env/ports/edit/:id" component={FormPortEdit} />
                 <Route path="/:env/ports" component={FilterListPort} />
                 <EntityRootRedirect path="/:env/ports/:foo" to="/:env/ports" />
+
+                <Route
+                    path="/:env/airports/create"
+                    component={FormAirportCreate}
+                />
+                <Route
+                    path="/:env/airports/edit/:id"
+                    component={FormAirportEdit}
+                />
+                <Route path="/:env/airports" component={FilterListAirport} />
+                <EntityRootRedirect
+                    path="/:env/airports/:foo"
+                    to="/:env/airports"
+                />
 
                 <Route component={EntityList} />
             </Switch>

@@ -18,11 +18,11 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCountry({ name }) {
+function LinkedCity({ name }) {
     return <span>{name}</span>;
 }
 
-function SearchResultCountry({ id, name, set }) {
+function SearchResultCity({ id, name, set }) {
     return <li onClick={set.bind(null, id)}>{name}</li>;
 }
 
@@ -30,35 +30,40 @@ function FormFields() {
     return (
         <React.Fragment>
             <FormFieldString prop="name" label="Name" />
-            <FormFieldString required prop="label" label="Label" />
+            <FormFieldString prop="label" label="Label" />
+            <FormFieldString
+                required
+                prop="airport_code"
+                label="Airport Code"
+            />
             <FormFieldLatLong required />
 
             <FormFieldLinkedSingle
                 required
-                label="Country"
-                prop="country"
+                label="City"
+                prop="city"
                 searchProp="name"
-                searchUrl="/countries"
-                RenderLinked={LinkedCountry}
-                RenderSearchResult={SearchResultCountry}
+                searchUrl="/cities"
+                RenderLinked={LinkedCity}
+                RenderSearchResult={SearchResultCity}
             />
         </React.Fragment>
     );
 }
 
-export function FormCityCreate({
+export function FormAirportCreate({
     match: {
         params: { env },
     },
 }) {
-    const createApi = "/cities";
-    const listApi = "/cities";
-    const getPushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
+    const listRoute = "/airports";
+    const createRoute = "/airports";
+    const pushToEditRoute = (id) => `/${env}/airports/edit/${id}`;
 
     return (
         <FormProvider>
             <TitleBoxPadder>
-                <TitleBox title="Create City">
+                <TitleBox title="Create Airport">
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -68,9 +73,9 @@ export function FormCityCreate({
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createApi={createApi}
-                                listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                createRoute={createRoute}
+                                listRoute={listRoute}
+                                pushToEditRoute={pushToEditRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
@@ -80,21 +85,20 @@ export function FormCityCreate({
     );
 }
 
-export function FormCityEdit({
+export function FormAirportEdit({
     match: {
         params: { id },
     },
 }) {
-    const getApi = `/cities/${id}`;
-    const listApi = "/cities";
-    const putApi = `/cities/${id}`;
+    const getRoute = `/airports/${id}`;
+    const listRoute = "/airports";
+    const putRoute = `/airports/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getApi={getApi} />
-
+            <FormContentLoader getRoute={getRoute} />
             <TitleBoxPadder>
-                <TitleBox title="Edit City">
+                <TitleBox title="Edit Airport">
                     <FormFieldGrid>
                         <FormFields />
 
@@ -102,9 +106,9 @@ export function FormCityEdit({
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putApi={putApi}
-                                getApi={getApi}
-                                listApi={listApi}
+                                putRoute={putRoute}
+                                getRoute={getRoute}
+                                listRoute={listRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
