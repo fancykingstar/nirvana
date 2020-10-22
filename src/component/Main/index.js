@@ -14,6 +14,10 @@ import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
+import {
+    FormExchangeRateCreate,
+    FormExchangeRateEdit,
+} from "../FormExchangeRate";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -82,6 +86,15 @@ export default function Main() {
                     component={FormCurrencyEdit}
                 />
                 <Route path="/:env/currencies" component={FilterListCurrency} />
+
+                <Route
+                    path="/:env/exchange-rates/create"
+                    component={FormExchangeRateCreate}
+                />
+                <Route
+                    path="/:env/exchange-rates/edit/:id"
+                    component={FormExchangeRateEdit}
+                />
 
                 <Route component={EntityList} />
             </Switch>
