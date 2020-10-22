@@ -18,11 +18,11 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCountry({ name }) {
+function LinkedCity({ name }) {
     return <span>{name}</span>;
 }
 
-function SearchResultCountry({ id, name, set }) {
+function SearchResultCity({ id, name, set }) {
     return <li onClick={set.bind(null, id)}>{name}</li>;
 }
 
@@ -30,35 +30,40 @@ function FormFields() {
     return (
         <React.Fragment>
             <FormFieldString prop="name" label="Name" />
-            <FormFieldString required prop="label" label="Label" />
+            <FormFieldString prop="label" label="Label" />
+            <FormFieldString
+                required
+                prop="airport_code"
+                label="Airport Code"
+            />
             <FormFieldLatLong required />
 
             <FormFieldLinkedSingle
                 required
-                label="Country"
-                prop="country"
+                label="City"
+                prop="city"
                 searchProp="name"
-                searchUrl="/countries"
-                RenderLinked={LinkedCountry}
-                RenderSearchResult={SearchResultCountry}
+                searchUrl="/cities"
+                RenderLinked={LinkedCity}
+                RenderSearchResult={SearchResultCity}
             />
         </React.Fragment>
     );
 }
 
-export function FormCityCreate({
+export function FormAirportCreate({
     match: {
         params: { env },
     },
 }) {
-    const createRoute = "/cities";
-    const listRoute = "/cities";
-    const pushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
+    const listRoute = "/airports";
+    const createRoute = "/airports";
+    const pushToEditRoute = (id) => `/${env}/airports/edit/${id}`;
 
     return (
         <FormProvider>
             <TitleBoxPadder>
-                <TitleBox title="Create City">
+                <TitleBox title="Create Airport">
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -80,21 +85,20 @@ export function FormCityCreate({
     );
 }
 
-export function FormCityEdit({
+export function FormAirportEdit({
     match: {
         params: { id },
     },
 }) {
-    const getRoute = `/cities/${id}`;
-    const listRoute = "/cities";
-    const putRoute = `/cities/${id}`;
+    const getRoute = `/airports/${id}`;
+    const listRoute = "/airports";
+    const putRoute = `/airports/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getRoute={getRoute} />
-
             <TitleBoxPadder>
-                <TitleBox title="Edit City">
+                <TitleBox title="Edit Airport">
                     <FormFieldGrid>
                         <FormFields />
 

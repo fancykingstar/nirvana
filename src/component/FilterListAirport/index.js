@@ -3,7 +3,7 @@ import React from "react";
 import FilterList from "../FilterList";
 import EnvLink from "../EnvLink";
 
-function PortHeader({ onChangeSort, sortBy, sortDirection }) {
+function AirportHeader({ onChangeSort, sortBy, sortDirection }) {
     return (
         <React.Fragment>
             <FilterList.ControlCell
@@ -12,6 +12,9 @@ function PortHeader({ onChangeSort, sortBy, sortDirection }) {
                 arrowDirection={sortBy === "id" ? sortDirection : null}
             >
                 Id
+            </FilterList.ControlCell>
+            <FilterList.ControlCell width="20%">
+                Airport Code
             </FilterList.ControlCell>
 
             <FilterList.ControlCell
@@ -25,20 +28,17 @@ function PortHeader({ onChangeSort, sortBy, sortDirection }) {
             <FilterList.ControlCell width="20%">Coords</FilterList.ControlCell>
 
             <FilterList.ControlCell width="20%">City</FilterList.ControlCell>
-
-            <FilterList.ControlCell width="20%">
-                Nearest Airport
-            </FilterList.ControlCell>
         </React.Fragment>
     );
 }
 
-function PortRow(props) {
+function AirportRow(props) {
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <EnvLink to={`/ports/edit/${props.id}`}>{props.id}</EnvLink>
+                <EnvLink to={`/airports/edit/${props.id}`}>{props.id}</EnvLink>
             </FilterList.Cell>
+            <FilterList.Cell>{props.airport_code}</FilterList.Cell>
             <FilterList.Cell>{props.name}</FilterList.Cell>
             <FilterList.Cell>
                 {props.latitude}, {props.longitude}
@@ -48,24 +48,19 @@ function PortRow(props) {
                     {props.city.name}
                 </EnvLink>
             </FilterList.Cell>
-            <FilterList.Cell>
-                <EnvLink to={`/cities/edit/${props.nearest_airport.id}`}>
-                    {props.nearest_airport.name}
-                </EnvLink>
-            </FilterList.Cell>
         </React.Fragment>
     );
 }
 
-export default function FilterListPort() {
+export default function FilterListAirport() {
     return (
         <FilterList
-            title="Ports"
-            listRoute="/ports"
-            deleteRoute={(id) => `/ports/${id}`}
-            HeaderComponent={PortHeader}
-            FooterComponent={PortHeader}
-            RowComponent={PortRow}
+            title="Airports"
+            listRoute="/airports"
+            deleteRoute={(id) => `/airports/${id}`}
+            HeaderComponent={AirportHeader}
+            FooterComponent={AirportHeader}
+            RowComponent={AirportRow}
             rows={4}
         />
     );
