@@ -21,8 +21,8 @@ export default function FormFieldLatLong({ required }) {
             <FormFieldLabel required={required}>Latitude</FormFieldLabel>
             <FieldInput
                 type="number"
-                min={-180}
-                max={180}
+                min={-90}
+                max={90}
                 step={0.00001}
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}

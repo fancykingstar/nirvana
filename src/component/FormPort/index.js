@@ -69,9 +69,9 @@ export function FormPortCreate({
         params: { env },
     },
 }) {
-    const listRoute = "/ports";
-    const createRoute = "/ports";
-    const pushToEditRoute = (id) => `/${env}/ports/edit/${id}`;
+    const listApi = "/ports";
+    const createApi = "/ports";
+    const getPushToEditRoute = (id) => `/${env}/ports/edit/${id}`;
 
     return (
         <FormProvider>
@@ -86,9 +86,9 @@ export function FormPortCreate({
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createRoute={createRoute}
-                                listRoute={listRoute}
-                                pushToEditRoute={pushToEditRoute}
+                                createApi={createApi}
+                                listApi={listApi}
+                                getPushToEditRoute={getPushToEditRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
@@ -103,13 +103,13 @@ export function FormPortEdit({
         params: { id },
     },
 }) {
-    const getRoute = `/ports/${id}`;
-    const listRoute = "/ports";
-    const putRoute = `/ports/${id}`;
+    const getApi = `/ports/${id}`;
+    const listApi = "/ports";
+    const putApi = `/ports/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getRoute={getRoute} />
+            <FormContentLoader getApi={getApi} />
             <TitleBoxPadder>
                 <TitleBox title="Edit Port">
                     <FormFieldGrid>
@@ -119,9 +119,9 @@ export function FormPortEdit({
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putRoute={putRoute}
-                                getRoute={getRoute}
-                                listRoute={listRoute}
+                                putApi={putApi}
+                                getApi={getApi}
+                                listApi={listApi}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

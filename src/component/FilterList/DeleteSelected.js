@@ -6,7 +6,7 @@ import { ControlSectionContainer } from "./styled";
 import { useAPIFetch } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
 
-export default function DeleteSelected({ checked, listRoute, deleteRoute }) {
+export default function DeleteSelected({ checked, listApi, getDeleteApi }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
 
@@ -22,7 +22,7 @@ export default function DeleteSelected({ checked, listRoute, deleteRoute }) {
             timeout: 1000,
         });
 
-        await fetcher(deleteRoute(id), {
+        await fetcher(getDeleteApi(id), {
             method: "DELETE",
         });
 
@@ -45,7 +45,7 @@ export default function DeleteSelected({ checked, listRoute, deleteRoute }) {
             await deleteEntry(id);
         }
 
-        mutateMany(`${listRoute}*`);
+        mutateMany(`${listApi}*`);
 
         addToast({
             color: "green",

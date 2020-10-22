@@ -14,10 +14,10 @@ function pathToFunction(path) {
 export default function FormContentLoaderCreate({
     nameProp,
 
-    createRoute,
-    getRoute,
-    listRoute,
-    pushToEditRoute,
+    createApi,
+    getApi,
+    listApi,
+    getPushToEditRoute,
 
     children,
 }) {
@@ -36,7 +36,7 @@ export default function FormContentLoaderCreate({
             message: local[nameProp],
         });
 
-        const response = await fetcher(pathToFunction(createRoute)({ id }), {
+        const response = await fetcher(pathToFunction(createApi)({ id }), {
             method: "POST",
             body: JSON.stringify(local),
         });
@@ -52,10 +52,10 @@ export default function FormContentLoaderCreate({
 
         const { id } = response;
 
-        mutate(pathToFunction(getRoute)({ id }));
-        mutate(listRoute);
+        mutate(pathToFunction(getApi)({ id }));
+        mutate(listApi);
 
-        push(pathToFunction(pushToEditRoute)({ env, id }));
+        push(pathToFunction(getPushToEditRoute)({ env, id }));
     }
 
     return children({ onCreate });

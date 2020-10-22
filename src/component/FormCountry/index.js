@@ -50,9 +50,9 @@ export function FormCountryCreate({
         params: { env },
     },
 }) {
-    const listRoute = "/cities";
-    const createRoute = "/cities";
-    const pushToEditRoute = (id) => `/${env}/countries/edit/${id}`;
+    const listApi = "/cities";
+    const createApi = "/cities";
+    const getPushToEditRoute = (id) => `/${env}/countries/edit/${id}`;
 
     return (
         <FormProvider>
@@ -67,9 +67,9 @@ export function FormCountryCreate({
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createRoute={createRoute}
-                                listRoute={listRoute}
-                                pushToEditRoute={pushToEditRoute}
+                                createApi={createApi}
+                                listApi={listApi}
+                                getPushToEditRoute={getPushToEditRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
@@ -84,13 +84,13 @@ export function FormCountryEdit({
         params: { id },
     },
 }) {
-    const getRoute = `/countries/${id}`;
-    const listRoute = "/countries";
-    const putRoute = `/countries/${id}`;
+    const getApi = `/countries/${id}`;
+    const listApi = "/countries";
+    const putApi = `/countries/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getRoute={getRoute} />
+            <FormContentLoader getApi={getApi} />
             <TitleBoxPadder>
                 <TitleBox title="Edit Country">
                     <FormFieldGrid>
@@ -100,9 +100,9 @@ export function FormCountryEdit({
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putRoute={putRoute}
-                                getRoute={getRoute}
-                                listRoute={listRoute}
+                                putApi={putApi}
+                                getApi={getApi}
+                                listApi={listApi}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

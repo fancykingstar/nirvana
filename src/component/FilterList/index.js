@@ -5,6 +5,7 @@ import qs from "qs";
 import useQueryStringState from "../../hooks/useQueryStringState";
 
 import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import EnvLink from "../EnvLink";
 
 import DeleteSelected from "./DeleteSelected";
 import PageNavigation from "./PageNavigation";
@@ -76,8 +77,11 @@ function useSetSearchFilter(setState) {
 export default function FilterList({
     rows,
     title,
-    listRoute,
-    deleteRoute,
+
+    listApi,
+    getDeleteApi,
+
+    createRoute,
 
     RowComponent,
     HeaderComponent,
@@ -100,7 +104,7 @@ export default function FilterList({
 
     //query utopia
     const { data, error } = useSWR(
-        `${listRoute}?${qs.stringify({
+        `${listApi}?${qs.stringify({
             _limit: pageSize,
             _start: pageNumber * pageSize,
 
@@ -119,7 +123,7 @@ export default function FilterList({
     );
 
     const { data: count } = useSWR(
-        `${listRoute}/count?${qs.stringify({
+        `${listApi}/count?${qs.stringify({
             ...(searchFilter
                 ? {
                       _where: [{ name_contains: searchFilter }],
@@ -135,12 +139,14 @@ export default function FilterList({
     return (
         <TitleBoxPadder>
             <TitleBox title={title}>
+                <EnvLink to={createRoute}> Create New</EnvLink>
+
                 <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
                 <PageNavigation
                     {...{ pageNumber, pageSize, count, setPageNumber }}
                 />
 
-                <DeleteSelected {...{ checked, listRoute, deleteRoute }} />
+                <DeleteSelected {...{ checked, listApi, getDeleteApi }} />
 
                 <TableContainer>
                     <TableStyled>
