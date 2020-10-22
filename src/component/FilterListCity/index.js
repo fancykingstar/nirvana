@@ -55,8 +55,8 @@ export default function FilterListCity() {
     return (
         <FilterList
             title="Cities"
-            listRoute="/cities"
-            deleteRoute={(id) => `/cities/${id}`}
+            listApi="/cities"
+            getDeleteApi={(id) => `/cities/${id}`}
             HeaderComponent={CityHeader}
             FooterComponent={CityHeader}
             RowComponent={CityRow}

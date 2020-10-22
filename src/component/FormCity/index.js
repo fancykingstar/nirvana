@@ -51,9 +51,9 @@ export function FormCityCreate({
         params: { env },
     },
 }) {
-    const createRoute = "/cities";
-    const listRoute = "/cities";
-    const pushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
+    const createApi = "/cities";
+    const listApi = "/cities";
+    const getPushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
 
     return (
         <FormProvider>
@@ -68,9 +68,9 @@ export function FormCityCreate({
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createRoute={createRoute}
-                                listRoute={listRoute}
-                                pushToEditRoute={pushToEditRoute}
+                                createApi={createApi}
+                                listApi={listApi}
+                                getPushToEditRoute={getPushToEditRoute}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
@@ -85,13 +85,13 @@ export function FormCityEdit({
         params: { id },
     },
 }) {
-    const getRoute = `/cities/${id}`;
-    const listRoute = "/cities";
-    const putRoute = `/cities/${id}`;
+    const getApi = `/cities/${id}`;
+    const listApi = "/cities";
+    const putApi = `/cities/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getRoute={getRoute} />
+            <FormContentLoader getApi={getApi} />
 
             <TitleBoxPadder>
                 <TitleBox title="Edit City">
@@ -102,9 +102,9 @@ export function FormCityEdit({
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putRoute={putRoute}
-                                getRoute={getRoute}
-                                listRoute={listRoute}
+                                putApi={putApi}
+                                getApi={getApi}
+                                listApi={listApi}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

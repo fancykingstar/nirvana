@@ -59,8 +59,8 @@ export default function FilterListCountries() {
     return (
         <FilterList
             title="Countries"
-            listRoute="/countries"
-            deleteRoute={(id) => `/countries/${id}`}
+            listApi="/countries"
+            getDeleteApi={(id) => `/countries/${id}`}
             HeaderComponent={CountryHeader}
             FooterComponent={CountryHeader}
             RowComponent={CountryRow}

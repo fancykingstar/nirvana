@@ -51,12 +51,7 @@ export function FormFieldButtonReset() {
     );
 }
 
-export function FormFieldButtonSave({
-    nameProp,
-    listRoute,
-    getRoute,
-    putRoute,
-}) {
+export function FormFieldButtonSave({ nameProp, listApi, getApi, putApi }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
 
@@ -70,9 +65,9 @@ export function FormFieldButtonSave({
             message: local[nameProp],
         });
 
-        mutate(getRoute, local, false);
+        mutate(getApi, local, false);
 
-        await fetcher(putRoute, {
+        await fetcher(putApi, {
             method: "PUT",
             body: JSON.stringify(local),
         });
@@ -86,8 +81,8 @@ export function FormFieldButtonSave({
             message: local[nameProp],
         });
 
-        mutate(getRoute);
-        mutateMany(`${listRoute}*`);
+        mutate(getApi);
+        mutateMany(`${listApi}*`);
     }
 
     return (
@@ -99,9 +94,9 @@ export function FormFieldButtonSave({
 
 export function FormFieldButtonCreate({
     nameProp,
-    listRoute,
-    createRoute,
-    pushToEditRoute,
+    listApi,
+    createApi,
+    getPushToEditRoute,
 }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
@@ -117,7 +112,7 @@ export function FormFieldButtonCreate({
             message: local[nameProp],
         });
 
-        const response = await fetcher(createRoute, {
+        const response = await fetcher(createApi, {
             method: "POST",
             body: JSON.stringify(local),
         });
@@ -133,9 +128,9 @@ export function FormFieldButtonCreate({
 
         const { id } = response;
 
-        mutate(listRoute);
+        mutate(listApi);
 
-        push(pushToEditRoute(id));
+        push(getPushToEditRoute(id));
     }
 
     return (

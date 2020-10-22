@@ -5,12 +5,12 @@ import { FormContext } from "../../hooks/useFormContext";
 
 import { useAPIFetch } from "../AppContextProvider";
 
-export default function FormContentLoader({ getRoute, children }) {
+export default function FormContentLoader({ getApi, children }) {
     const { dispatch } = React.useContext(FormContext);
 
     const fetcher = useAPIFetch();
 
-    const { data } = useSWR(getRoute, fetcher);
+    const { data } = useSWR(getApi, fetcher);
 
     React.useEffect(() => {
         if (data) {
