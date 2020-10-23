@@ -41,7 +41,7 @@ function FormFields() {
                 required
                 label="From Currency"
                 prop="from_currency"
-                searchProp="from_exchange_rates"
+                searchProp="currency_code"
                 searchUrl="/currencies"
                 RenderLinked={LinkedCurrency}
                 RenderSearchResult={SearchResultCurrency}
@@ -50,7 +50,7 @@ function FormFields() {
                 required
                 label="To Currency"
                 prop="to_currency"
-                searchProp="to_exchange_rates"
+                searchProp="currency_code"
                 searchUrl="/currencies"
                 RenderLinked={LinkedCurrency}
                 RenderSearchResult={SearchResultCurrency}
