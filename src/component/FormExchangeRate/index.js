@@ -8,7 +8,7 @@ import TitleBox, { TitleBoxPadder } from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
-import FormFieldString from "../FormFieldString";
+import FormFieldNumber from "../FormFieldNumber";
 
 import {
     FormFieldButtonBlock,
@@ -17,20 +17,24 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCurrency({ name }) {
-    return <span>{name}</span>;
+function LinkedCurrency({ currency_code, symbol }) {
+    return (
+        <span>
+            {currency_code} ({symbol})
+        </span>
+    );
 }
 
-function SearchResultCurrency({ id, name, set }) {
-    return <li onClick={set.bind(null, id)}>{name}</li>;
+function SearchResultCurrency({ id, currency_code, set }) {
+    return <li onClick={set.bind(null, id)}>{currency_code}</li>;
 }
 
 function FormFields() {
     return (
         <React.Fragment>
-            <FormFieldString
+            <FormFieldNumber
                 required
-                prop="exchange-rate"
+                prop="exhange_rate"
                 label="Exchange Rate"
             />
             <FormFieldLinkedSingle
