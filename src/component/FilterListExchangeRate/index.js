@@ -15,14 +15,14 @@ function ExchangeRateHeader({ onChangeSort, sortBy, sortDirection }) {
             </FilterList.ControlCell>
             <FilterList.ControlCell
                 width="30%"
-                onClick={onChangeSort.bind(null, "exchange_rate")}
+                onClick={onChangeSort.bind(null, "exhange_rate")}
                 arrowDirection={
-                    sortBy === "exchange_rate" ? sortDirection : null
+                    sortBy === "exhange_rate" ? sortDirection : null
                 }
             >
                 Exchange Rate
             </FilterList.ControlCell>
-            {/* <FilterList.ControlCell
+            <FilterList.ControlCell
                 width="30%"
                 onClick={onChangeSort.bind(null, "from_currency")}
                 arrowDirection={
@@ -30,14 +30,14 @@ function ExchangeRateHeader({ onChangeSort, sortBy, sortDirection }) {
                 }
             >
                 From Currency
-            </FilterList.ControlCell> */}
-            {/* <FilterList.ControlCell
+            </FilterList.ControlCell>
+            <FilterList.ControlCell
                 width="30%"
                 onClick={onChangeSort.bind(null, "to_currency")}
                 arrowDirection={sortBy === "to_currency" ? sortDirection : null}
             >
                 To Currency
-            </FilterList.ControlCell> */}
+            </FilterList.ControlCell>
         </React.Fragment>
     );
 }
@@ -51,9 +51,11 @@ function ExchangeRateRow(props) {
                 </EnvLink>
             </FilterList.Cell>
 
-            <FilterList.Cell>{props.exchange_rate}</FilterList.Cell>
-            {/* <FilterList.Cell>{props.from_currency}</FilterList.Cell> */}
-            {/* <FilterList.Cell>{props.to_currency}</FilterList.Cell> */}
+            <FilterList.Cell>{props.exhange_rate}</FilterList.Cell>
+            <FilterList.Cell>
+                {props.from_currency.currency_code}
+            </FilterList.Cell>
+            <FilterList.Cell>{props.to_currency.currency_code}</FilterList.Cell>
         </React.Fragment>
     );
 }
