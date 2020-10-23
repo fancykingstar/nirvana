@@ -34,6 +34,8 @@ function FormFields() {
         <React.Fragment>
             <FormFieldNumber
                 required
+                step=".01"
+                min="0"
                 prop="exhange_rate"
                 label="Exchange Rate"
             />
