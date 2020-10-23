@@ -16,13 +16,14 @@ const FieldInput = styled.input`
     grid-column: input / input;
 `;
 
-export default function FormFieldNumber({ required, prop, label }) {
+export default function FormFieldNumber({ required, prop, label, ...props }) {
     const [state, setState, changed] = useFormField(prop, "");
 
     return (
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <FieldInput
+                {...props}
                 type="number"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
