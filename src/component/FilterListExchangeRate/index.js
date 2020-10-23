@@ -22,20 +22,10 @@ function ExchangeRateHeader({ onChangeSort, sortBy, sortDirection }) {
             >
                 Exchange Rate
             </FilterList.ControlCell>
-            <FilterList.ControlCell
-                width="30%"
-                onClick={onChangeSort.bind(null, "from_currency")}
-                arrowDirection={
-                    sortBy === "from_currency" ? sortDirection : null
-                }
-            >
+            <FilterList.ControlCell width="30%">
                 From Currency
             </FilterList.ControlCell>
-            <FilterList.ControlCell
-                width="30%"
-                onClick={onChangeSort.bind(null, "to_currency")}
-                arrowDirection={sortBy === "to_currency" ? sortDirection : null}
-            >
+            <FilterList.ControlCell width="30%">
                 To Currency
             </FilterList.ControlCell>
         </React.Fragment>
