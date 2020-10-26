@@ -1,13 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-const LinkStyled = styled(Link)``;
-
-import { useAppContext } from "../AppContextProvider";
+import EnvLink from "../EnvLink";
 
 export default function EntityList() {
-    const { env } = useAppContext();
     const links = [
         "accommodation-grades",
         "accommodations",
@@ -34,17 +29,17 @@ export default function EntityList() {
         "product-types",
         "products",
     ].map((slug) => ({
-        to: `/${env}/${slug}`,
+        to: `/${slug}`,
         label: slug.replace("-", " "),
     }));
 
     return (
-        <nav>
-            <h1>Select a data type to view and edit it</h1>
-            <ul>
+        <nav className="p-2">
+            <h1 className="text-3lx">Select a data type to view and edit it</h1>
+            <ul className="list-disc pl-4">
                 {links.map(({ to, label }) => (
                     <li key={to}>
-                        <LinkStyled to={to}>{label}</LinkStyled>
+                        <EnvLink to={to}>{label}</EnvLink>
                     </li>
                 ))}
             </ul>

@@ -3,18 +3,16 @@ import React from "react";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
 
-export default function FormFieldNumber({ required, prop, label, ...props }) {
+export default function FormFieldBoolean({ required, prop, label }) {
     const [state, setState, changed] = useFormField(prop, "");
 
     return (
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
-            <KeyboardInboxBox
+            <input
                 className="form-field-grid-row-input"
-                {...props}
-                type="number"
+                type="text"
                 value={state}
                 onChange={(e) => setState(e.target.value)}
             />

@@ -1,14 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
-
-const FieldChanged = styled.span`
-    grid-column: updated / updated;
-`;
 
 export default function FormFieldString({ required, prop, label }) {
     const [state, setState, changed] = useFormField(prop, "");
@@ -23,7 +18,9 @@ export default function FormFieldString({ required, prop, label }) {
                 onChange={(e) => setState(e.target.value)}
             />
 
-            {changed ? <FieldChanged>updated</FieldChanged> : null}
+            {changed ? (
+                <span className="form-field-grid-row-updated">updated</span>
+            ) : null}
         </React.Fragment>
     );
 }
