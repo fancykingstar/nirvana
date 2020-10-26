@@ -9,6 +9,7 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedMany from "../FormFieldLinkedMany";
 import FormFieldString from "../FormFieldString";
+import FormFieldRichText from "../FormFieldRichText";
 
 import {
     FormFieldButtonBlock,
@@ -32,6 +33,8 @@ function FormFields() {
             <FormFieldString required prop="label" label="Label" />
             <FormFieldString required prop="iso_2" label="ISO (2)" />
             <FormFieldString required prop="iso_3" label="ISO (3)" />
+
+            <FormFieldRichText prop="description" label="Description" />
 
             <FormFieldLinkedMany
                 label="Cities"
