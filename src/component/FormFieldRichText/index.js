@@ -7,12 +7,6 @@ import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
 
-const prettier = require("prettier/standalone");
-const plugins = [
-    require("prettier/parser-angular"),
-    require("prettier/parser-html"),
-];
-
 const FieldChanged = styled.span`
     grid-column: updated / updated;
 `;
@@ -37,20 +31,7 @@ function EditRawHTML({ value, onChange }) {
                 "text/html",
             ).body.innerHTML;
 
-            console.log(
-                prettier.format("<div>hello world</div>", {
-                    parser: "html",
-                    plugins,
-                }),
-            );
-            //console.log({ sanitized });
-
-            //const formatted = prettier.format(sanitized, {
-            //parser: "html",
-            //plugins: [parserHtml],
-            //});
-
-            //onChange(formatted);
+            onChange(sanitized);
         } catch (e) {
             console.error(e);
         }
@@ -75,9 +56,6 @@ export default function FormFieldRichText({ required, prop, label }) {
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <FieldInput>
-                <button onClick={setViewRaw.bind(null, (x) => !x)}>
-                    view {viewRaw ? "formatted" : "html"}
-                </button>
                 {viewRaw ? (
                     <EditRawHTML value={state} onChange={setState} />
                 ) : (
@@ -87,6 +65,10 @@ export default function FormFieldRichText({ required, prop, label }) {
                         onChange={setState}
                     />
                 )}
+                <br />
+                <button onClick={setViewRaw.bind(null, (x) => !x)}>
+                    view {viewRaw ? "formatted" : "html"}
+                </button>
             </FieldInput>
 
             {changed ? <FieldChanged>updated</FieldChanged> : null}
