@@ -140,4 +140,51 @@ export function FormFieldButtonCreate({
     );
 }
 
+export function FormFieldButtonDuplicate({
+    nameProp,
+    listApi,
+    duplicateApi,
+    getPushToEditRoute,
+}) {
+    const fetcher = useAPIFetch();
+    const { addToast, removeToast } = useToast();
+    const { push } = useHistory();
+
+    const {
+        state: { local },
+    } = React.useContext(FormContext);
+
+    async function onDuplicate() {
+        const startSaveToastId = addToast({
+            title: "Duplicating",
+            message: local[nameProp],
+        });
+
+        const response = await fetcher(duplicateApi, {
+            method: "POST",
+        });
+
+        removeToast(startSaveToastId);
+
+        addToast({
+            color: "green",
+            title: "Duplicated",
+            timeout: 3000,
+            message: local[nameProp],
+        });
+
+        const { id } = response;
+
+        mutate(listApi);
+
+        push(getPushToEditRoute(id));
+    }
+
+    return (
+        <FormFieldButton color="orange" onClick={onDuplicate}>
+            Duplicate
+        </FormFieldButton>
+    );
+}
+
 export default FormFieldButton;

@@ -4,7 +4,7 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
@@ -62,8 +62,9 @@ export function FormAirportCreate({
 
     return (
         <FormProvider>
-            <TitleBoxPadder>
-                <TitleBox title="Create Airport">
+            <TitleBox>
+                <TitleBox.Header>Create Airport</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -79,8 +80,8 @@ export function FormAirportCreate({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
@@ -97,8 +98,9 @@ export function FormAirportEdit({
     return (
         <FormProvider>
             <FormContentLoader getRoute={getRoute} />
-            <TitleBoxPadder>
-                <TitleBox title="Edit Airport">
+            <TitleBox>
+                <TitleBox.Header>Edit Airport</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
 
@@ -112,8 +114,8 @@ export function FormAirportEdit({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }

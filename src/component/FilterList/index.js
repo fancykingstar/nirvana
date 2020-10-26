@@ -4,7 +4,7 @@ import qs from "qs";
 
 import useQueryStringState from "../../hooks/useQueryStringState";
 
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 import EnvLink from "../EnvLink";
 
 import DeleteSelected from "./DeleteSelected";
@@ -137,8 +137,9 @@ export default function FilterList({
     }
 
     return (
-        <TitleBoxPadder>
-            <TitleBox title={title}>
+        <TitleBox>
+            <TitleBox.Header>{title}</TitleBox.Header>
+            <TitleBox.Body>
                 <EnvLink to={createRoute}> Create New</EnvLink>
 
                 <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
@@ -186,8 +187,8 @@ export default function FilterList({
                         </LoadingOverlay>
                     )}
                 </TableContainer>
-            </TitleBox>
-        </TitleBoxPadder>
+            </TitleBox.Body>
+        </TitleBox>
     );
 }
 
