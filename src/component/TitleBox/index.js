@@ -25,10 +25,13 @@ export default function TitleBox({ children }) {
 TitleBox.Header = classed.h1(
     "bg-blue-100",
     "bg-white",
+    "flex",
+    "items-center",
     "px-2",
     "py-1",
     "rounded-t",
     "text-3xl",
     "text-black",
 );
+
 TitleBox.Body = classed.div("items-stretch", "flex", "flex-col", "p-3");

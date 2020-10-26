@@ -24,7 +24,6 @@ function createComponentWithClasses(el, ...classes) {
 
 for (const elementType of [
     "button",
-    "textarea",
     "div",
     "h1",
     "h2",
@@ -32,6 +31,8 @@ for (const elementType of [
     "h4",
     "input",
     "label",
+    "nav",
+    "textarea",
 ]) {
     createComponentWithClasses[elementType] = createComponentWithClasses.bind(
         null,
