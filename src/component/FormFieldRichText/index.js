@@ -6,6 +6,8 @@ import ReactQuill from "react-quill";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
+import classed from "../ClassedComponent";
+import Button from "../Button";
 
 const FieldChanged = styled.span`
     grid-column: updated / updated;
@@ -17,11 +19,15 @@ const FieldInput = styled.div`
     grid-column: input / input;
 `;
 
-const TextArea = styled.textarea`
-    display: block;
-    width: 100%;
-    min-height: ${(p) => p.theme.size[8]};
-`;
+const TextArea = classed.textarea(
+    "h-20",
+    "block",
+    "w-full",
+    "border",
+
+    "border-2",
+    "border-gray-400",
+);
 
 function EditRawHTML({ value, onChange }) {
     function cleanup() {
@@ -66,9 +72,9 @@ export default function FormFieldRichText({ required, prop, label }) {
                     />
                 )}
                 <br />
-                <button onClick={setViewRaw.bind(null, (x) => !x)}>
+                <Button onClick={setViewRaw.bind(null, (x) => !x)}>
                     view {viewRaw ? "formatted" : "html"}
-                </button>
+                </Button>
             </FieldInput>
 
             {changed ? <FieldChanged>updated</FieldChanged> : null}

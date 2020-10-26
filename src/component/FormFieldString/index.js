@@ -4,16 +4,10 @@ import styled from "styled-components";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
+import { KeyboardInboxBox } from "../Input";
 
 const FieldChanged = styled.span`
     grid-column: updated / updated;
-`;
-
-const FieldInput = styled.input`
-    padding: ${(p) => p.theme.size[0]};
-    border-radius: ${(p) => p.theme.size[0]};
-    font-size: ${(p) => p.theme.text[2]};
-    grid-column: input / input;
 `;
 
 export default function FormFieldString({ required, prop, label }) {
@@ -22,7 +16,8 @@ export default function FormFieldString({ required, prop, label }) {
     return (
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
-            <FieldInput
+            <KeyboardInboxBox
+                className="form-field-grid-row-input"
                 type="text"
                 value={state}
                 onChange={(e) => setState(e.target.value)}

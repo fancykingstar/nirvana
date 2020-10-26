@@ -6,6 +6,7 @@ import qs from "qs";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
+import { KeyboardInboxBox } from "../Input";
 
 const Divider = styled.hr`
     grid-column: label / end;
@@ -62,7 +63,7 @@ export default function FormFieldLinkedMany({
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <InputArea>
                 <h3>Add:</h3>
-                <input
+                <KeyboardInboxBox
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
