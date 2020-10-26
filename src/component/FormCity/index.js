@@ -4,7 +4,7 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
@@ -57,8 +57,9 @@ export function FormCityCreate({
 
     return (
         <FormProvider>
-            <TitleBoxPadder>
-                <TitleBox title="Create City">
+            <TitleBox>
+                <TitleBox.Header>Create City</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -74,8 +75,8 @@ export function FormCityCreate({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
@@ -93,8 +94,9 @@ export function FormCityEdit({
         <FormProvider>
             <FormContentLoader getApi={getApi} />
 
-            <TitleBoxPadder>
-                <TitleBox title="Edit City">
+            <TitleBox>
+                <TitleBox.Header>Edit City</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
 
@@ -108,8 +110,8 @@ export function FormCityEdit({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }

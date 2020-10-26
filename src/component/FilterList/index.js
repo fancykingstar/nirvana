@@ -4,8 +4,9 @@ import qs from "qs";
 
 import useQueryStringState from "../../hooks/useQueryStringState";
 
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 import EnvLink from "../EnvLink";
+import Button from "../Button";
 
 import DeleteSelected from "./DeleteSelected";
 import PageNavigation from "./PageNavigation";
@@ -137,10 +138,15 @@ export default function FilterList({
     }
 
     return (
-        <TitleBoxPadder>
-            <TitleBox title={title}>
-                <EnvLink to={createRoute}> Create New</EnvLink>
+        <TitleBox>
+            <TitleBox.Header>
+                <div className="flex-1">{title}</div>
 
+                <EnvLink to={createRoute} className="flex no-underline">
+                    <Button color="green">Create New</Button>
+                </EnvLink>
+            </TitleBox.Header>
+            <TitleBox.Body>
                 <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
                 <PageNavigation
                     {...{ pageNumber, pageSize, count, setPageNumber }}
@@ -186,8 +192,8 @@ export default function FilterList({
                         </LoadingOverlay>
                     )}
                 </TableContainer>
-            </TitleBox>
-        </TitleBoxPadder>
+            </TitleBox.Body>
+        </TitleBox>
     );
 }
 

@@ -1,27 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components";
 
-const BreadcrumbContainer = styled.nav`
-    display: flex;
-    padding: ${(p) => p.theme.size[1]};
-`;
+import classed from "../ClassedComponent";
 
-const BreadcrumbLink = styled(Link)`
-    text-transform: capitalize;
-    padding: 0 ${(p) => p.theme.size[1]};
-    display: block;
-    position: relative;
+const BreadcrumbContainer = classed.nav("flex", "p-2");
 
-    &:before {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: "/";
-        font-weight: bold;
-        color: ${(p) => p.theme.color.black};
-    }
-`;
+const BreadcrumbLink = classed(
+    Link,
+    "capitalize",
+    "px-1",
+    "block",
+    "text-blue-700",
+    "hover:text-blue-900",
+    "hover:underline",
+);
+
+const BreadcrumbDivider = classed.div("font-bold", "text-black");
 
 export default function Breadcrumb() {
     const { pathname } = useLocation();
@@ -47,9 +41,10 @@ export default function Breadcrumb() {
         <BreadcrumbContainer>
             <BreadcrumbLink to={`/${environment}`}>home</BreadcrumbLink>
             {links.map(({ to, label }) => (
-                <BreadcrumbLink key={to} to={to}>
-                    {label}
-                </BreadcrumbLink>
+                <React.Fragment key={to}>
+                    <BreadcrumbDivider>/</BreadcrumbDivider>
+                    <BreadcrumbLink to={to}>{label}</BreadcrumbLink>
+                </React.Fragment>
             ))}
         </BreadcrumbContainer>
     );

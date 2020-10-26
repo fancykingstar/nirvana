@@ -4,7 +4,7 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldString from "../FormFieldString";
@@ -40,8 +40,9 @@ export function FormCurrencyCreate({
 
     return (
         <FormProvider>
-            <TitleBoxPadder>
-                <TitleBox title="Create Currency">
+            <TitleBox>
+                <TitleBox.Header>Create Currency</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
                         <FormFields />
@@ -55,8 +56,8 @@ export function FormCurrencyCreate({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
@@ -74,8 +75,9 @@ export function FormCurrencyEdit({
         <FormProvider>
             <FormContentLoader getApi={getApi} />
 
-            <TitleBoxPadder>
-                <TitleBox title="Edit Currency">
+            <TitleBox>
+                <TitleBox.Header>Edit Currency</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
 
@@ -89,8 +91,8 @@ export function FormCurrencyEdit({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }

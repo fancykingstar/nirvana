@@ -1,39 +1,37 @@
 import React from "react";
-import styled from "styled-components";
+import cn from "classnames";
 
-const BoxContainer = styled.div`
-    border-radius: ${(p) => p.theme.size[1]};
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
+import classed from "../ClassedComponent";
 
-    ${(p) => p.theme.shadow[1]};
-`;
-
-const Title = styled.h1`
-    background-color: ${(p) => p.theme.color.white};
-    color: ${(p) => p.theme.color.black};
-    padding: ${(p) => p.theme.size[1]};
-    border-top-right-radius: ${(p) => p.theme.size[1]};
-    border-top-left-radius: ${(p) => p.theme.size[1]};
-`;
-
-const BoxChildren = styled.div`
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    padding: ${(p) => p.theme.size[1]};
-`;
-
-export const TitleBoxPadder = styled.div`
-    padding: ${(p) => p.theme.size[1]};
-`;
-
-export default function TitleBox({ title, children }) {
+export default function TitleBox({ children }) {
     return (
-        <BoxContainer>
-            <Title>{title}</Title>
-            <BoxChildren>{children}</BoxChildren>
-        </BoxContainer>
+        <div className="p-3">
+            <div
+                className={cn(
+                    "border",
+                    "flex",
+                    "flex-col",
+                    "items-stretch",
+                    "rounded",
+                    "shadow-lg",
+                )}
+            >
+                {children}
+            </div>
+        </div>
     );
 }
+
+TitleBox.Header = classed.h1(
+    "bg-blue-100",
+    "bg-white",
+    "flex",
+    "items-center",
+    "px-2",
+    "py-1",
+    "rounded-t",
+    "text-3xl",
+    "text-black",
+);
+
+TitleBox.Body = classed.div("items-stretch", "flex", "flex-col", "p-3");

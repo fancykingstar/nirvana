@@ -9,33 +9,11 @@ import { useToast } from "../ToastProvider";
 
 import { FormContext } from "../../hooks/useFormContext";
 
-export const FormFieldButton = styled.button`
-    background-color: ${(p) => p.theme.color[p.color || "white"]};
-    border-radius: ${(p) => p.theme.size[0]};
-    color: ${(p) => (p.color ? p.theme.color.white : p.theme.color.black)};
-    cursor: pointer;
-    padding: ${(p) => p.theme.size[0]} ${(p) => p.theme.size[1]};
-
-    ${(p) => p.theme.shadow[2]};
-`;
+import FormFieldButton from "../Button";
 
 export const FormFieldButtonBlock = styled.div`
     display: flex;
     grid-column: input / input;
-
-    ${FormFieldButton} {
-        border-radius: 0;
-    }
-
-    ${FormFieldButton}:first-child {
-        border-top-left-radius: ${(p) => p.theme.size[0]};
-        border-bottom-left-radius: ${(p) => p.theme.size[0]};
-    }
-
-    ${FormFieldButton}:last-child {
-        border-top-right-radius: ${(p) => p.theme.size[0]};
-        border-bottom-right-radius: ${(p) => p.theme.size[0]};
-    }
 `;
 
 export function FormFieldButtonReset() {
@@ -136,6 +114,53 @@ export function FormFieldButtonCreate({
     return (
         <FormFieldButton color="green" onClick={onCreate}>
             Create
+        </FormFieldButton>
+    );
+}
+
+export function FormFieldButtonDuplicate({
+    nameProp,
+    listApi,
+    duplicateApi,
+    getPushToEditRoute,
+}) {
+    const fetcher = useAPIFetch();
+    const { addToast, removeToast } = useToast();
+    const { push } = useHistory();
+
+    const {
+        state: { local },
+    } = React.useContext(FormContext);
+
+    async function onDuplicate() {
+        const startSaveToastId = addToast({
+            title: "Duplicating",
+            message: local[nameProp],
+        });
+
+        const response = await fetcher(duplicateApi, {
+            method: "POST",
+        });
+
+        removeToast(startSaveToastId);
+
+        addToast({
+            color: "green",
+            title: "Duplicated",
+            timeout: 3000,
+            message: local[nameProp],
+        });
+
+        const { id } = response;
+
+        mutate(listApi);
+
+        push(getPushToEditRoute(id));
+    }
+
+    return (
+        <FormFieldButton color="orange" onClick={onDuplicate}>
+            Duplicate
         </FormFieldButton>
     );
 }

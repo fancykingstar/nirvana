@@ -4,7 +4,7 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
@@ -75,8 +75,9 @@ export function FormPortCreate({
 
     return (
         <FormProvider>
-            <TitleBoxPadder>
-                <TitleBox title="Create Port">
+            <TitleBox>
+                <TitleBox.Header>Create Port</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
@@ -92,8 +93,8 @@ export function FormPortCreate({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
@@ -110,8 +111,9 @@ export function FormPortEdit({
     return (
         <FormProvider>
             <FormContentLoader getApi={getApi} />
-            <TitleBoxPadder>
-                <TitleBox title="Edit Port">
+            <TitleBox>
+                <TitleBox.Header>Edit Port</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
 
@@ -125,8 +127,8 @@ export function FormPortEdit({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
