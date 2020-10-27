@@ -74,11 +74,10 @@ export function FormFieldButtonCreate({
     nameProp,
     listApi,
     createApi,
-    getPushToEditRoute,
+    onCreated,
 }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
-    const { push } = useHistory();
 
     const {
         state: { local },
@@ -108,7 +107,7 @@ export function FormFieldButtonCreate({
 
         mutate(listApi);
 
-        push(getPushToEditRoute(id));
+        onCreated(id);
     }
 
     return (

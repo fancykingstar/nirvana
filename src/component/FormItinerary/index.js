@@ -31,10 +31,10 @@ export function FormItineraryCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const createApi = "/itineraries";
     const listApi = "/itineraries";
-    const getPushToEditRoute = (id) => `/${env}/itineraries/edit/${id}`;
 
     return (
         <FormProvider>
@@ -52,7 +52,11 @@ export function FormItineraryCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(
+                                        `/${env}/itineraries/edit/${id}`,
+                                    )
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

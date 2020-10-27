@@ -55,10 +55,10 @@ export function FormAirportCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const listRoute = "/airports";
     const createRoute = "/airports";
-    const pushToEditRoute = (id) => `/${env}/airports/edit/${id}`;
 
     return (
         <FormProvider>
@@ -76,7 +76,9 @@ export function FormAirportCreate({
                                 nameProp="name"
                                 createRoute={createRoute}
                                 listRoute={listRoute}
-                                pushToEditRoute={pushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(`/${env}/airports/edit/${id}`)
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

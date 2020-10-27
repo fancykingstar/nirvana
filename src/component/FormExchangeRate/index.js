@@ -65,10 +65,10 @@ export function FormExchangeRateCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const createApi = "/exchange-rates";
     const listApi = "/exchange-rates";
-    const getPushToEditRoute = (id) => `/${env}/exchange-rates/edit/${id}`;
 
     return (
         <FormProvider>
@@ -83,7 +83,11 @@ export function FormExchangeRateCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(
+                                        `/${env}/exchange-rates/edit/${id}`,
+                                    )
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
