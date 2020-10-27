@@ -22,7 +22,7 @@ export default function FormFieldLinkedMany({
     label,
     prop,
     searchProp,
-    searchUrl,
+    searchApi,
     RenderLinked,
     RenderSearchResult,
 }) {
@@ -31,7 +31,7 @@ export default function FormFieldLinkedMany({
 
     const { data } = useSWR(
         search.length
-            ? `${searchUrl}?${qs.stringify({
+            ? `${searchApi}?${qs.stringify({
                   [`${searchProp}_contains`]: search,
               })}`
             : null,

@@ -3,7 +3,7 @@ import React from "react";
 import FilterList from "../FilterList";
 import EnvLink from "../EnvLink";
 
-function ItineraryItemHeader({ onChangeSort, sortBy, sortDirection }) {
+function ItineraryItemItemHeader({ onChangeSort, sortBy, sortDirection }) {
     return (
         <React.Fragment>
             <FilterList.ControlCell
@@ -13,24 +13,83 @@ function ItineraryItemHeader({ onChangeSort, sortBy, sortDirection }) {
             >
                 Id
             </FilterList.ControlCell>
+
+            <FilterList.ControlCell width="20%">
+                Itinerary
+            </FilterList.ControlCell>
+
             <FilterList.ControlCell
-                width="30%"
+                width="20%"
                 onClick={onChangeSort.bind(null, "name")}
                 arrowDirection={sortBy === "name" ? sortDirection : null}
             >
                 Name
             </FilterList.ControlCell>
+
+            <FilterList.ControlCell
+                width="10%"
+                onClick={onChangeSort.bind(null, "start_day")}
+                arrowDirection={sortBy === "start_day" ? sortDirection : null}
+            >
+                Days
+            </FilterList.ControlCell>
+
+            <FilterList.ControlCell width="10%">
+                {" "}
+                Coords{" "}
+            </FilterList.ControlCell>
+            <FilterList.ControlCell width="10%"> City </FilterList.ControlCell>
+            <FilterList.ControlCell width="10%"> Port </FilterList.ControlCell>
+            <FilterList.ControlCell width="10%"> Event </FilterList.ControlCell>
         </React.Fragment>
     );
 }
 
-function ItineraryItemRow({ id, name }) {
+function ItineraryItemItemRow({
+    id,
+    name,
+    start_day,
+    end_day,
+    city,
+    event,
+    latitude,
+    longitude,
+    port,
+    itinerary,
+}) {
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <EnvLink to={`/itinerary-item/edit/${id}`}>{id}</EnvLink>
+                <EnvLink to={`/itinerary-items/edit/${id}`}>{id}</EnvLink>
             </FilterList.Cell>
+
+            <FilterList.Cell>
+                <EnvLink to={`/itineraries/edit/${itinerary?.id}`}>
+                    {itinerary?.name}
+                </EnvLink>
+            </FilterList.Cell>
+
             <FilterList.Cell>{name}</FilterList.Cell>
+
+            <FilterList.Cell>
+                {start_day} - {end_day}
+            </FilterList.Cell>
+
+            <FilterList.Cell>
+                {latitude && longitude ? `${latitude}, ${longitude}` : null}
+            </FilterList.Cell>
+
+            <FilterList.Cell>
+                <EnvLink to={`/city/edit/${city?.id}`}>{city?.name}</EnvLink>
+            </FilterList.Cell>
+
+            <FilterList.Cell>
+                <EnvLink to={`/port/edit/${port?.id}`}>{port?.name}</EnvLink>
+            </FilterList.Cell>
+
+            <FilterList.Cell>
+                <EnvLink to={`/event/edit/${event?.id}`}>{event?.name}</EnvLink>
+            </FilterList.Cell>
         </React.Fragment>
     );
 }
@@ -38,14 +97,14 @@ function ItineraryItemRow({ id, name }) {
 export default function FilterListItinarary() {
     return (
         <FilterList
-            title="Itinarary"
-            listApi="/itineraries"
-            getDeleteApi={(id) => `/itineraries/${id}`}
-            createRoute="/create/itineraries"
-            HeaderComponent={ItineraryItemHeader}
-            FooterComponent={ItineraryItemHeader}
-            RowComponent={ItineraryItemRow}
-            rows={4}
+            title="Itinarary Item"
+            listApi="/itinerary-items"
+            getDeleteApi={(id) => `/itinerary-items/${id}`}
+            createRoute="/create/itinerary-items"
+            HeaderComponent={ItineraryItemItemHeader}
+            FooterComponent={ItineraryItemItemHeader}
+            RowComponent={ItineraryItemItemRow}
+            rows={8}
         />
     );
 }

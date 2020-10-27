@@ -1,16 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
-
-const FieldInput = styled.input`
-    padding: ${(p) => p.theme.size[0]};
-    border-radius: ${(p) => p.theme.size[0]};
-    font-size: ${(p) => p.theme.text[2]};
-    grid-column: input / input;
-`;
+import { KeyboardInboxBox } from "../Input";
 
 export default function FormFieldLatLong({ required }) {
     const [latitude, setLatitude] = useFormField("latitude");
@@ -19,23 +12,25 @@ export default function FormFieldLatLong({ required }) {
     return (
         <React.Fragment>
             <FormFieldLabel required={required}>Latitude</FormFieldLabel>
-            <FieldInput
+            <KeyboardInboxBox
+                className="form-field-grid-row-input"
                 type="number"
                 min={-90}
                 max={90}
                 step={0.00001}
                 value={latitude}
-                onChange={(e) => setLatitude(e.target.value)}
+                onChange={(e) => setLatitude(Number(e.target.value))}
             />
 
             <FormFieldLabel required={required}>Longitude</FormFieldLabel>
-            <FieldInput
+            <KeyboardInboxBox
+                className="form-field-grid-row-input"
                 type="number"
                 min={-180}
                 max={180}
                 step={0.00001}
                 value={longitude}
-                onChange={(e) => setLongitude(e.target.value)}
+                onChange={(e) => setLongitude(Number(e.target.value))}
             />
         </React.Fragment>
     );

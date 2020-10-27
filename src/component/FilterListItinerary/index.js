@@ -38,7 +38,14 @@ function ItineraryRow({ id, name, itinerary_items }) {
             </FilterList.Cell>
             <FilterList.Cell>{name}</FilterList.Cell>
             <FilterList.Cell>{itinerary_items.length}</FilterList.Cell>
-            <FilterList.Cell>{12}</FilterList.Cell>
+            <FilterList.Cell>
+                {itinerary_items.reduce(
+                    (max, { end_day }) => (
+                        console.log({ max, end_day }), Math.max(max, end_day)
+                    ),
+                    1,
+                )}
+            </FilterList.Cell>
         </React.Fragment>
     );
 }

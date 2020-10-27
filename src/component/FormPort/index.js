@@ -46,7 +46,7 @@ function FormFields() {
                 label="Nearest Airport"
                 prop="nearest_airport"
                 searchProp="name"
-                searchUrl="/airports"
+                searchApi="/airports"
                 RenderLinked={LinkedAirport}
                 RenderSearchResult={SearchResultAirport}
             />
@@ -56,7 +56,7 @@ function FormFields() {
                 label="City"
                 prop="city"
                 searchProp="name"
-                searchUrl="/cities"
+                searchApi="/cities"
                 RenderLinked={LinkedCity}
                 RenderSearchResult={SearchResultCity}
             />

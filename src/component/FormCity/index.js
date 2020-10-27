@@ -38,7 +38,7 @@ function FormFields() {
                 label="Country"
                 prop="country"
                 searchProp="name"
-                searchUrl="/countries"
+                searchApi="/countries"
                 RenderLinked={LinkedCountry}
                 RenderSearchResult={SearchResultCountry}
             />

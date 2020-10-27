@@ -47,9 +47,21 @@ function createEntityBlock({ entityName, Create, Edit, List }) {
     }) {
         return (
             <Switch>
-                <Route path={`/:env/${entityName}/create`} component={Create} />
-                <Route path={`/:env/${entityName}/edit/:id`} component={Edit} />
-                <Route path={`/:env/${entityName}`} component={List} />
+                {Create ? (
+                    <Route
+                        path={`/:env/${entityName}/create`}
+                        component={Create}
+                    />
+                ) : null}
+                {Edit ? (
+                    <Route
+                        path={`/:env/${entityName}/edit/:id`}
+                        component={Edit}
+                    />
+                ) : null}
+                {List ? (
+                    <Route path={`/:env/${entityName}`} component={List} />
+                ) : null}
                 <EntityRootRedirect to={`/${env}/cities`} />
             </Switch>
         );

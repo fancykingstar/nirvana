@@ -5,8 +5,14 @@ import { ControlSectionContainer } from "./styled";
 
 import { useAPIFetch } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
+import Button from "../Button";
 
-export default function DeleteSelected({ checked, listApi, getDeleteApi }) {
+export default function DeleteSelected({
+    checked,
+    clearChecked,
+    listApi,
+    getDeleteApi,
+}) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
 
@@ -52,6 +58,8 @@ export default function DeleteSelected({ checked, listApi, getDeleteApi }) {
             title: "Deleted All",
             timeout: 1000,
         });
+
+        clearChecked();
     }
 
     if (checkedCount === 0) {
@@ -62,7 +70,7 @@ export default function DeleteSelected({ checked, listApi, getDeleteApi }) {
         <ControlSectionContainer>
             <div>{checkedCount} entries selected</div>
 
-            <button onClick={onDelete}>delete</button>
+            <Button onClick={onDelete}>delete</Button>
         </ControlSectionContainer>
     );
 }
