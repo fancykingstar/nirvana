@@ -68,10 +68,10 @@ export function FormPortCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const listApi = "/ports";
     const createApi = "/ports";
-    const getPushToEditRoute = (id) => `/${env}/ports/edit/${id}`;
 
     return (
         <FormProvider>
@@ -89,7 +89,9 @@ export function FormPortCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(`/${env}/ports/edit/${id}`)
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

@@ -11,6 +11,8 @@ import { FormContext } from "../../hooks/useFormContext";
 
 import FormFieldButton from "../Button";
 
+function noop() {}
+
 export const FormFieldButtonBlock = styled.div`
     display: flex;
     grid-column: input / input;
@@ -29,7 +31,13 @@ export function FormFieldButtonReset() {
     );
 }
 
-export function FormFieldButtonSave({ nameProp, listApi, getApi, putApi }) {
+export function FormFieldButtonSave({
+    nameProp,
+    listApi,
+    getApi,
+    putApi,
+    onSaved = noop,
+}) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
 
@@ -61,6 +69,8 @@ export function FormFieldButtonSave({ nameProp, listApi, getApi, putApi }) {
 
         mutate(getApi);
         mutateMany(`${listApi}*`);
+
+        onSaved();
     }
 
     return (
@@ -74,11 +84,10 @@ export function FormFieldButtonCreate({
     nameProp,
     listApi,
     createApi,
-    getPushToEditRoute,
+    onCreated = noop,
 }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
-    const { push } = useHistory();
 
     const {
         state: { local },
@@ -108,7 +117,7 @@ export function FormFieldButtonCreate({
 
         mutate(listApi);
 
-        push(getPushToEditRoute(id));
+        onCreated(id);
     }
 
     return (

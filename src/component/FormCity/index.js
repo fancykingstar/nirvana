@@ -50,10 +50,10 @@ export function FormCityCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const createApi = "/cities";
     const listApi = "/cities";
-    const getPushToEditRoute = (id) => `/${env}/cities/edit/${id}`;
 
     return (
         <FormProvider>
@@ -71,7 +71,9 @@ export function FormCityCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(`/${env}/cities/edit/${id}`)
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

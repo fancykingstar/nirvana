@@ -33,10 +33,10 @@ export function FormCurrencyCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const createApi = "/currencies";
     const listApi = "/currencies";
-    const getPushToEditRoute = (id) => `/${env}/currencies/edit/${id}`;
 
     return (
         <FormProvider>
@@ -52,7 +52,11 @@ export function FormCurrencyCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(
+                                        `/${env}/currencies/edit/${id}`,
+                                    )
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

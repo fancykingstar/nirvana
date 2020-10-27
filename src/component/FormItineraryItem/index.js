@@ -6,10 +6,11 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
-import FormFieldUUID from "../FormFieldUUID";
-import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
-import FormFieldLatLong from "../FormFieldLatLong";
+import FormFieldBoolean from "../FormFieldBoolean";
 import FormFieldString from "../FormFieldString";
+import FormFieldUUID from "../FormFieldUUID";
+
+import FormFieldItemOrder from "./FormFieldItemOrder";
 
 import {
     FormFieldButtonBlock,
@@ -18,66 +19,52 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCity({ name }) {
-    return <span>{name}</span>;
-}
-
-function SearchResultCity({ id, name, set }) {
-    return <li onClick={set.bind(null, id)}>{name}</li>;
-}
-
-function FormFields() {
+export function RequiredFormFields() {
     return (
         <React.Fragment>
-            <FormFieldString prop="name" label="Name" />
-            <FormFieldString prop="label" label="Label" />
-            <FormFieldString
-                required
-                prop="airport_code"
-                label="Airport Code"
-            />
-            <FormFieldLatLong required />
+            <FormFieldString required prop="name" label="Name" />
+            <FormFieldString required prop="label" label="Label" />
 
-            <FormFieldLinkedSingle
+            <FormFieldItemOrder label="Start - End (Ordering)" />
+
+            <FormFieldBoolean
                 required
-                label="City"
-                prop="city"
-                searchProp="name"
-                searchUrl="/cities"
-                RenderLinked={LinkedCity}
-                RenderSearchResult={SearchResultCity}
+                prop="display_map_marker"
+                label="Display Map Marker"
             />
         </React.Fragment>
     );
 }
 
-export function FormAirportCreate({
+export function FormItineraryCreate({
     match: {
         params: { env },
     },
     history,
 }) {
-    const listRoute = "/airports";
-    const createRoute = "/airports";
+    const createApi = "/itineraries";
+    const listApi = "/itineraries";
 
     return (
         <FormProvider>
             <TitleBox>
-                <TitleBox.Header>Create Airport</TitleBox.Header>
+                <TitleBox.Header>Create Itinerary</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
 
-                        <FormFields />
+                        <RequiredFormFields />
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createRoute={createRoute}
-                                listRoute={listRoute}
+                                createApi={createApi}
+                                listApi={listApi}
                                 onCreated={(id) =>
-                                    history.push(`/${env}/airports/edit/${id}`)
+                                    history.push(
+                                        `/${env}/itineraries/edit/${id}`,
+                                    )
                                 }
                             />
                         </FormFieldButtonBlock>
@@ -88,31 +75,32 @@ export function FormAirportCreate({
     );
 }
 
-export function FormAirportEdit({
+export function FormItineraryEdit({
     match: {
         params: { id },
     },
 }) {
-    const getRoute = `/airports/${id}`;
-    const listRoute = "/airports";
-    const putRoute = `/airports/${id}`;
+    const getApi = `/itineraries/${id}`;
+    const listApi = "/itineraries";
+    const putApi = `/itineraries/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getRoute={getRoute} />
+            <FormContentLoader getApi={getApi} />
+
             <TitleBox>
-                <TitleBox.Header>Edit Airport</TitleBox.Header>
+                <TitleBox.Header>Edit Itinerary</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
-                        <FormFields />
+                        <RequiredFormFields />
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putRoute={putRoute}
-                                getRoute={getRoute}
-                                listRoute={listRoute}
+                                putApi={putApi}
+                                getApi={getApi}
+                                listApi={listApi}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>

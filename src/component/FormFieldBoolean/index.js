@@ -3,20 +3,24 @@ import React from "react";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
 
-export default function FormFieldNumber({ required, prop, label, ...props }) {
-    const [state, setState, changed] = useFormField(prop, "");
+export default function FormFieldBoolean({ required, prop, label }) {
+    const [state, setState, changed] = useFormField(prop);
+
+    React.useEffect(() => {
+        if (state === undefined) {
+            setState(false);
+        }
+    }, []);
 
     return (
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
-            <KeyboardInboxBox
-                className="form-field-grid-row-input"
-                {...props}
-                type="number"
+            <input
+                className="form-field-grid-row-input justify-self-start"
+                type="checkbox"
                 value={state}
-                onChange={(e) => setState(Number(e.target.value))}
+                onChange={(e) => setState(e.target.value)}
             />
 
             {changed ? (

@@ -52,10 +52,10 @@ export function FormCountryCreate({
     match: {
         params: { env },
     },
+    history,
 }) {
     const listApi = "/cities";
     const createApi = "/cities";
-    const getPushToEditRoute = (id) => `/${env}/countries/edit/${id}`;
 
     return (
         <FormProvider>
@@ -73,7 +73,9 @@ export function FormCountryCreate({
                                 nameProp="name"
                                 createApi={createApi}
                                 listApi={listApi}
-                                getPushToEditRoute={getPushToEditRoute}
+                                onCreated={(id) =>
+                                    history.push(`/${env}/countries/edit/${id}`)
+                                }
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
