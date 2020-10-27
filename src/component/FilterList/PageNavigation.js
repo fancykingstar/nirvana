@@ -16,6 +16,10 @@ export default function PageNavigation({
     count = 0,
     setPageNumber,
 }) {
+    if (count <= pageSize) {
+        return null;
+    }
+
     const firstPage = 0;
     const lastPage = Math.floor(count / pageSize);
 

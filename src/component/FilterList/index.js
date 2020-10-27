@@ -103,6 +103,10 @@ export default function FilterList({
     const setSearchFilter = useSetSearchFilter(setState);
     const [checked, setChecked] = React.useState({});
 
+    function clearChecked() {
+        setChecked({});
+    }
+
     //query utopia
     const { data, error } = useSWR(
         `${listApi}?${qs.stringify({
@@ -152,7 +156,9 @@ export default function FilterList({
                     {...{ pageNumber, pageSize, count, setPageNumber }}
                 />
 
-                <DeleteSelected {...{ checked, listApi, getDeleteApi }} />
+                <DeleteSelected
+                    {...{ clearChecked, checked, listApi, getDeleteApi }}
+                />
 
                 <TableContainer>
                     <TableStyled>
