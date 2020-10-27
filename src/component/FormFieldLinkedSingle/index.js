@@ -6,6 +6,7 @@ import qs from "qs";
 import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
+import { KeyboardInboxBox } from "../Input";
 
 const Divider = styled.hr`
     grid-column: label / end;
@@ -21,7 +22,7 @@ export default function FormFieldLinkedSingle({
     label,
     prop,
     searchProp,
-    searchUrl,
+    searchApi,
     RenderLinked,
     RenderSearchResult,
 }) {
@@ -30,7 +31,7 @@ export default function FormFieldLinkedSingle({
 
     const { data } = useSWR(
         search.length
-            ? `${searchUrl}?${qs.stringify({
+            ? `${searchApi}?${qs.stringify({
                   [`${searchProp}_contains`]: search,
               })}`
             : null,
@@ -43,6 +44,8 @@ export default function FormFieldLinkedSingle({
         const idNumber = Number(id);
 
         setLinked(searchResults.find(({ id }) => id === idNumber));
+
+        setSearch("");
     }
 
     return (
@@ -58,7 +61,7 @@ export default function FormFieldLinkedSingle({
                 <br />
 
                 <h3>Replace:</h3>
-                <input
+                <KeyboardInboxBox
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />

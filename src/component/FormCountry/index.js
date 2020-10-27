@@ -39,7 +39,7 @@ function FormFields() {
             <FormFieldLinkedMany
                 label="Cities"
                 prop="cities"
-                searchUrl="/cities"
+                searchApi="/cities"
                 searchProp="name"
                 RenderLinked={LinkedCity}
                 RenderSearchResult={SearchResultCity}

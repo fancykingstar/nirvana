@@ -60,7 +60,7 @@ function ItineraryItemItemRow({
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <EnvLink to={`/itinerary-item/edit/${id}`}>{id}</EnvLink>
+                <EnvLink to={`/itinerary-items/edit/${id}`}>{id}</EnvLink>
             </FilterList.Cell>
 
             <FilterList.Cell>

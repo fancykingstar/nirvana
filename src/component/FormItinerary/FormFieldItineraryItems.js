@@ -91,7 +91,7 @@ function InlineItemForm({
         return (
             <div onClick={setOpenItem.bind(null, id)} className="flex">
                 {i + 1}.
-                <div className=" text-blue-600 hover:text-blue-900 underline cursor-pointer">
+                <div className="text-blue-600 hover:text-blue-900 underline cursor-pointer">
                     {`"${name}" (${start_day} - ${end_day})`}
                 </div>
             </div>
