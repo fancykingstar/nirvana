@@ -16,7 +16,7 @@ export default function FormFieldNumber({ required, prop, label, ...props }) {
                 {...props}
                 type="number"
                 value={state}
-                onChange={(e) => setState(e.target.value)}
+                onChange={(e) => setState(Number(e.target.value))}
             />
 
             {changed ? (

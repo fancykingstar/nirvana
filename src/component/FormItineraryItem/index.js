@@ -7,9 +7,10 @@ import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
 import FormFieldBoolean from "../FormFieldBoolean";
-import FormFieldNumber from "../FormFieldNumber";
 import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
+
+import FormFieldItemOrder from "./FormFieldItemOrder";
 
 import {
     FormFieldButtonBlock,
@@ -23,20 +24,9 @@ export function RequiredFormFields() {
         <React.Fragment>
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
-            <FormFieldNumber
-                required
-                min={0}
-                step={1}
-                prop="start_day"
-                label="Start Day"
-            />
-            <FormFieldNumber
-                required
-                min={1}
-                step={1}
-                prop="end_day"
-                label="End Day"
-            />
+
+            <FormFieldItemOrder label="Start - End (Ordering)" />
+
             <FormFieldBoolean
                 required
                 prop="display_map_marker"
