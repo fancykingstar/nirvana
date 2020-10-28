@@ -4,10 +4,11 @@ import useSWR from "swr";
 import { FormProvider, useFormField } from "../../hooks/useFormContext";
 
 import Button from "../Button";
+import EnvLink from "../EnvLink";
 import FormContentLoader from "../FormContentLoader";
-import FormFieldViewProp from "../FormFieldViewProp";
 import FormFieldGrid from "../FormFieldGrid";
 import FormFieldLabel from "../FormFieldLabel";
+import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldStatic from "../FormFieldStatic";
 import FormFieldUUID from "../FormFieldUUID";
 import TitleBox from "../TitleBox";
@@ -33,7 +34,7 @@ function NewItemCreator({ itineraryId, invalidateLocalCache }) {
     return (
         <FormProvider>
             <TitleBox>
-                <ItemHeader i={"Create"} />
+                <TitleBox.Header>Create Itinerary Item</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
@@ -56,23 +57,6 @@ function NewItemCreator({ itineraryId, invalidateLocalCache }) {
                 </TitleBox.Body>
             </TitleBox>
         </FormProvider>
-    );
-}
-
-function ItemHeader({ i }) {
-    return (
-        <TitleBox.Header>
-            {i}
-            {". "}
-            <FormFieldViewProp prop="name" />
-            {" ["}
-            <FormFieldViewProp prop="start_day" />
-            {" - "}
-            <FormFieldViewProp prop="end_day" />
-            {" ("}
-            <FormFieldViewProp prop="ordering" />
-            {")]"}
-        </TitleBox.Header>
     );
 }
 
@@ -103,7 +87,24 @@ function InlineItemForm({
             <FormContentLoader getApi={getApi} />
 
             <TitleBox>
-                <ItemHeader i={i + 1} />
+                <TitleBox.Header>
+                    <div className="flex-1">
+                        <FormFieldRenderState>
+                            {({ name, start_day, end_day, ordering }) =>
+                                `${
+                                    i + 1
+                                }. ${name} [${start_day} - ${end_day} (${ordering})]`
+                            }
+                        </FormFieldRenderState>
+                    </div>
+                    <EnvLink
+                        to={`/itinerary-items/edit/${id}`}
+                        className="text-lg self-end"
+                    >
+                        Edit Details
+                    </EnvLink>
+                </TitleBox.Header>
+
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <RequiredFormFields />
