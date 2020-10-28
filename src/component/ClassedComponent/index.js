@@ -29,6 +29,7 @@ for (const elementType of [
     "h2",
     "h3",
     "h4",
+    "hr",
     "input",
     "label",
     "nav",

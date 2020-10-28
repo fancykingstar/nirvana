@@ -1,21 +1,15 @@
 import React from "react";
 import useSWR from "swr";
-import styled from "styled-components";
 import qs from "qs";
 
 import { useFormField } from "../../hooks/useFormContext";
 
+import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
-const Divider = styled.hr`
-    grid-column: label / end;
-`;
-
-const InputArea = styled.div`
-    padding: ${(p) => p.theme.size[0]};
-    grid-column: input / input;
-`;
+const Divider = classed.hr("form-field-grid-row-all");
+const InputArea = classed.div("p-1", "form-field-grid-row-input");
 
 export default function FormFieldLinkedSingle({
     required,

@@ -14,6 +14,7 @@ export default function EntityList() {
         ["currencies", true],
         ["departures", false],
         ["discounts", false],
+        ["events", true],
         ["exchange-rates", true],
         ["itineraries", true],
         ["itinerary-items", true],
