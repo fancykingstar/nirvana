@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "classnames";
 
 import { useFormField } from "../../hooks/useFormContext";
 
@@ -17,7 +18,14 @@ export default function FormFieldBoolean({ required, prop, label }) {
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <input
-                className="form-field-grid-row-input justify-self-start"
+                className={cn(
+                    "form-field-grid-row-input",
+                    "justify-self-start p-3",
+                    "border-2",
+                    "border-gray-400",
+                    "p-1",
+                    "rounded",
+                )}
                 type="checkbox"
                 value={state}
                 onChange={(e) => setState(e.target.value)}

@@ -1,11 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import { mutate } from "swr";
 import { mutateMany } from "swr-mutate-many";
 import { useHistory } from "react-router-dom";
 
 import { useAPIFetch } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
+import classed from "../ClassedComponent";
 
 import { FormContext } from "../../hooks/useFormContext";
 
@@ -13,10 +13,10 @@ import FormFieldButton from "../Button";
 
 function noop() {}
 
-export const FormFieldButtonBlock = styled.div`
-    display: flex;
-    grid-column: input / input;
-`;
+export const FormFieldButtonBlock = classed.div(
+    "flex",
+    "form-field-grid-row-input",
+);
 
 export function FormFieldButtonReset() {
     const { dispatch } = React.useContext(FormContext);

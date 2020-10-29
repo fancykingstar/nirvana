@@ -56,8 +56,9 @@ export default function FilterListAirport() {
     return (
         <FilterList
             title="Airports"
-            listRoute="/airports"
-            deleteRoute={(id) => `/airports/${id}`}
+            listApi="/airports"
+            createRoute="/airports/create"
+            getDeleteApi={(id) => `/airports/${id}`}
             HeaderComponent={AirportHeader}
             FooterComponent={AirportHeader}
             RowComponent={AirportRow}
