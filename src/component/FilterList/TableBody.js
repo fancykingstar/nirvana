@@ -17,7 +17,7 @@ export default function TableBody({
                       <input
                           checked={Boolean(checked[x.id])}
                           type="checkbox"
-                          onClick={() =>
+                          onChange={() =>
                               setChecked((checked) => ({
                                   ...checked,
                                   [x.id]: !checked[x.id],

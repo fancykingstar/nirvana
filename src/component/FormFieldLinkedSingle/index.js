@@ -3,6 +3,7 @@ import useSWR from "swr";
 import qs from "qs";
 
 import { useFormField } from "../../hooks/useFormContext";
+import useStableRandomId from "../../hooks/useStableRandomId";
 
 import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
@@ -22,6 +23,7 @@ export default function FormFieldLinkedSingle({
 }) {
     const [search, setSearch] = React.useState("");
     const [linked, setLinked] = useFormField(prop, []);
+    const id = useStableRandomId();
 
     const { data } = useSWR(
         search.length
@@ -54,8 +56,11 @@ export default function FormFieldLinkedSingle({
 
                 <br />
 
-                <h3>Replace:</h3>
+                <h3>
+                    <label htmlFor={id}>Replace:</label>
+                </h3>
                 <KeyboardInboxBox
+                    id={id}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
