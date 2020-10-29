@@ -38,28 +38,11 @@ function LoggIner() {
     return null;
 }
 
-async function resetDb() {
-    const session = JSON.parse(
-        localStorage.getItem("app-session-local") || "{}",
-    );
-
-    if (session.jwt) {
-        // if there's a JWT, that means the test modified the database, so reset it and clear the JWT
-
-        await fetch(`http://localhost:1337/database/reset`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-                Authorization: `Bearer ${session.jwt}`,
-            },
-        }).then((x) => x.json());
-
-        localStorage.removeItem("app-session-local");
-    }
-}
-
 export function createWrapper({ route, history = [route], loggedIn = true }) {
     let location = {};
+    let apiFetchFunction = function apiFetchFunctionStub() {
+        return Promise.resolve();
+    };
 
     function setLocationFromRender({ location: newLocation }) {
         location = {
@@ -72,11 +55,30 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
         return location;
     }
 
+    function apiFetch(...args) {
+        return apiFetchFunction(...args);
+    }
+
+    function resetDb() {
+        return apiFetchFunction("/database/reset", { method: "POST" });
+    }
+
+    function AquireApiFetch() {
+        const { apiFetch } = useAppContext();
+
+        React.useEffect(() => {
+            apiFetchFunction = apiFetch;
+        }, [apiFetch]);
+
+        return null;
+    }
+
     function wrapper({ children }) {
         return (
             <ThemeProvider>
                 <RouterProvider initialEntries={history}>
                     <AppContextProvider>
+                        <AquireApiFetch />
                         <ToastProvider>
                             <SWRErrorProvider>
                                 {loggedIn ? <LoggIner /> : null}
@@ -91,5 +93,5 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
         );
     }
 
-    return { resetDb, getCurrentLocation, wrapper };
+    return { apiFetch, resetDb, getCurrentLocation, wrapper };
 }

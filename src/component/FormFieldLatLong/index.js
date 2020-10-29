@@ -1,18 +1,25 @@
 import React from "react";
 
 import { useFormField } from "../../hooks/useFormContext";
+import useStableRandomId from "../../hooks/useStableRandomId";
 
 import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
 export default function FormFieldLatLong({ required }) {
-    const [latitude, setLatitude] = useFormField("latitude");
-    const [longitude, setLongitude] = useFormField("longitude");
+    const [latitude, setLatitude] = useFormField("latitude", "");
+    const [longitude, setLongitude] = useFormField("longitude", "");
+
+    const idLat = useStableRandomId();
+    const idLong = useStableRandomId();
 
     return (
         <React.Fragment>
-            <FormFieldLabel required={required}>Latitude</FormFieldLabel>
+            <FormFieldLabel htmlFor={idLat} required={required}>
+                Latitude
+            </FormFieldLabel>
             <KeyboardInboxBox
+                id={idLat}
                 className="form-field-grid-row-input"
                 type="number"
                 min={-90}
@@ -22,8 +29,11 @@ export default function FormFieldLatLong({ required }) {
                 onChange={(e) => setLatitude(Number(e.target.value))}
             />
 
-            <FormFieldLabel required={required}>Longitude</FormFieldLabel>
+            <FormFieldLabel htmlFor={idLong} required={required}>
+                Longitude
+            </FormFieldLabel>
             <KeyboardInboxBox
+                id={idLong}
                 className="form-field-grid-row-input"
                 type="number"
                 min={-180}

@@ -37,6 +37,7 @@ export function FormFieldButtonSave({
     getApi,
     putApi,
     onSaved = noop,
+    children,
 }) {
     const fetcher = useAPIFetch();
     const { addToast, removeToast } = useToast();
@@ -75,7 +76,7 @@ export function FormFieldButtonSave({
 
     return (
         <FormFieldButton color="blue" onClick={onSave}>
-            Save
+            {children ? children : "Save"}
         </FormFieldButton>
     );
 }

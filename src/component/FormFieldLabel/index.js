@@ -10,10 +10,10 @@ const RequiredMarker = classed.div(
     "w-3",
 );
 
-export default function FormFieldLabel({ required, children }) {
+export default function FormFieldLabel({ required, children, htmlFor }) {
     return (
         <React.Fragment>
-            <FieldLabel>{children}</FieldLabel>
+            <FieldLabel htmlFor={htmlFor}>{children}</FieldLabel>
             {required ? <RequiredMarker>*</RequiredMarker> : null}
         </React.Fragment>
     );
