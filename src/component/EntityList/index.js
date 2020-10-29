@@ -25,7 +25,7 @@ export default function EntityList() {
         ["pages", false],
         ["ports", true],
         ["price-labels", false],
-        ["prices", false],
+        ["prices", true],
         ["product-regions", false],
         ["product-types", false],
         ["products", false],

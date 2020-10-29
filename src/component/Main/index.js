@@ -13,6 +13,7 @@ import FilterListExchangeRate from "../FilterListExchangeRate";
 import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
 import FilterListPort from "../FilterListPort";
+import FilterListPrice from "../FilterListPrice";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
@@ -28,6 +29,7 @@ import {
     FormItineraryItemEdit,
 } from "../FormItineraryItem";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
+import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
 
 function EntityRootRedirect({ path, to }) {
     function Redirecter({
@@ -162,6 +164,16 @@ export default function Main() {
                         Create: FormPortCreate,
                         Edit: FormPortEdit,
                         List: FilterListPort,
+                    })}
+                />
+
+                <Route
+                    path="/:env/prices"
+                    component={createEntityBlock({
+                        entityName: "prices",
+                        Create: FormPriceCreate,
+                        Edit: FormPriceEdit,
+                        List: FilterListPrice,
                     })}
                 />
 
