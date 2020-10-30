@@ -1,21 +1,10 @@
 import React from "react";
+import cn from "classname";
 
 import { FormContext, FormProvider } from "../../hooks/useFormContext";
 
-import classed from "../ClassedComponent";
 import FormFieldDebug from "../FormFieldDebug";
 import TitleBox from "../TitleBox";
-
-const SectionSelectorOption = classed.div(
-    "cursor-pointer",
-    "flex-1",
-    "hover:bg-blue-200",
-    "hover:text-blue-800",
-    "p-2",
-    "text-center",
-    "text-lg",
-    ({ active }) => (active ? ["text-white", "bg-blue-500"] : ["text-black"]),
-);
 
 function SectionSelector({
     setActiveId,
@@ -71,17 +60,27 @@ function SectionSelector({
             <FormFieldDebug />
             {childArray.map(
                 ({ props: { props, label, id, defaultValues } }) => (
-                    <SectionSelectorOption
-                        active={id === currentId}
+                    <div
                         key={id}
-                        className="flex-1 text-center cursor-pointer"
+                        className={cn(
+                            "cursor-pointer",
+                            "flex-1",
+                            "hover:bg-blue-200",
+                            "hover:text-blue-800",
+                            "p-2",
+                            "text-center",
+                            "text-lg",
+                            id === currentId
+                                ? ["text-white", "bg-blue-500"]
+                                : ["text-black"],
+                        )}
                         onClick={onSelectSection.bind(null, {
                             oldSection: activeChild?.props,
                             newSection: { props, id, defaultValues },
                         })}
                     >
                         {label}
-                    </SectionSelectorOption>
+                    </div>
                 ),
             )}
         </div>
@@ -110,7 +109,10 @@ export default function FormFieldOneOfFieldsGroup({ children, label }) {
 
     return (
         <FormProvider>
-            <div className="form-field-grid-row-all">
+            <div
+                className="form-field-grid-row-all"
+                data-testid="form-field-one-of-fields-group"
+            >
                 <TitleBox>
                     <TitleBox.Header>{label}</TitleBox.Header>
                     <SectionSelector
