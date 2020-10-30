@@ -1,4 +1,5 @@
 import React from "react";
+import useSWR from "swr";
 
 import FilterList from "../FilterList";
 import EnvLink from "../EnvLink";
@@ -57,6 +58,8 @@ function ItineraryItemItemRow({
     port,
     itinerary,
 }) {
+    const { data: cityData } = useSWR(city ? `/cities/${city.id}` : null);
+
     return (
         <React.Fragment>
             <FilterList.Cell>
@@ -80,7 +83,9 @@ function ItineraryItemItemRow({
             </FilterList.Cell>
 
             <FilterList.Cell>
-                <EnvLink to={`/city/edit/${city?.id}`}>{city?.name}</EnvLink>
+                <EnvLink to={`/city/edit/${city?.id}`}>
+                    {city.name} ({cityData?.country?.name ?? "..."})
+                </EnvLink>
             </FilterList.Cell>
 
             <FilterList.Cell>

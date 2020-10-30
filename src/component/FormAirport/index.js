@@ -1,4 +1,5 @@
 import React from "react";
+import useSWR from "swr";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
@@ -18,12 +19,22 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCity({ name }) {
-    return <span>{name}</span>;
+function LinkedCity({ name, id }) {
+    const { data: cityData } = useSWR(`/cities/${id}`);
+
+    return (
+        <span>
+            {name} ({cityData?.country?.name ?? "..."})
+        </span>
+    );
 }
 
-function SearchResultCity({ id, name, set }) {
-    return <li onClick={set.bind(null, id)}>{name}</li>;
+function SearchResultCity({ id, name, set, country }) {
+    return (
+        <li onClick={set.bind(null, id)}>
+            {name} ({country?.name ?? "..."})
+        </li>
+    );
 }
 
 function FormFields() {
