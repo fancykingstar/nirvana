@@ -7,11 +7,12 @@ import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
 import FormFieldBoolean from "../FormFieldBoolean";
-import FormFieldRichText from "../FormFieldRichText";
+import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
+import FormFieldOneOfFieldsGroup from "../FormFieldOneOfFieldsGroup";
+import FormFieldRichText from "../FormFieldRichText";
 import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
-import FormFieldLatLong from "../FormFieldLatLong";
 
 import FormFieldItemOrder from "./FormFieldItemOrder";
 
@@ -64,33 +65,72 @@ function FormFields() {
         <React.Fragment>
             <RequiredFormFields />
 
-            <FormFieldLatLong />
             <FormFieldRichText prop="description" label="Description" />
 
-            <FormFieldLinkedSingle
-                prop="city"
-                label="City"
-                searchProp="name"
-                searchApi="/cities"
-                RenderLinked={LinkedCity}
-                RenderSearchResult={ResultCity}
-            />
-            <FormFieldLinkedSingle
-                prop="port"
-                label="Port"
-                searchProp="name"
-                searchApi="/ports"
-                RenderLinked={LinkedPort}
-                RenderSearchResult={ResultPort}
-            />
-            <FormFieldLinkedSingle
-                prop="event"
-                label="Event"
-                searchProp="name"
-                searchApi="/events"
-                RenderLinked={LinkedEvent}
-                RenderSearchResult={ResultEvent}
-            />
+            <FormFieldOneOfFieldsGroup label="Physical Location">
+                <FormFieldOneOfFieldsGroup.Section
+                    label="Coords"
+                    id="coords"
+                    props={["latitude", "longitude"]}
+                    defaultValues={{ latitude: null, longitude: null }}
+                    isActive={({ latitude, longitude }) =>
+                        latitude || longitude
+                    }
+                >
+                    <FormFieldLatLong />
+                </FormFieldOneOfFieldsGroup.Section>
+
+                <FormFieldOneOfFieldsGroup.Section
+                    label="City"
+                    id="city"
+                    props={["city"]}
+                    defaultValues={{ city: null }}
+                    isActive={(item) => item?.city?.id}
+                >
+                    <FormFieldLinkedSingle
+                        prop="city"
+                        label="City"
+                        searchProp="name"
+                        searchApi="/cities"
+                        RenderLinked={LinkedCity}
+                        RenderSearchResult={ResultCity}
+                    />
+                </FormFieldOneOfFieldsGroup.Section>
+
+                <FormFieldOneOfFieldsGroup.Section
+                    label="Port"
+                    id="port"
+                    props={["port"]}
+                    defaultValues={{ port: null }}
+                    isActive={(item) => item?.port?.id}
+                >
+                    <FormFieldLinkedSingle
+                        prop="port"
+                        label="Port"
+                        searchProp="name"
+                        searchApi="/ports"
+                        RenderLinked={LinkedPort}
+                        RenderSearchResult={ResultPort}
+                    />
+                </FormFieldOneOfFieldsGroup.Section>
+
+                <FormFieldOneOfFieldsGroup.Section
+                    label="Event"
+                    id="event"
+                    props={["event"]}
+                    defaultValues={{ event: null }}
+                    isActive={(item) => item?.event?.id}
+                >
+                    <FormFieldLinkedSingle
+                        prop="event"
+                        label="Event"
+                        searchProp="name"
+                        searchApi="/events"
+                        RenderLinked={LinkedEvent}
+                        RenderSearchResult={ResultEvent}
+                    />
+                </FormFieldOneOfFieldsGroup.Section>
+            </FormFieldOneOfFieldsGroup>
         </React.Fragment>
     );
 }

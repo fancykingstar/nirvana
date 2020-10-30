@@ -23,7 +23,7 @@ export default function TitleBox({ children }) {
 }
 
 TitleBox.Header = classed.h1(
-    "bg-blue-100",
+    "bg-blue-200",
     "bg-white",
     "flex",
     "items-center",
