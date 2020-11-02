@@ -20,7 +20,7 @@ import {
 } from "../FormFieldButton";
 
 function LinkedCity({ name, id }) {
-    const { data: cityData } = useSWR(`/cities/${id}`);
+    const { data: cityData } = useSWR(id ? `/cities/${id}` : null);
 
     return (
         <span>
@@ -68,8 +68,8 @@ export function FormAirportCreate({
     },
     history,
 }) {
-    const listRoute = "/airports";
-    const createRoute = "/airports";
+    const listApi = "/airports";
+    const createApi = "/airports";
 
     return (
         <FormProvider>
@@ -85,8 +85,8 @@ export function FormAirportCreate({
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
                                 nameProp="name"
-                                createRoute={createRoute}
-                                listRoute={listRoute}
+                                createApi={createApi}
+                                listApi={listApi}
                                 onCreated={(id) =>
                                     history.push(`/${env}/airports/edit/${id}`)
                                 }
@@ -104,13 +104,13 @@ export function FormAirportEdit({
         params: { id },
     },
 }) {
-    const getRoute = `/airports/${id}`;
-    const listRoute = "/airports";
-    const putRoute = `/airports/${id}`;
+    const getApi = `/airports/${id}`;
+    const listApi = "/airports";
+    const putApi = `/airports/${id}`;
 
     return (
         <FormProvider>
-            <FormContentLoader getRoute={getRoute} />
+            <FormContentLoader getApi={getApi} />
             <TitleBox>
                 <TitleBox.Header>Edit Airport</TitleBox.Header>
                 <TitleBox.Body>
@@ -121,9 +121,9 @@ export function FormAirportEdit({
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
                                 nameProp="name"
-                                putRoute={putRoute}
-                                getRoute={getRoute}
-                                listRoute={listRoute}
+                                putApi={putApi}
+                                getApi={getApi}
+                                listApi={listApi}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
