@@ -3,7 +3,6 @@ import cn from "classname";
 
 import { FormContext, FormProvider } from "../../hooks/useFormContext";
 
-import FormFieldDebug from "../FormFieldDebug";
 import TitleBox from "../TitleBox";
 
 function SectionSelector({
@@ -57,7 +56,6 @@ function SectionSelector({
 
     return (
         <div className="flex w-full shadow">
-            <FormFieldDebug />
             {childArray.map(
                 ({ props: { props, label, id, defaultValues } }) => (
                     <div

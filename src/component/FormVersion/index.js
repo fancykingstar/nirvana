@@ -6,7 +6,6 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
-import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
 import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
@@ -18,11 +17,19 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCountry({ name }) {
+function LinkedItinerary({ name }) {
     return <span>{name}</span>;
 }
 
-function SearchResultCountry({ id, name, set }) {
+function LinkedProduct({ name }) {
+    return <span>{name}</span>;
+}
+
+function SearchResultItinerary({ id, name, set }) {
+    return <li onClick={set.bind(null, id)}>{name}</li>;
+}
+
+function SearchResultProduct({ id, name, set }) {
     return <li onClick={set.bind(null, id)}>{name}</li>;
 }
 
@@ -31,34 +38,43 @@ function FormFields() {
         <React.Fragment>
             <FormFieldString prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
-            <FormFieldLatLong required />
 
             <FormFieldLinkedSingle
                 required
-                label="Country"
-                prop="country"
+                label="Itinerary"
+                prop="itinerary"
                 searchProp="name"
-                searchApi="/countries"
-                RenderLinked={LinkedCountry}
-                RenderSearchResult={SearchResultCountry}
+                searchApi="/itineraries"
+                RenderLinked={LinkedItinerary}
+                RenderSearchResult={SearchResultItinerary}
+            />
+
+            <FormFieldLinkedSingle
+                required
+                label="Product"
+                prop="product"
+                searchProp="name"
+                searchApi="/products"
+                RenderLinked={LinkedProduct}
+                RenderSearchResult={SearchResultProduct}
             />
         </React.Fragment>
     );
 }
 
-export function FormCityCreate({
+export function FormVersionCreate({
     match: {
         params: { env },
     },
     history,
 }) {
-    const createApi = "/cities";
-    const listApi = "/cities";
+    const createApi = "/versions";
+    const listApi = "/versions";
 
     return (
         <FormProvider>
             <TitleBox>
-                <TitleBox.Header>Create City</TitleBox.Header>
+                <TitleBox.Header>Create Version</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
@@ -72,7 +88,7 @@ export function FormCityCreate({
                                 createApi={createApi}
                                 listApi={listApi}
                                 onCreated={(id) =>
-                                    history.push(`/${env}/cities/edit/${id}`)
+                                    history.push(`/${env}/versions/edit/${id}`)
                                 }
                             />
                         </FormFieldButtonBlock>
@@ -83,21 +99,21 @@ export function FormCityCreate({
     );
 }
 
-export function FormCityEdit({
+export function FormVersionEdit({
     match: {
         params: { id },
     },
 }) {
-    const getApi = `/cities/${id}`;
-    const listApi = "/cities";
-    const putApi = `/cities/${id}`;
+    const getApi = `/versions/${id}`;
+    const listApi = "/versions";
+    const putApi = `/versions/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getApi={getApi} />
 
             <TitleBox>
-                <TitleBox.Header>Edit City</TitleBox.Header>
+                <TitleBox.Header>Edit Version</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
