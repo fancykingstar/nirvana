@@ -37,7 +37,7 @@ function EditRawHTML({ value, onChange }) {
                 "text/html",
             ).body.innerHTML;
 
-            onChange(sanitized);
+            onChange(sanitized, false);
         } catch (e) {
             console.error(e);
         }

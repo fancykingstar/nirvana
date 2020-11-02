@@ -28,7 +28,7 @@ export default function EntityList() {
         ["prices", true],
         ["product-regions", false],
         ["product-types", false],
-        ["products", false],
+        ["products", true],
         ["versions", true],
     ].map(([slug, exists]) => ({
         to: `/${slug}`,
