@@ -1,4 +1,5 @@
 import React from "react";
+import useSWR from "swr";
 
 import FilterList from "../FilterList";
 import EnvLink from "../EnvLink";
@@ -34,6 +35,10 @@ function PortHeader({ onChangeSort, sortBy, sortDirection }) {
 }
 
 function PortRow(props) {
+    const { data: cityData } = useSWR(
+        props.city ? `/cities/${props.city.id}` : null,
+    );
+
     return (
         <React.Fragment>
             <FilterList.Cell>
@@ -45,7 +50,7 @@ function PortRow(props) {
             </FilterList.Cell>
             <FilterList.Cell>
                 <EnvLink to={`/cities/edit/${props.city.id}`}>
-                    {props.city.name}
+                    {props.city.name} ({cityData?.country?.name ?? "..."})
                 </EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>

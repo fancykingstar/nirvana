@@ -32,20 +32,20 @@ function CityHeader({ onChangeSort, sortBy, sortDirection }) {
     );
 }
 
-function CityRow(props) {
+function CityRow({ id, name, country, latitude, longitude }) {
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <EnvLink to={`/cities/edit/${props.id}`}>{props.id}</EnvLink>
+                <EnvLink to={`/cities/edit/${id}`}>{id}</EnvLink>
             </FilterList.Cell>
-            <FilterList.Cell>{props.name}</FilterList.Cell>
+            <FilterList.Cell>{name}</FilterList.Cell>
             <FilterList.Cell>
-                <EnvLink to={`/countries/edit/${props.country.id}`}>
-                    {props.country.name}
+                <EnvLink to={`/countries/edit/${country.id}`}>
+                    {country.name}
                 </EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>
-                {props.latitude},{props.longitude}
+                {latitude},{longitude}
             </FilterList.Cell>
         </React.Fragment>
     );
