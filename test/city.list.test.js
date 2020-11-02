@@ -14,7 +14,7 @@ describe("cities/list", () => {
 
         const { findByText } = render(<App />, { wrapper });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
     });
 
     it("can navigate to the last page", async () => {
@@ -24,7 +24,7 @@ describe("cities/list", () => {
 
         const { findByText, getByText } = render(<App />, { wrapper });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
 
         fireEvent.click(getByText("774"));
 
@@ -45,7 +45,7 @@ describe("cities/list", () => {
 
         const { findByText } = render(<App />, { wrapper });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
         await findByText("Zurich");
     });
 
@@ -56,7 +56,7 @@ describe("cities/list", () => {
 
         const { findByText, getByText } = render(<App />, { wrapper });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
 
         fireEvent.click(getByText("20"));
 
@@ -72,7 +72,7 @@ describe("cities/list", () => {
 
         const { findByText, getByText } = render(<App />, { wrapper });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
 
         fireEvent.click(getByText("Russia"));
 
@@ -90,7 +90,7 @@ describe("cities/list", () => {
             wrapper,
         });
 
-        await findByText(/15494 entries matching current filter/);
+        await findByText(/15496 entries matching current filter/);
 
         expect(queryByText(/addis ababa/i)).not.toBeInTheDocument();
 
