@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
@@ -35,16 +35,11 @@ import { FormVersionCreate, FormVersionEdit } from "../FormVersion";
 
 function createEntityBlock({ Create, Edit, List }) {
     return function EntityBlock({ match: { path } }) {
-        function Redirecter() {
-            return <Redirect to={path} />;
-        }
-
         return (
             <Switch>
                 <Route path={`${path}/create`} component={Create} />
                 <Route path={`${path}/edit/:id`} component={Edit} />
-                <Route path={`${path}/:anything`} component={Redirecter} />
-                <Route path={`${path}`} component={List} />
+                <Route component={List} />
             </Switch>
         );
     };

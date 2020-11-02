@@ -6,10 +6,10 @@ import { createWrapper } from "./utils";
 
 import App from "../src/App";
 
-describe("cities/list", () => {
+describe("cities", () => {
     it("can get a list of cities", async () => {
         const { wrapper } = createWrapper({
-            route: "/local/cities/list",
+            route: "/local/cities",
         });
 
         const { findByText } = render(<App />, { wrapper });
@@ -19,7 +19,7 @@ describe("cities/list", () => {
 
     it("can navigate to the last page", async () => {
         const { getCurrentLocation, wrapper } = createWrapper({
-            route: "/local/cities/list",
+            route: "/local/cities",
         });
 
         const { findByText, getByText } = render(<App />, { wrapper });
@@ -29,7 +29,7 @@ describe("cities/list", () => {
         fireEvent.click(getByText("774"));
 
         expect(getCurrentLocation()).toMatchObject({
-            pathname: "/local/cities/list",
+            pathname: "/local/cities",
             query: {
                 pageNumber: "774",
             },
@@ -40,7 +40,7 @@ describe("cities/list", () => {
 
     it("can load directly to the last page", async () => {
         const { wrapper } = createWrapper({
-            route: "/local/cities/list?pageNumber=774",
+            route: "/local/cities?pageNumber=774",
         });
 
         const { findByText } = render(<App />, { wrapper });
@@ -51,7 +51,7 @@ describe("cities/list", () => {
 
     it("can navigate to a city's edit page", async () => {
         const { getCurrentLocation, wrapper } = createWrapper({
-            route: "/local/cities/list",
+            route: "/local/cities",
         });
 
         const { findByText, getByText } = render(<App />, { wrapper });
@@ -67,7 +67,7 @@ describe("cities/list", () => {
 
     it("can navigate to a country's edit page", async () => {
         const { getCurrentLocation, wrapper } = createWrapper({
-            route: "/local/cities/list",
+            route: "/local/cities",
         });
 
         const { findByText, getByText } = render(<App />, { wrapper });
@@ -83,7 +83,7 @@ describe("cities/list", () => {
 
     it("can search for cities by name", async () => {
         const { wrapper } = createWrapper({
-            route: "/local/cities/list",
+            route: "/local/cities",
         });
 
         const { findByText, getByLabelText, queryByText } = render(<App />, {
