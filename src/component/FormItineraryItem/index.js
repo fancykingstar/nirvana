@@ -42,7 +42,7 @@ export function RequiredFormFields() {
 }
 
 function LinkedCity({ name, id }) {
-    const { data: cityData } = useSWR(`/cities/${id}`);
+    const { data: cityData } = useSWR(id ? `/cities/${id}` : null);
 
     return (
         <span>
