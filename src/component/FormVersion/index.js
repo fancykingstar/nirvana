@@ -6,7 +6,6 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
-import FormFieldDebug from "../FormFieldDebug";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
 import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
@@ -37,7 +36,6 @@ function SearchResultProduct({ id, name, set }) {
 function FormFields() {
     return (
         <React.Fragment>
-            <FormFieldDebug />
             <FormFieldString prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
 
