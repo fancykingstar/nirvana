@@ -14,6 +14,7 @@ import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
 import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
+import FilterListVersion from "../FilterListVersion";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
@@ -30,43 +31,20 @@ import {
 } from "../FormItineraryItem";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
+import { FormVersionCreate, FormVersionEdit } from "../FormVersion";
 
-function EntityRootRedirect({ path, to }) {
-    function Redirecter({
-        match: {
-            params: { env },
-        },
-    }) {
-        return <Redirect to={`/${env}/${to}`} />;
-    }
+function createEntityBlock({ Create, Edit, List }) {
+    return function EntityBlock({ match: { path } }) {
+        function Redirecter() {
+            return <Redirect to={path} />;
+        }
 
-    return <Route path={path} component={Redirecter} />;
-}
-
-function createEntityBlock({ entityName, Create, Edit, List }) {
-    return function EntityBlock({
-        match: {
-            params: { env },
-        },
-    }) {
         return (
             <Switch>
-                {Create ? (
-                    <Route
-                        path={`/:env/${entityName}/create`}
-                        component={Create}
-                    />
-                ) : null}
-                {Edit ? (
-                    <Route
-                        path={`/:env/${entityName}/edit/:id`}
-                        component={Edit}
-                    />
-                ) : null}
-                {List ? (
-                    <Route path={`/:env/${entityName}`} component={List} />
-                ) : null}
-                <EntityRootRedirect to={`/${env}/cities`} />
+                <Route path={`${path}/create`} component={Create} />
+                <Route path={`${path}/edit/:id`} component={Edit} />
+                <Route path={`${path}/:anything`} component={Redirecter} />
+                <Route path={`${path}`} component={List} />
             </Switch>
         );
     };
@@ -80,7 +58,6 @@ export default function Main() {
                 <Route
                     path="/:env/airports"
                     component={createEntityBlock({
-                        entityName: "airports",
                         Create: FormAirportCreate,
                         Edit: FormAirportEdit,
                         List: FilterListAirport,
@@ -90,7 +67,6 @@ export default function Main() {
                 <Route
                     path="/:env/cities"
                     component={createEntityBlock({
-                        entityName: "cities",
                         Create: FormCityCreate,
                         Edit: FormCityEdit,
                         List: FilterListCity,
@@ -100,7 +76,6 @@ export default function Main() {
                 <Route
                     path="/:env/countries"
                     component={createEntityBlock({
-                        entityName: "countries",
                         Create: FormCountryCreate,
                         Edit: FormCountryEdit,
                         List: FilterListCountry,
@@ -110,7 +85,6 @@ export default function Main() {
                 <Route
                     path="/:env/currencies"
                     component={createEntityBlock({
-                        entityName: "currencies",
                         Create: FormCurrencyCreate,
                         Edit: FormCurrencyEdit,
                         List: FilterListCurrency,
@@ -120,7 +94,6 @@ export default function Main() {
                 <Route
                     path="/:env/events"
                     component={createEntityBlock({
-                        entityName: "events",
                         Create: FormEventCreate,
                         Edit: FormEventEdit,
                         List: FilterListEvent,
@@ -130,7 +103,6 @@ export default function Main() {
                 <Route
                     path="/:env/exchange-rates"
                     component={createEntityBlock({
-                        entityName: "exchange-rates",
                         Create: FormExchangeRateCreate,
                         Edit: FormExchangeRateEdit,
                         List: FilterListExchangeRate,
@@ -140,7 +112,6 @@ export default function Main() {
                 <Route
                     path="/:env/itineraries"
                     component={createEntityBlock({
-                        entityName: "itineraries",
                         Create: FormItineraryCreate,
                         Edit: FormItineraryEdit,
                         List: FilterListItinerary,
@@ -150,7 +121,6 @@ export default function Main() {
                 <Route
                     path="/:env/itinerary-items"
                     component={createEntityBlock({
-                        entityName: "itinerary-items",
                         Create: FormItineraryItemCreate,
                         Edit: FormItineraryItemEdit,
                         List: FilterListItineraryItem,
@@ -160,7 +130,6 @@ export default function Main() {
                 <Route
                     path="/:env/ports"
                     component={createEntityBlock({
-                        entityName: "ports",
                         Create: FormPortCreate,
                         Edit: FormPortEdit,
                         List: FilterListPort,
@@ -170,10 +139,18 @@ export default function Main() {
                 <Route
                     path="/:env/prices"
                     component={createEntityBlock({
-                        entityName: "prices",
                         Create: FormPriceCreate,
                         Edit: FormPriceEdit,
                         List: FilterListPrice,
+                    })}
+                />
+
+                <Route
+                    path="/:env/versions"
+                    component={createEntityBlock({
+                        Create: FormVersionCreate,
+                        Edit: FormVersionEdit,
+                        List: FilterListVersion,
                     })}
                 />
 
