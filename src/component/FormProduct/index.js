@@ -6,11 +6,12 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
-import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
-import FormFieldString from "../FormFieldString";
-import FormFieldRichText from "../FormFieldRichText";
-import FormFieldDebug from "../FormFieldDebug";
 import FormFieldBoolean from "../FormFieldBoolean";
+import FormFieldDebug from "../FormFieldDebug";
+import FormFieldEnum from "../FormFieldEnum";
+import FormFieldRenderState from "../FormFieldRenderState";
+import FormFieldRichText from "../FormFieldRichText";
+import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
 
 import {
@@ -20,37 +21,15 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedItinerary({ name }) {
-    return <span>{name}</span>;
-}
-
-function LinkedProduct({ name }) {
-    return <span>{name}</span>;
-}
-
-function SearchResultItinerary({ id, name, set }) {
-    return <li onClick={set.bind(null, id)}>{name}</li>;
-}
-
-function SearchResultProduct({ id, name, set }) {
-    return <li onClick={set.bind(null, id)}>{name}</li>;
-}
-
-/*
-apis
-categories
-code
-feed_product
-operator
-primary_accommodation
-product_groups
-product_includes
-product_template
-product_type
-regions
-related_products
-versions
-*/
+import AccommodationField from "./AccommodationField";
+import ApisField from "./ApisField";
+import CategoriesField from "./CategoriesField";
+import OperatorField from "./OperatorField";
+import ProductGroupsField from "./ProductGroupsField";
+import ProductTypeField from "./ProductTypeField";
+import RegionsField from "./RegionsField";
+import RelatedProductsField from "./RelatedProductsField";
+import VersionsField from "./VersionsField";
 
 function FormFields() {
     return (
@@ -59,32 +38,52 @@ function FormFields() {
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
             <FormFieldString required prop="code" label="Code" />
-
             <FormFieldBoolean prop="active" label="Is Active" />
             <FormFieldBoolean
                 prop="include_in_search"
                 label="Include in Search"
             />
+            <FormFieldBoolean prop="feed_product" label="Is Feed Product" />
+            <FormFieldEnum
+                prop="product_template"
+                label="Product Template"
+                defaultValue="operated"
+            >
+                <FormFieldEnum.Option value="operated">
+                    Operated
+                </FormFieldEnum.Option>
+            </FormFieldEnum>
+            <FormFieldEnum prop="status" label="Status" defaultValue="live">
+                <FormFieldEnum.Option value="live">Live</FormFieldEnum.Option>
+            </FormFieldEnum>
+            <hr className="form-field-grid-row-all" />
             <FormFieldRichText prop="description" label="Description" />
+            <hr className="form-field-grid-row-all" />
+            <FormFieldRichText
+                prop="product_includes"
+                label="Product Includes"
+            />
 
-            <FormFieldLinkedSingle
-                required
-                label="Itinerary"
-                prop="itinerary"
-                searchProp="name"
-                searchApi="/itineraries"
-                RenderLinked={LinkedItinerary}
-                RenderSearchResult={SearchResultItinerary}
-            />
-            <FormFieldLinkedSingle
-                required
-                label="Product"
-                prop="product"
-                searchProp="name"
-                searchApi="/products"
-                RenderLinked={LinkedProduct}
-                RenderSearchResult={SearchResultProduct}
-            />
+            <hr className="form-field-grid-row-all" />
+            <OperatorField />
+            <hr className="form-field-grid-row-all" />
+            <AccommodationField />
+            <hr className="form-field-grid-row-all" />
+            <ProductTypeField />
+            <hr className="form-field-grid-row-all" />
+
+            <ApisField />
+            <hr className="form-field-grid-row-all" />
+            <CategoriesField />
+            <hr className="form-field-grid-row-all" />
+            <ProductGroupsField />
+            <hr className="form-field-grid-row-all" />
+            <RegionsField />
+            <hr className="form-field-grid-row-all" />
+            <RelatedProductsField />
+            <hr className="form-field-grid-row-all" />
+            <VersionsField />
+            <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
 }
@@ -140,7 +139,9 @@ export function FormProductEdit({
             <FormContentLoader getApi={getApi} />
 
             <TitleBox>
-                <TitleBox.Header>Edit Product</TitleBox.Header>
+                <TitleBox.Header>
+                    Edit <FormFieldRenderState prop="name" />
+                </TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
