@@ -3,8 +3,8 @@
     "scripts": {
         "start": "parcel serve ./src/index.html",
         "build": "NODE_ENV=production parcel build ./src/index.html",
-        "format": "eslint . --cache --fix && prettier --write **/*.{js,scss,md,json,html}",
-        "lint": "eslint . && prettier --check **/*.{js,scss,md,json}",
+        "format": "eslint . --cache --fix && prettier --write **/*.{js,md,json,html}",
+        "lint": "eslint . && prettier --check **/*.{js,md,json}",
         "test": "jest --runInBand",
         "test:watch": "jest --watch"
     },
@@ -53,12 +53,12 @@
     "husky": {
         "hooks": {
             "pre-commit": "lint-staged",
-            "pre-push": "npm run test"
+            "pre-push": "npm run lint && npm run test"
         }
     },
     "lint-staged": {
         "**/*.js": "eslint --fix",
-        "**/*.{html,js,scss,md,json}": "prettier --write"
+        "**/*.{html,js,md,json}": "prettier --write"
     },
     "jest": {
         "testPathIgnorePatterns": [
@@ -71,7 +71,7 @@
         ],
         "testEnvironment": "jsdom",
         "moduleNameMapper": {
-            "\\.(css|less|scss)$": "<rootDir>/test/__mocks__/styleMock.js"
+            "\\.(css|less|pcss)$": "<rootDir>/test/__mocks__/styleMock.js"
         }
     },
     "babel": {

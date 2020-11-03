@@ -6,14 +6,21 @@ export const FormContext = React.createContext({
 });
 
 export function useFormField(prop, defaultState) {
+    const [hasBeenUpdated, setHasBeenUpdated] = React.useState(false);
+
     const { state, dispatch } = React.useContext(FormContext);
     const { local, remote } = state;
 
     const subState = local[prop] ?? defaultState;
-    const changed = remote[prop] !== subState;
+    const isThereDiff = remote[prop] !== subState;
+    const changed = isThereDiff && hasBeenUpdated;
 
     const setState = React.useCallback(
-        (updater) => {
+        (updater, hasUpdated = true) => {
+            if (hasUpdated) {
+                setHasBeenUpdated(true);
+            }
+
             const value =
                 typeof updater === "function" ? updater(subState) : updater;
 

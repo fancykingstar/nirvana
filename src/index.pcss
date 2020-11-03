@@ -14,8 +14,11 @@ html {
 html,
 body,
 #root {
-    height: 100%;
     min-height: 100%;
+}
+
+body {
+    position: relative;
 }
 
 #root {
@@ -52,3 +55,13 @@ hr {
     @apply border;
     @apply border-gray-400;
 }
+
+.list-deleteable li:hover {
+    cursor: pointer;
+    list-style-type: "\274C";
+}
+.list-addable li:hover {
+    cursor: pointer;
+    list-style-type: "\2705";
+}
+

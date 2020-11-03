@@ -9,7 +9,6 @@ import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
-const Divider = classed.hr("form-field-grid-row-all");
 const InputArea = classed.div("p-1", "form-field-grid-row-input");
 
 export default function FormFieldLinkedSingle({
@@ -46,7 +45,6 @@ export default function FormFieldLinkedSingle({
 
     return (
         <React.Fragment>
-            <Divider />
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <InputArea>
                 <h3>Current:</h3>
@@ -64,7 +62,8 @@ export default function FormFieldLinkedSingle({
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <ul>
+
+                <ul className="list-dist pl-4">
                     {isLoading ? (
                         <React.Fragment>
                             <li>Loading</li>

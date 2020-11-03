@@ -1,21 +1,14 @@
 import React from "react";
 import useSWR from "swr";
-import styled from "styled-components";
 import qs from "qs";
 
 import { useFormField } from "../../hooks/useFormContext";
 
+import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
-const Divider = styled.hr`
-    grid-column: label / end;
-`;
-
-const InputArea = styled.div`
-    padding: ${(p) => p.theme.size[0]};
-    grid-column: input / input;
-`;
+const InputArea = classed.div("p-1", "form-field-grid-row-input");
 
 export default function FormFieldLinkedMany({
     required,
@@ -59,15 +52,27 @@ export default function FormFieldLinkedMany({
 
     return (
         <React.Fragment>
-            <Divider />
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <InputArea>
+                <h3>Current:</h3>
+                <ul className="list-disc list-deleteable pl-4">
+                    {linked.map((linkedEntity) => (
+                        <RenderLinked
+                            key={linkedEntity.id}
+                            {...linkedEntity}
+                            remove={remove}
+                        />
+                    ))}
+                </ul>
+
+                <br />
+
                 <h3>Add:</h3>
                 <KeyboardInboxBox
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <ul>
+                <ul className="list-disc list-addable pl-4">
                     {isLoading ? (
                         <React.Fragment>
                             <li>Loading</li>
@@ -84,19 +89,6 @@ export default function FormFieldLinkedMany({
                                 add={add}
                             />
                         ))}
-                </ul>
-
-                <br />
-
-                <h3>Current:</h3>
-                <ul>
-                    {linked.map((linkedEntity) => (
-                        <RenderLinked
-                            key={linkedEntity.id}
-                            {...linkedEntity}
-                            remove={remove}
-                        />
-                    ))}
                 </ul>
             </InputArea>
         </React.Fragment>

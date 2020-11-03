@@ -14,6 +14,7 @@ import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
 import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
+import FilterListProduct from "../FilterListProduct";
 import FilterListVersion from "../FilterListVersion";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
@@ -31,6 +32,7 @@ import {
 } from "../FormItineraryItem";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
+import { FormProductCreate, FormProductEdit } from "../FormProduct";
 import { FormVersionCreate, FormVersionEdit } from "../FormVersion";
 
 function createEntityBlock({ Create, Edit, List }) {
@@ -137,6 +139,15 @@ export default function Main() {
                         Create: FormPriceCreate,
                         Edit: FormPriceEdit,
                         List: FilterListPrice,
+                    })}
+                />
+
+                <Route
+                    path="/:env/products"
+                    component={createEntityBlock({
+                        Create: FormProductCreate,
+                        Edit: FormProductEdit,
+                        List: FilterListProduct,
                     })}
                 />
 
