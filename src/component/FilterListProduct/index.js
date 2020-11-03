@@ -37,7 +37,7 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
     );
 }
 
-function ProductRow({ id, active, code, i, name, ...rest }) {
+function ProductRow({ id, active, code, i, name }) {
     return (
         <React.Fragment>
             <FilterList.Cell>
