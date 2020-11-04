@@ -42,6 +42,7 @@ export default function FormFieldItineraryItems() {
             RenderEditFields={RequiredFormFields}
             RenderPreview={ItineraryItemPreview}
             compareFn={compareItineraryItems}
+            createApi="/itinerary-items"
             getEditRoute={(id) => `/itinerary-items/edit/${id}`}
             getGetApi={(id) => `/itinerary-items/${id}`}
             getPutApi={(id) => `/itinerary-items/${id}`}

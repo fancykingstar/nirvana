@@ -34,7 +34,7 @@ function ResultCurrency({ id, currency_code, set }) {
     return <li onClick={set.bind(null, id)}>{currency_code}</li>;
 }
 
-function FormFields() {
+export function FormFields() {
     return (
         <React.Fragment>
             <FormFieldLinkedSingle
