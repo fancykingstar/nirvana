@@ -45,8 +45,8 @@ function DepartureRow({ id, date, include_in_serach, version }) {
             </FilterList.Cell>
 
             <FilterList.Cell>
-                <EnvLink to={`/versions/edit/${version.id}`}>
-                    {version.name}
+                <EnvLink to={`/versions/edit/${version?.id}`}>
+                    {version?.name}
                 </EnvLink>
             </FilterList.Cell>
         </React.Fragment>

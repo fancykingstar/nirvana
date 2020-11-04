@@ -134,7 +134,9 @@ export default function FormFieldSubformMultiple({
     parentProp,
 }) {
     const [openedItem, setOpenedItem] = React.useState(null);
-    const { data: items = [], mutate: invalidateLocalCache } = useSWR(listApi);
+    const { data: items = [], mutate: invalidateLocalCache } = useSWR(
+        `${listApi}?${parentProp}.id=${parentId}`,
+    );
 
     const itemsSorted = React.useMemo(() => [...items].sort(compareFn), [
         items,
