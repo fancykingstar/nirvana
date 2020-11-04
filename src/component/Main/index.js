@@ -8,6 +8,7 @@ import FilterListAirport from "../FilterListAirport";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListCurrency from "../FilterListCurrency";
+import FilterListDeparture from "../FilterListDeparture";
 import FilterListEvent from "../FilterListEvent";
 import FilterListExchangeRate from "../FilterListExchangeRate";
 import FilterListGradeMapping from "../FilterListGradeMapping";
@@ -21,6 +22,7 @@ import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
+import { FormDepartureCreate, FormDepartureEdit } from "../FormDeparture";
 import { FormEventCreate, FormEventEdit } from "../FormEvent";
 import {
     FormExchangeRateCreate,
@@ -90,6 +92,15 @@ export default function Main() {
                         Create: FormCurrencyCreate,
                         Edit: FormCurrencyEdit,
                         List: FilterListCurrency,
+                    })}
+                />
+
+                <Route
+                    path="/:env/departures"
+                    component={createEntityBlock({
+                        Create: FormDepartureCreate,
+                        Edit: FormDepartureEdit,
+                        List: FilterListDeparture,
                     })}
                 />
 
