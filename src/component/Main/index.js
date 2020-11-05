@@ -10,6 +10,7 @@ import FilterListCountry from "../FilterListCountry";
 import FilterListCurrency from "../FilterListCurrency";
 import FilterListEvent from "../FilterListEvent";
 import FilterListExchangeRate from "../FilterListExchangeRate";
+import FilterListGradeMapping from "../FilterListGradeMapping";
 import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
 import FilterListPort from "../FilterListPort";
@@ -25,6 +26,10 @@ import {
     FormExchangeRateCreate,
     FormExchangeRateEdit,
 } from "../FormExchangeRate";
+import {
+    FormGradeMappingCreate,
+    FormGradeMappingEdit,
+} from "../FormGradeMapping";
 import { FormItineraryCreate, FormItineraryEdit } from "../FormItinerary";
 import {
     FormItineraryItemCreate,
@@ -103,6 +108,15 @@ export default function Main() {
                         Create: FormExchangeRateCreate,
                         Edit: FormExchangeRateEdit,
                         List: FilterListExchangeRate,
+                    })}
+                />
+
+                <Route
+                    path="/:env/grade-mappings"
+                    component={createEntityBlock({
+                        Create: FormGradeMappingCreate,
+                        Edit: FormGradeMappingEdit,
+                        List: FilterListGradeMapping,
                     })}
                 />
 
