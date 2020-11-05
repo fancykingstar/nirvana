@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import "react-quill/dist/quill.snow.css";
-import ReactQuill from "react-quill";
+import "quill/dist/quill.snow.css";
+import Quill from "quill";
 
 import { useFormField } from "../../hooks/useFormContext";
 
@@ -54,8 +54,57 @@ function EditRawHTML({ value, onChange }) {
     );
 }
 
+function EditRichText({ value, onChange }) {
+    const editorRef = React.useRef();
+    const quillRef = React.useRef();
+
+    React.useEffect(() => {
+        if (!editorRef.current) {
+            return;
+        }
+
+        quillRef.current = new Quill(editorRef.current, {
+            theme: "snow",
+            clipboard: true,
+            modules: {
+                toolbar: [
+                    ["bold", "italic", "underline", "strike"], // toggled buttons
+                    ["blockquote", "code-block"],
+
+                    [{ header: 1 }, { header: 2 }], // custom button values
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+                    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+                    [{ direction: "rtl" }], // text direction
+
+                    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+                    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+                    [{ font: [] }],
+                    [{ align: [] }],
+
+                    ["clean"], // remove formatting button
+                ],
+            },
+        });
+
+        quillRef.current.on("text-change", () => {
+            onChange(editorRef.current.querySelector(".ql-editor").innerHTML);
+        });
+    }, []);
+
+    React.useEffect(() => {
+        if (value !== null) {
+            quillRef.current.clipboard.dangerouslyPasteHTML(0, value, "api");
+        }
+    }, [value === null]);
+
+    return <div ref={editorRef} />;
+}
+
 export default function FormFieldRichText({ required, prop, label }) {
-    const [state, setState, changed] = useFormField(prop, "");
+    const [state, setState, changed] = useFormField(prop, null);
     const [viewRaw, setViewRaw] = React.useState(false);
 
     return (
@@ -65,11 +114,7 @@ export default function FormFieldRichText({ required, prop, label }) {
                 {viewRaw ? (
                     <EditRawHTML value={state} onChange={setState} />
                 ) : (
-                    <ReactQuill
-                        theme="snow"
-                        value={state}
-                        onChange={setState}
-                    />
+                    <EditRichText value={state} onChange={setState} />
                 )}
                 <br />
                 <Button onClick={setViewRaw.bind(null, (x) => !x)}>

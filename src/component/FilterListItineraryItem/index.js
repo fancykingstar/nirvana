@@ -84,7 +84,7 @@ function ItineraryItemItemRow({
 
             <FilterList.Cell>
                 <EnvLink to={`/city/edit/${city?.id}`}>
-                    {city.name} ({cityData?.country?.name ?? "..."})
+                    {city?.name} ({cityData?.country?.name ?? "..."})
                 </EnvLink>
             </FilterList.Cell>
 
