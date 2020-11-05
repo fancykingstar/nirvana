@@ -12,7 +12,7 @@ export default function EntityList() {
         ["cities", true],
         ["countries", true],
         ["currencies", true],
-        ["departures", false],
+        ["departures", true],
         ["discounts", false],
         ["events", true],
         ["exchange-rates", true],
