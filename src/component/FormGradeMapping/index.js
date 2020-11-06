@@ -6,9 +6,9 @@ import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
+import FormFieldDebug from "../FormFieldDebug";
+import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
-import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
-import FormFieldNumber from "../FormFieldNumber";
 
 import {
     FormFieldButtonBlock,
@@ -17,74 +17,39 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function LinkedCurrency({ currency_code, symbol }) {
-    return (
-        <span>
-            {currency_code} ({symbol})
-        </span>
-    );
-}
-
-function SearchResultCurrency({ id, currency_code, set }) {
-    return <li onClick={set.bind(null, id)}>{currency_code}</li>;
-}
-
 function FormFields() {
     return (
         <React.Fragment>
-            <FormFieldNumber
+            <FormFieldDebug />
+            <FormFieldString prop="name" label="Name" />
+            <FormFieldString
                 required
-                step=".01"
-                min="0"
-                prop="exchange_rate"
-                label="Exchange Rate"
-            />
-
-            <hr className="form-field-grid-row-all" />
-
-            <FormFieldLinkedSingle
-                required
-                label="From Currency"
-                prop="from_currency"
-                searchProp="currency_code"
-                searchApi="/currencies"
-                RenderLinked={LinkedCurrency}
-                RenderSearchResult={SearchResultCurrency}
-            />
-
-            <hr className="form-field-grid-row-all" />
-
-            <FormFieldLinkedSingle
-                required
-                label="To Currency"
-                prop="to_currency"
-                searchProp="currency_code"
-                searchApi="/currencies"
-                RenderLinked={LinkedCurrency}
-                RenderSearchResult={SearchResultCurrency}
+                prop="default_label"
+                label="Default Label"
             />
         </React.Fragment>
     );
 }
 
-export function FormExchangeRateCreate({
+export function FormGradeMappingCreate({
     match: {
         params: { env },
     },
     history,
 }) {
-    const createApi = "/exchange-rates";
-    const listApi = "/exchange-rates";
+    const createApi = "/grade-mappings";
+    const listApi = "/grade-mappings";
 
     return (
         <FormProvider>
             <TitleBox>
-                <TitleBox.Header>Create Exchange Rate</TitleBox.Header>
-
+                <TitleBox.Header>Create GradeMapping</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
+
                         <FormFields />
+
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
                             <FormFieldButtonCreate
@@ -93,7 +58,7 @@ export function FormExchangeRateCreate({
                                 listApi={listApi}
                                 onCreated={(id) =>
                                     history.push(
-                                        `/${env}/exchange-rates/edit/${id}`,
+                                        `/${env}/grade-mappings/edit/${id}`,
                                     )
                                 }
                             />
@@ -105,21 +70,21 @@ export function FormExchangeRateCreate({
     );
 }
 
-export function FormExchangeRateEdit({
+export function FormGradeMappingEdit({
     match: {
         params: { id },
     },
 }) {
-    const getApi = `/exchange-rates/${id}`;
-    const listApi = "/exchange-rates";
-    const putApi = `/exchange-rates/${id}`;
+    const getApi = `/grade-mappings/${id}`;
+    const listApi = "/grade-mappings";
+    const putApi = `/grade-mappings/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getApi={getApi} />
 
             <TitleBox>
-                <TitleBox.Header>Edit Exchange Rate</TitleBox.Header>
+                <TitleBox.Header>Edit GradeMapping</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />

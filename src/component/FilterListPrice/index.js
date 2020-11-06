@@ -67,7 +67,7 @@ function PriceRow({
             </FilterList.Cell>
             <FilterList.Cell>
                 <EnvLink to={`/currencies/edit/${currency.id}`}>
-                    {currency.name}
+                    {currency.symbol}
                 </EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>{now_price}</FilterList.Cell>

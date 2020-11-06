@@ -30,8 +30,11 @@ TitleBox.Header = classed.h1(
     "px-2",
     "py-1",
     "rounded-t",
+    "sticky",
     "text-3xl",
     "text-black",
+    "top-0",
+    "z-10",
 );
 
 TitleBox.Body = classed.div("items-stretch", "flex", "flex-col", "p-3");

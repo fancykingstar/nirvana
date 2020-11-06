@@ -10,7 +10,7 @@ export default function FormFieldBoolean({ required, prop, label }) {
 
     React.useEffect(() => {
         if (state === undefined) {
-            setState(false);
+            setState(false, false);
         }
     }, []);
 

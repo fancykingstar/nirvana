@@ -30,11 +30,19 @@ function LinkedCurrency({ currency_code, symbol }) {
     );
 }
 
+function LinkedGradeMapping({ name }) {
+    return <span> {name} </span>;
+}
+
 function ResultCurrency({ id, currency_code, set }) {
     return <li onClick={set.bind(null, id)}>{currency_code}</li>;
 }
 
-function FormFields() {
+function ResultGradeMapping({ id, name, set }) {
+    return <li onClick={set.bind(null, id)}>{name}</li>;
+}
+
+export function FormFields() {
     return (
         <React.Fragment>
             <FormFieldLinkedSingle
@@ -46,10 +54,21 @@ function FormFields() {
                 RenderLinked={LinkedCurrency}
                 RenderSearchResult={ResultCurrency}
             />
+
             <FormFieldNumber prop="now_price" label="Now Price" />
             <FormFieldNumber prop="was_price" label="Was Price" />
-            <FormFieldNumber prop="generic_price" label="Generic Price" />
+            <FormFieldBoolean prop="generic_price" label="Generic Price" />
             <FormFieldBoolean prop="sold_out" label="Sold Out" />
+
+            <FormFieldLinkedSingle
+                required
+                label="Grade Mapping"
+                prop="grade_mapping"
+                searchProp="name"
+                searchApi="/grade-mappings"
+                RenderLinked={LinkedGradeMapping}
+                RenderSearchResult={ResultGradeMapping}
+            />
         </React.Fragment>
     );
 }

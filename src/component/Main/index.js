@@ -9,12 +9,15 @@ import FilterListAccommodationGrades from "../FilterListAccommodationGrades";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListCurrency from "../FilterListCurrency";
+import FilterListDeparture from "../FilterListDeparture";
 import FilterListEvent from "../FilterListEvent";
 import FilterListExchangeRate from "../FilterListExchangeRate";
+import FilterListGradeMapping from "../FilterListGradeMapping";
 import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
 import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
+import FilterListProduct from "../FilterListProduct";
 import FilterListVersion from "../FilterListVersion";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import {
@@ -24,11 +27,16 @@ import {
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
+import { FormDepartureCreate, FormDepartureEdit } from "../FormDeparture";
 import { FormEventCreate, FormEventEdit } from "../FormEvent";
 import {
     FormExchangeRateCreate,
     FormExchangeRateEdit,
 } from "../FormExchangeRate";
+import {
+    FormGradeMappingCreate,
+    FormGradeMappingEdit,
+} from "../FormGradeMapping";
 import { FormItineraryCreate, FormItineraryEdit } from "../FormItinerary";
 import {
     FormItineraryItemCreate,
@@ -36,6 +44,7 @@ import {
 } from "../FormItineraryItem";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
+import { FormProductCreate, FormProductEdit } from "../FormProduct";
 import { FormVersionCreate, FormVersionEdit } from "../FormVersion";
 
 function createEntityBlock({ Create, Edit, List }) {
@@ -101,6 +110,15 @@ export default function Main() {
                 />
 
                 <Route
+                    path="/:env/departures"
+                    component={createEntityBlock({
+                        Create: FormDepartureCreate,
+                        Edit: FormDepartureEdit,
+                        List: FilterListDeparture,
+                    })}
+                />
+
+                <Route
                     path="/:env/events"
                     component={createEntityBlock({
                         Create: FormEventCreate,
@@ -115,6 +133,15 @@ export default function Main() {
                         Create: FormExchangeRateCreate,
                         Edit: FormExchangeRateEdit,
                         List: FilterListExchangeRate,
+                    })}
+                />
+
+                <Route
+                    path="/:env/grade-mappings"
+                    component={createEntityBlock({
+                        Create: FormGradeMappingCreate,
+                        Edit: FormGradeMappingEdit,
+                        List: FilterListGradeMapping,
                     })}
                 />
 
@@ -151,6 +178,15 @@ export default function Main() {
                         Create: FormPriceCreate,
                         Edit: FormPriceEdit,
                         List: FilterListPrice,
+                    })}
+                />
+
+                <Route
+                    path="/:env/products"
+                    component={createEntityBlock({
+                        Create: FormProductCreate,
+                        Edit: FormProductEdit,
+                        List: FilterListProduct,
                     })}
                 />
 
