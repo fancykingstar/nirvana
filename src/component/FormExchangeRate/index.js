@@ -4,7 +4,7 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox, { TitleBoxPadder } from "../TitleBox";
+import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
@@ -36,9 +36,12 @@ function FormFields() {
                 required
                 step=".01"
                 min="0"
-                prop="exhange_rate"
+                prop="exchange_rate"
                 label="Exchange Rate"
             />
+
+            <hr className="form-field-grid-row-all" />
+
             <FormFieldLinkedSingle
                 required
                 label="From Currency"
@@ -48,6 +51,9 @@ function FormFields() {
                 RenderLinked={LinkedCurrency}
                 RenderSearchResult={SearchResultCurrency}
             />
+
+            <hr className="form-field-grid-row-all" />
+
             <FormFieldLinkedSingle
                 required
                 label="To Currency"
@@ -72,8 +78,10 @@ export function FormExchangeRateCreate({
 
     return (
         <FormProvider>
-            <TitleBoxPadder>
-                <TitleBox title="Create Exchange Rate">
+            <TitleBox>
+                <TitleBox.Header>Create Exchange Rate</TitleBox.Header>
+
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
                         <FormFields />
@@ -91,8 +99,8 @@ export function FormExchangeRateCreate({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
@@ -110,8 +118,9 @@ export function FormExchangeRateEdit({
         <FormProvider>
             <FormContentLoader getApi={getApi} />
 
-            <TitleBoxPadder>
-                <TitleBox title="Edit Exchange Rate">
+            <TitleBox>
+                <TitleBox.Header>Edit Exchange Rate</TitleBox.Header>
+                <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
 
@@ -125,8 +134,8 @@ export function FormExchangeRateEdit({
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
-                </TitleBox>
-            </TitleBoxPadder>
+                </TitleBox.Body>
+            </TitleBox>
         </FormProvider>
     );
 }
