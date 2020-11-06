@@ -7,6 +7,7 @@ import TitleBox from "../TitleBox";
 
 import FormFieldUUID from "../FormFieldUUID";
 import FormFieldString from "../FormFieldString";
+import FormFieldRichText from "../FormFieldRichText";
 
 import {
     FormFieldButtonBlock,
@@ -20,8 +21,11 @@ function FormFields() {
         <React.Fragment>
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
-
-            <FormFieldString required prop="description" label="description" />
+            <FormFieldRichText
+                required
+                prop="description"
+                label="description"
+            />
         </React.Fragment>
     );
 }
