@@ -5,7 +5,7 @@ import EnvLink from "../EnvLink";
 export default function EntityList() {
     const links = [
         ["accommodation-grades", false],
-        ["accommodations", false],
+        ["accommodations", true],
         ["airports", true],
         ["campaign-mappings", false],
         ["campaigns", false],

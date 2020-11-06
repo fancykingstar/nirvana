@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
 
+import FilterListAccommodation from "../FilterListAccommodation";
 import FilterListAirport from "../FilterListAirport";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
@@ -18,6 +19,10 @@ import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
 import FilterListProduct from "../FilterListProduct";
 import FilterListVersion from "../FilterListVersion";
+import {
+    FormAccommodationCreate,
+    FormAccommodationEdit,
+} from "../FormAccommodation";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
@@ -59,6 +64,15 @@ export default function Main() {
         <main>
             <Breadcrumb />
             <Switch>
+                <Route
+                    path="/:env/accommodations"
+                    component={createEntityBlock({
+                        Create: FormAccommodationCreate,
+                        Edit: FormAccommodationEdit,
+                        List: FilterListAccommodation,
+                    })}
+                />
+
                 <Route
                     path="/:env/airports"
                     component={createEntityBlock({
