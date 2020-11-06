@@ -1,4 +1,5 @@
 import React from "react";
+import useSWR from "swr";
 
 import { FormProvider } from "../../hooks/useFormContext";
 
@@ -102,11 +103,14 @@ export function FormDepartureCreate({
 }
 
 function PreviewPrice({ i, id, now_price, currency, openItem }) {
+    const { data: priceData } = useSWR(id ? `/prices/${id}` : null);
+
     return (
         <li onClick={openItem.bind(null, id)}>
             <span>{i + 1}</span>
             <span className="pl-1 text-blue-600 hover:text-blue-900 underline cursor-pointer">
-                {currency.symbol} {now_price}
+                {currency.symbol} {now_price} (
+                {priceData?.grade_mapping?.name ?? "..."})
             </span>
         </li>
     );

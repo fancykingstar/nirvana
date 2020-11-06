@@ -32,20 +32,16 @@ function ExchangeRateHeader({ onChangeSort, sortBy, sortDirection }) {
     );
 }
 
-function ExchangeRateRow(props) {
+function ExchangeRateRow({ id, from_currency, to_currency, exchange_rate }) {
     return (
         <React.Fragment>
             <FilterList.Cell>
-                <EnvLink to={`/exchange-rates/edit/${props.id}`}>
-                    {props.id}
-                </EnvLink>
+                <EnvLink to={`/exchange-rates/edit/${id}`}>{id}</EnvLink>
             </FilterList.Cell>
 
-            <FilterList.Cell>{props.exhange_rate}</FilterList.Cell>
-            <FilterList.Cell>
-                {props.from_currency.currency_code}
-            </FilterList.Cell>
-            <FilterList.Cell>{props.to_currency.currency_code}</FilterList.Cell>
+            <FilterList.Cell>{exchange_rate}</FilterList.Cell>
+            <FilterList.Cell>{from_currency.currency_code}</FilterList.Cell>
+            <FilterList.Cell>{to_currency.currency_code}</FilterList.Cell>
         </React.Fragment>
     );
 }
