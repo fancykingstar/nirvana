@@ -12,19 +12,16 @@ function AccommodationGradesHeader({ onChangeSort, sortBy, sortDirection }) {
             >
                 Id
             </FilterList.ControlCell>
-            <FilterList.ControlCell width="20%">Name</FilterList.ControlCell>
 
             <FilterList.ControlCell
                 width="20%"
                 onClick={onChangeSort.bind(null, "name")}
                 arrowDirection={sortBy === "name" ? sortDirection : null}
             >
-                Label
+                Name
             </FilterList.ControlCell>
 
-            <FilterList.ControlCell width="20%">
-                Description
-            </FilterList.ControlCell>
+            <FilterList.ControlCell width="40%">Label</FilterList.ControlCell>
         </React.Fragment>
     );
 }
@@ -39,7 +36,6 @@ function AccommodationGradesRow(props) {
             </FilterList.Cell>
             <FilterList.Cell>{props.name}</FilterList.Cell>
             <FilterList.Cell>{props.label}</FilterList.Cell>
-            <FilterList.Cell>{props.description}</FilterList.Cell>
         </React.Fragment>
     );
 }
