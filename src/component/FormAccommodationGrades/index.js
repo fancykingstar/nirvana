@@ -24,7 +24,7 @@ function FormFields() {
             <FormFieldRichText
                 required
                 prop="description"
-                label="description"
+                label="Description"
             />
         </React.Fragment>
     );
