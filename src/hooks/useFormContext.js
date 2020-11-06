@@ -1,7 +1,7 @@
 import React from "react";
 
 export const FormContext = React.createContext({
-    state: { local: {}, remote: {} },
+    state: { local: {}, remote: null },
     dispatch: () => {},
 });
 
@@ -11,8 +11,8 @@ export function useFormField(prop, defaultState) {
     const { state, dispatch } = React.useContext(FormContext);
     const { local, remote } = state;
 
-    const subState = local[prop] ?? defaultState;
-    const isThereDiff = remote[prop] !== subState;
+    const subState = local?.[prop] ?? defaultState;
+    const isThereDiff = remote?.[prop] !== subState;
     const changed = isThereDiff && hasBeenUpdated;
 
     const setState = React.useCallback(
@@ -33,7 +33,7 @@ export function useFormField(prop, defaultState) {
         [prop, subState],
     );
 
-    return [subState, setState, changed];
+    return [subState, setState, changed, Boolean(remote)];
 }
 
 export function useSetRemoteFormData() {}
@@ -68,7 +68,7 @@ export function FormProvider({ children }) {
                     return state;
             }
         },
-        { local: {}, remote: {} },
+        { local: {}, remote: null },
     );
 
     return (

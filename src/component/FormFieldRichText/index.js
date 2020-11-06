@@ -54,7 +54,7 @@ function EditRawHTML({ value, onChange }) {
     );
 }
 
-function EditRichText({ value, onChange }) {
+function EditRichText({ value, onChange, remoteLoaded }) {
     const editorRef = React.useRef();
     const quillRef = React.useRef();
 
@@ -98,13 +98,13 @@ function EditRichText({ value, onChange }) {
         if (value !== null) {
             quillRef.current.clipboard.dangerouslyPasteHTML(0, value, "api");
         }
-    }, [value === null]);
+    }, [remoteLoaded]);
 
     return <div ref={editorRef} />;
 }
 
 export default function FormFieldRichText({ required, prop, label }) {
-    const [state, setState, changed] = useFormField(prop, null);
+    const [state, setState, changed, remoteLoaded] = useFormField(prop, null);
     const [viewRaw, setViewRaw] = React.useState(false);
 
     return (
@@ -114,7 +114,11 @@ export default function FormFieldRichText({ required, prop, label }) {
                 {viewRaw ? (
                     <EditRawHTML value={state} onChange={setState} />
                 ) : (
-                    <EditRichText value={state} onChange={setState} />
+                    <EditRichText
+                        value={state}
+                        onChange={setState}
+                        remoteLoaded={remoteLoaded}
+                    />
                 )}
                 <br />
                 <Button onClick={setViewRaw.bind(null, (x) => !x)}>
