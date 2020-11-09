@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
 
+import FilterListAccommodation from "../FilterListAccommodation";
 import FilterListAirport from "../FilterListAirport";
 import FilterListAccommodationGrades from "../FilterListAccommodationGrades";
 import FilterListCity from "../FilterListCity";
@@ -19,6 +20,10 @@ import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
 import FilterListProduct from "../FilterListProduct";
 import FilterListVersion from "../FilterListVersion";
+import {
+    FormAccommodationCreate,
+    FormAccommodationEdit,
+} from "../FormAccommodation";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import {
     FormAccommodationGradesCreate,
@@ -70,6 +75,14 @@ export default function Main() {
                         Create: FormAccommodationGradesCreate,
                         Edit: FormAccommodationGradesEdit,
                         List: FilterListAccommodationGrades,
+                    })}
+                />
+                <Route
+                    path="/:env/accommodations"
+                    component={createEntityBlock({
+                        Create: FormAccommodationCreate,
+                        Edit: FormAccommodationEdit,
+                        List: FilterListAccommodation,
                     })}
                 />
 

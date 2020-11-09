@@ -22,6 +22,10 @@ export default function FormFieldEnum({
         }
     }, [state]);
 
+    if (state === null) {
+        return null;
+    }
+
     return (
         <React.Fragment>
             <FormFieldLabel htmlFor={id} required={required}>
