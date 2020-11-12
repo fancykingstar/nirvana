@@ -59,6 +59,7 @@ export default function FilterListCurrency() {
             FooterComponent={CurrencyHeader}
             RowComponent={CurrencyRow}
             rows={3}
+            SearchFilterColName="currency_code"
         />
     );
 }
