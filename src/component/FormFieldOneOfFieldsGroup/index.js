@@ -16,7 +16,7 @@ function SectionSelector({
     const lowerFormContext = React.useContext(FormContext);
 
     React.useEffect(() => {
-        if (Object.keys(upperFormContext.state.remote)) {
+        if (Object.keys(upperFormContext.state.remote ?? [])) {
             lowerFormContext.dispatch({
                 type: "LOAD",
                 data: upperFormContext.state.remote,
@@ -29,7 +29,7 @@ function SectionSelector({
             upperFormContext.dispatch({
                 type: "SET_LOCAL",
                 prop,
-                value: lowerFormContext.state.local[prop],
+                value: lowerFormContext.state.local?.[prop],
             });
         }
     }, [lowerFormContext.state.local]);
@@ -47,7 +47,7 @@ function SectionSelector({
             upperFormContext.dispatch({
                 type: "SET_LOCAL",
                 prop,
-                value: lowerFormContext.state.local[prop],
+                value: lowerFormContext.state.local?.[prop],
             });
         }
 
@@ -93,7 +93,7 @@ export default function FormFieldOneOfFieldsGroup({ children, label }) {
     const [activeId, setActiveId] = React.useState(null);
 
     React.useEffect(() => {
-        if (Object.keys(upperFormContext.state.remote)) {
+        if (Object.keys(upperFormContext.state.remote ?? {})) {
             const activeChild =
                 childArray.find(({ props: { isActive } }) =>
                     isActive(upperFormContext.state.local),

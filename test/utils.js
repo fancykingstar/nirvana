@@ -2,12 +2,13 @@ import React from "react";
 import qs from "qs";
 import { Route, MemoryRouter as RouterProvider } from "react-router-dom";
 
-import ThemeProvider from "../src/component/ThemeProvider";
 import AppContextProvider, {
     useAppContext,
 } from "../src/component/AppContextProvider";
-import ToastProvider from "../src/component/ToastProvider";
 import SWRErrorProvider from "../src/component/SWRErrorProvider";
+import ThemeProvider from "../src/component/ThemeProvider";
+import ToastProvider from "../src/component/ToastProvider";
+import { useFormField } from "../src/hooks/useFormContext";
 
 let cachedJWT = null;
 async function getJWT(apiFetch) {
@@ -94,4 +95,12 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
     }
 
     return { apiFetch, resetDb, getCurrentLocation, wrapper };
+}
+
+export function FormFieldTestable({ prop, ...props }) {
+    const [state, _, changed] = useFormField(prop);
+
+    return (
+        <code {...props} data-test-value={JSON.stringify({ state, changed })} />
+    );
 }
