@@ -1,25 +1,20 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useAppContext } from "../AppContextProvider";
+import classed from "../ClassedComponent";
 
-const HeaderContainer = styled.header`
-    align-items: center;
-    background-color: ${(p) => p.theme.color.white};
-    color: ${(p) => p.theme.color.black};
-    display: flex;
-    padding: 1rem;
-    ${(p) => p.theme.shadow[1]}
-`;
+const HeaderContainer = classed.header(
+    "items-center",
+    "bg-blue-200",
+    "text-black",
+    "flex",
+    "p-4",
+    "shadow",
+);
 
-const Title = styled.h1`
-    flex: 1;
-    font-size: 3rem;
-`;
+const Title = classed.h1("flex-1", "text-lg");
 
-const EnvSelectorContainer = styled.div`
-    padding: 0.5rem;
-`;
+const EnvSelectorContainer = classed.div("p-1");
 
 export default function Header() {
     const { env: apiEnv, setEnv } = useAppContext();

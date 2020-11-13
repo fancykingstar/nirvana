@@ -1,0 +1,33 @@
+.semi-transparent-black-background {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.table-with-alternating-rows thead,
+.table-with-alternating-rows tfoot {
+    @apply bg-gray-400;
+}
+
+.table-with-alternating-rows tbody tr:nth-child(odd) {
+    @apply bg-gray-300;
+}
+
+.table-with-alternating-rows tbody tr:nth-child(even) {
+    @apply bg-gray-100;
+}
+
+.control-cell-with-indicator:after {
+    @apply absolute;
+    @apply mr-2;
+    @apply mt-1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.control-cell-with-indicator-up:after {
+    content: "▲";
+}
+
+.control-cell-with-indicator-down:after {
+    content: "▼";
+}
