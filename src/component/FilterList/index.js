@@ -81,7 +81,7 @@ export default function FilterList({
 
     listApi,
     getDeleteApi,
-    SearchFilterColName,
+    searchFilterColName,
 
     createRoute,
 
@@ -109,7 +109,7 @@ export default function FilterList({
     }
 
     //query utopia
-    const searchFilterColNameContains = `${SearchFilterColName}_contains`;
+    const searchFilterColNameContains = `${searchFilterColName}_contains`;
     const { data, error } = useSWR(
         `${listApi}?${qs.stringify({
             _limit: pageSize,

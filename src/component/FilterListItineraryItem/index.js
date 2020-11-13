@@ -110,7 +110,7 @@ export default function FilterListItinarary() {
             FooterComponent={ItineraryItemItemHeader}
             RowComponent={ItineraryItemItemRow}
             rows={8}
-            SearchFilterColName="name"
+            searchFilterColName="name"
         />
     );
 }

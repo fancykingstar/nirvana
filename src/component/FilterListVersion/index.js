@@ -77,7 +77,7 @@ export default function FilterListVersion() {
             FooterComponent={VersionHeader}
             RowComponent={VersionRow}
             rows={6}
-            SearchFilterColName="name"
+            searchFilterColName="name"
         />
     );
 }

@@ -62,7 +62,7 @@ export default function FilterListCity() {
             FooterComponent={CityHeader}
             RowComponent={CityRow}
             rows={4}
-            SearchFilterColName="name"
+            searchFilterColName="name"
         />
     );
 }

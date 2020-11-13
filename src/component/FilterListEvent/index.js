@@ -46,7 +46,7 @@ export default function FilterListEvent() {
             FooterComponent={EventHeader}
             RowComponent={EventRow}
             rows={2}
-            SearchFilterColName="name"
+            searchFilterColName="name"
         />
     );
 }
