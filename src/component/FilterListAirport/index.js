@@ -68,6 +68,7 @@ export default function FilterListAirport() {
             FooterComponent={AirportHeader}
             RowComponent={AirportRow}
             rows={4}
+            SearchFilterColName="name"
         />
     );
 }

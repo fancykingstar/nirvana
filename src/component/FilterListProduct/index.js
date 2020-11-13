@@ -63,6 +63,7 @@ export default function FilterListProduct() {
             FooterComponent={ProductHeader}
             RowComponent={ProductRow}
             rows={5}
+            SearchFilterColName="name"
         />
     );
 }
