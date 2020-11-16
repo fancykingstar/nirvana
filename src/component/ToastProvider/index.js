@@ -1,45 +1,34 @@
 import React from "react";
-import styled from "styled-components";
 import { nanoid } from "nanoid";
 
 import ModalPortal from "../ModalPortal";
+import classed from "../ClassedComponent";
 
 const ToastContext = React.createContext({});
 
-const ToastsContainer = styled.div`
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: ${(x) => x.theme.size[0]};
-`;
+const ToastsContainer = classed.div("items-center", "flex", "flex-col", "p-1");
 
-const ToastWrapper = styled.div`
-    padding: ${(x) => x.theme.size[2]};
-    pointer-events: all;
-`;
+const ToastWrapper = classed.div("p-2", "pointer-events-auto");
 
-const ToastContainer = styled.div`
-    background-color: white;
-    border-color: ${({ color }) => color || "grey"};
-    border-style: solid;
-    border-width: 2px;
-    padding: ${(x) => x.theme.size[3]} ${(x) => x.theme.size[4]};
-    position: relative;
-    font-size: ${(x) => x.theme.text[2]};
-`;
+const ToastContainer = classed.div(
+    "bg-white",
+    "border",
+    "border-gray-500",
+    "px-3",
+    "py-4",
+    "relative",
+    "text-lg",
+);
 
-const ToastClose = styled.div`
-    position: absolute;
-    top: ${(x) => x.theme.size[1]};
-    right: ${(x) => x.theme.size[1]};
-    font-size: ${(x) => x.theme.text[3]};
-`;
+const ToastClose = classed.div(
+    "absolute",
+    "top-0",
+    "right-0",
+    "m-1",
+    "text-xl",
+);
 
-const ToastTitle = styled.div`
-    padding-bottom: ${(x) => x.theme.size[1]};
-    font-size: ${(x) => x.theme.text[3]};
-    font-weight: bold;
-`;
+const ToastTitle = classed.div("pb-2", "text-lg", "font-bold");
 
 export function useToast() {
     const dispatch = React.useContext(ToastContext);

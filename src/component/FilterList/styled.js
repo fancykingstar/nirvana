@@ -1,79 +1,66 @@
-import styled from "styled-components";
-import { transparentize, mix } from "polished";
+import classed from "../ClassedComponent";
 
-export const TableContainer = styled.div`
-    display: block;
-    padding: ${(p) => p.theme.size[1]};
-    position: relative;
-`;
+import "./index.css";
 
-export const LoadingOverlay = styled.div`
-    position: absolute;
-    top: ${(p) => p.theme.size[1]};
-    left: ${(p) => p.theme.size[1]};
-    right: ${(p) => p.theme.size[1]};
-    bottom: ${(p) => p.theme.size[1]};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const TableContainer = classed.div("block", "p-1", "relative");
 
-    color: ${(p) => p.theme.color.white};
-    font-size: ${(p) => p.theme.text[4]};
-    background: ${(p) => transparentize(1 / 2, p.theme.color.black)};
-`;
+export const LoadingOverlay = classed.div(
+    "absolute",
+    "inset-0",
+    "m-1",
 
-export const TableStyled = styled.table`
-    width: 100%;
+    "flex",
+    "items-center",
+    "justify-center",
+    "text-white",
+    "text-xl",
+    "bg-gray-400",
 
+    "semi-transparent-black-background",
+);
+
+export const TableStyled = classed.table(
+    "w-full",
+    "table-with-alternating-rows",
+);
+
+`
     thead,
     tfoot {
-        background-color: ${(p) =>
-            mix(1 / 3, p.theme.color.gray, p.theme.color.white)};
+        background-color:
     }
 
     tbody tr:nth-child(odd) {
-        background-color: ${(p) =>
-            mix(1 / 5, p.theme.color.gray, p.theme.color.white)};
+        background-color:
     }
 
     tbody tr:nth-child(even) {
-        background-color: ${(p) => p.theme.color.white};
+        background-color:
     }
 `;
 
-export const ControlSectionContainer = styled.div`
-    padding: ${(p) => p.theme.size[1]};
-    border-bottom-width: 1px;
-    border-bottom-color: ${(p) => p.theme.color.gray};
-    border-bottom-style: solid;
-`;
+export const ControlSectionContainer = classed.div(
+    "p-1",
+    "border-b-2",
+    "border-gray-500",
+);
 
-export const Cell = styled.td`
-    padding: ${(p) => p.theme.size[0]} ${(p) => p.theme.size[1]};
-`;
+export const Cell = classed.td("px-0", "py-1");
 
-export const LoadingCell = styled(Cell)``;
+export const LoadingCell = classed(Cell);
 
-export const ControlCell = styled(Cell)`
-    cursor: pointer;
-    position: relative;
-    width: ${(p) => p.width};
+export const ControlCell = classed(
+    Cell,
+    "cursor-pointer",
+    "relative",
+    "control-cell-with-indicator",
+    ({ arrowDirection }) => {
+        if (arrowDirection === "ASC") {
+            return "control-cell-with-indicator-up";
+        }
 
-    &:after {
-        position: absolute;
-        right: ${(p) => p.theme.size[1]};
-        top: ${(p) => p.theme.size[0]};
-        bottom: ${(p) => p.theme.size[0]};
-        ${({ arrowDirection }) => {
-            if (arrowDirection === "ASC") {
-                return `content: "▲"`;
-            }
-
-            if (arrowDirection === "DESC") {
-                return `content: "▼"`;
-            }
-
-            return "";
-        }};
-    }
-`;
+        if (arrowDirection === "DESC") {
+            return "control-cell-with-indicator-down";
+        }
+    },
+);

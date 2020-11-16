@@ -24,7 +24,6 @@ body {
 #root {
     display: flex;
     flex-direction: column;
-
 }
 
 main {
@@ -45,11 +44,21 @@ button {
     row-gap: 0.5rem;
 }
 
-.form-field-grid-row-label  { grid-column: label / label; }
-.form-field-grid-row-required  { grid-column: required / required; }
-.form-field-grid-row-input  { grid-column: input / input; }
-.form-field-grid-row-updated  { grid-column: updated / updated; }
-.form-field-grid-row-all  { grid-column: label / end; }
+.form-field-grid-row-label {
+    grid-column: label / label;
+}
+.form-field-grid-row-required {
+    grid-column: required / required;
+}
+.form-field-grid-row-input {
+    grid-column: input / input;
+}
+.form-field-grid-row-updated {
+    grid-column: updated / updated;
+}
+.form-field-grid-row-all {
+    grid-column: label / end;
+}
 
 hr {
     @apply border;
@@ -64,4 +73,3 @@ hr {
     cursor: pointer;
     list-style-type: "\2705";
 }
-
