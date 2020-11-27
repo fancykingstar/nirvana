@@ -61,6 +61,7 @@ export default function FilterListItinarary() {
             FooterComponent={ItineraryHeader}
             RowComponent={ItineraryRow}
             rows={4}
+            searchFilterColName="name"
         />
     );
 }

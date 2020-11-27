@@ -57,6 +57,7 @@ export default function FilterListExchangeRate() {
             FooterComponent={ExchangeRateHeader}
             RowComponent={ExchangeRateRow}
             rows={3}
+            searchFilterColName="exchange_rate"
         />
     );
 }

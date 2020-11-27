@@ -46,6 +46,7 @@ export default function FilterListGradeMapping() {
             FooterComponent={GradeMappingHeader}
             RowComponent={GradeMappingRow}
             rows={2}
+            searchFilterColName="name"
         />
     );
 }
