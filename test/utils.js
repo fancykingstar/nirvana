@@ -6,7 +6,6 @@ import AppContextProvider, {
     useAppContext,
 } from "../src/component/AppContextProvider";
 import SWRErrorProvider from "../src/component/SWRErrorProvider";
-import ThemeProvider from "../src/component/ThemeProvider";
 import ToastProvider from "../src/component/ToastProvider";
 import { useFormField } from "../src/hooks/useFormContext";
 
@@ -76,21 +75,19 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
 
     function wrapper({ children }) {
         return (
-            <ThemeProvider>
-                <RouterProvider initialEntries={history}>
-                    <AppContextProvider>
-                        <AquireApiFetch />
-                        <ToastProvider>
-                            <SWRErrorProvider>
-                                {loggedIn ? <LoggIner /> : null}
-                                <Route render={setLocationFromRender} />
+            <RouterProvider initialEntries={history}>
+                <AppContextProvider>
+                    <AquireApiFetch />
+                    <ToastProvider>
+                        <SWRErrorProvider>
+                            {loggedIn ? <LoggIner /> : null}
+                            <Route render={setLocationFromRender} />
 
-                                {children}
-                            </SWRErrorProvider>
-                        </ToastProvider>
-                    </AppContextProvider>
-                </RouterProvider>
-            </ThemeProvider>
+                            {children}
+                        </SWRErrorProvider>
+                    </ToastProvider>
+                </AppContextProvider>
+            </RouterProvider>
         );
     }
 

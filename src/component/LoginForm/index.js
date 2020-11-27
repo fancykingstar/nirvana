@@ -1,49 +1,36 @@
 import React from "react";
-import styled from "styled-components";
 
 import { useAppContext } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
+
+import classed from "../ClassedComponent";
 
 function formNoop(e) {
     e.preventDefault();
 }
 
-const LoginContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-`;
+const LoginContainer = classed.div(
+    "flex",
+    "flex-col",
+    "flex-1",
+    "items-center",
+    "justify-center",
+);
 
-const LoginPane = styled.div`
-    padding: ${(x) => x.theme.size[2]};
-    border-color: ${(x) => x.theme.color.gray};
-    border-width: 2px;
-    border-style: solid;
-    border-radius: ${(x) => x.theme.size[0]};
-`;
+const LoginPane = classed.div("p-2", "border", "border-gray-500", "rounded");
 
-const Title = styled.h3`
-    font-size: ${(x) => x.theme.text[4]};
-    font-weight: bold;
-    padding: ${(x) => x.theme.size[2]} 0 ${(x) => x.theme.size[1]};
-    border-color: ${(x) => x.theme.color.gray};
-    border-width: 0;
-    border-bottom-width: 2px;
-    border-style: solid;
-`;
+const Title = classed.h3(
+    "text-xl",
+    "font-bold",
+    "px-2",
+    "py-1",
+    "border",
+    "border-gray-500",
+);
 
-const Form = styled.form`
-    padding-top: ${(x) => x.theme.size[1]};
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-`;
+const Form = classed.form("pt-1", "flex", "flex-col", "itmes-end");
 
-const Field = styled.div`
-    padding: ${(x) => x.theme.size[0]};
-`;
+const Field = classed.div("p-1");
 
 export default function LoginForm() {
     const { setSession, apiFetch } = useAppContext();

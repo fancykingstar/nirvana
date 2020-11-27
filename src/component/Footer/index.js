@@ -1,17 +1,15 @@
 import React from "react";
-import styled from "styled-components";
+import classed from "../ClassedComponent";
 
-const FooterContainer = styled.footer`
-    align-items: center;
-    background-color: aliceblue;
-    color: darkgray;
-    display: flex;
-    padding: 1rem;
-`;
+const FooterContainer = classed.footer(
+    "items-center",
+    "bg-blue-200",
+    "flex",
+    "p-1",
+    "text-gray-800",
+);
 
-const FooterInfo = styled.span`
-    padding: 0 0.25rem;
-`;
+const FooterInfo = classed.span("py-1");
 
 export default function Footer() {
     if (!process.env.CI) {

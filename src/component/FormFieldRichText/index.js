@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import "quill/dist/quill.snow.css";
 import Quill from "quill";
 
@@ -9,15 +8,9 @@ import FormFieldLabel from "../FormFieldLabel";
 import classed from "../ClassedComponent";
 import Button from "../Button";
 
-const FieldChanged = styled.span`
-    grid-column: updated / updated;
-`;
+const FieldChanged = classed.span("form-field-grid-row-updated");
 
-const FieldInput = styled.div`
-    padding: ${(p) => p.theme.size[0]};
-    font-size: ${(p) => p.theme.text[2]};
-    grid-column: input / input;
-`;
+const FieldInput = classed.div("p-1", "text-lg", "form-field-grid-row-input");
 
 const TextArea = classed.textarea(
     "h-20",

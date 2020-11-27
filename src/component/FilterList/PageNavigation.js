@@ -1,14 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 
+import classed from "../ClassedComponent";
 import { ControlSectionContainer } from "./styled";
 
-const PageNavigationLink = styled.span`
-    color: ${(p) => (p.current ? p.theme.color.red : p.theme.color.blue)};
-    cursor: pointer;
-    padding: ${(p) => p.theme.size[0]};
-    text-decoration: underline;
-`;
+const PageNavigationLink = classed.span(
+    "cursor-pointer",
+    "p-1",
+    "underline",
+    ({ current }) => (current ? "text-red-500" : "text-color-blue"),
+);
 
 export default function PageNavigation({
     pageNumber = 0,

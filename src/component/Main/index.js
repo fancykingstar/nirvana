@@ -6,6 +6,7 @@ import EntityList from "../EntityList";
 
 import FilterListAccommodation from "../FilterListAccommodation";
 import FilterListAirport from "../FilterListAirport";
+import FilterListAccommodationGrades from "../FilterListAccommodationGrades";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListCurrency from "../FilterListCurrency";
@@ -24,6 +25,10 @@ import {
     FormAccommodationEdit,
 } from "../FormAccommodation";
 import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
+import {
+    FormAccommodationGradesCreate,
+    FormAccommodationGradesEdit,
+} from "../FormAccommodationGrades";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
@@ -64,6 +69,14 @@ export default function Main() {
         <main>
             <Breadcrumb />
             <Switch>
+                <Route
+                    path="/:env/accommodation-grades"
+                    component={createEntityBlock({
+                        Create: FormAccommodationGradesCreate,
+                        Edit: FormAccommodationGradesEdit,
+                        List: FilterListAccommodationGrades,
+                    })}
+                />
                 <Route
                     path="/:env/accommodations"
                     component={createEntityBlock({

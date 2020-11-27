@@ -25,15 +25,22 @@ function createComponentWithClasses(el, ...classes) {
 for (const elementType of [
     "button",
     "div",
+    "footer",
     "h1",
     "h2",
     "h3",
     "h4",
+    "header",
     "hr",
     "input",
     "label",
     "nav",
+    "span",
+    "table",
+    "td",
+    "form",
     "textarea",
+    "tr",
 ]) {
     createComponentWithClasses[elementType] = createComponentWithClasses.bind(
         null,
