@@ -8,8 +8,6 @@ import FormFieldLabel from "../FormFieldLabel";
 import classed from "../ClassedComponent";
 import Button from "../Button";
 
-const FieldChanged = classed.span("form-field-grid-row-updated");
-
 const FieldInput = classed.div("p-1", "text-lg", "form-field-grid-row-input");
 
 const TextArea = classed.textarea(
@@ -97,7 +95,7 @@ function EditRichText({ value, onChange, remoteLoaded }) {
 }
 
 export default function FormFieldRichText({ required, prop, label }) {
-    const [state, setState, changed, remoteLoaded] = useFormField(prop, null);
+    const [state, setState, _, remoteLoaded] = useFormField(prop, null);
     const [viewRaw, setViewRaw] = React.useState(false);
 
     return (
@@ -118,8 +116,6 @@ export default function FormFieldRichText({ required, prop, label }) {
                     view {viewRaw ? "formatted" : "html"}
                 </Button>
             </FieldInput>
-
-            {changed ? <FieldChanged>updated</FieldChanged> : null}
         </React.Fragment>
     );
 }

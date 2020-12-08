@@ -1,7 +1,7 @@
 import React from "react";
 
 export const FormContext = React.createContext({
-    state: { local: {}, remote: null },
+    state: { local: {}, remote: {} },
     dispatch: () => {},
 });
 
@@ -26,17 +26,58 @@ export function useFormField(prop, defaultState) {
 
             dispatch({
                 type: "SET_LOCAL",
-                prop,
+                path: [prop],
                 value,
             });
         },
         [prop, subState],
     );
 
-    return [subState, setState, changed, Boolean(remote)];
+    return [subState, setState, changed, Boolean(remote?.[prop])];
 }
 
-export function useSetRemoteFormData() {}
+function assocPath([head, ...tail], value, object) {
+    if (head === undefined) {
+        return value;
+    }
+
+    if (typeof head === "number") {
+        const newArr = [...(object ?? [])];
+        newArr[head] = assocPath(tail, value, object?.[head]);
+        return newArr;
+    }
+
+    return {
+        ...object,
+        [head]: assocPath(tail, value, object?.[head]),
+    };
+}
+
+export function SubFormProvider({ prop, defaultValue = null, children }) {
+    const parentContext = React.useContext(FormContext);
+
+    const state = {
+        local: parentContext.state.local?.[prop] ?? defaultValue,
+        remote: parentContext.state.remote?.[prop] ?? defaultValue,
+    };
+
+    function dispatch(action) {
+        parentContext.dispatch({
+            ...action,
+            ...(action.path
+                ? {
+                      path: [prop, ...action.path],
+                  }
+                : null),
+        });
+    }
+
+    return (
+        <FormContext.Provider value={{ state, dispatch }}>
+            {children}
+        </FormContext.Provider>
+    );
+}
 
 export function FormProvider({ children }) {
     const [state, dispatch] = React.useReducer(
@@ -56,19 +97,17 @@ export function FormProvider({ children }) {
                     };
 
                 case "SET_LOCAL":
-                    return {
-                        ...state,
-                        local: {
-                            ...state.local,
-                            [action.prop]: action.value,
-                        },
-                    };
+                    return assocPath(
+                        ["local", ...(action.path ?? [])],
+                        action.value,
+                        state,
+                    );
 
                 default:
                     return state;
             }
         },
-        { local: {}, remote: null },
+        { local: {}, remote: {} },
     );
 
     return (
