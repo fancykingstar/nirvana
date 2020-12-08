@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
 
+import ProductWizard from "../ProductWizard";
 import FilterListAccommodation from "../FilterListAccommodation";
 import FilterListAirport from "../FilterListAirport";
 import FilterListAccommodationGrades from "../FilterListAccommodationGrades";
@@ -211,6 +212,8 @@ export default function Main() {
                         List: FilterListVersion,
                     })}
                 />
+
+                <Route path="/:env/wizard/product" component={ProductWizard} />
 
                 <Route component={EntityList} />
             </Switch>

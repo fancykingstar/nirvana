@@ -4,6 +4,8 @@ import { useAppContext } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
 
 import classed from "../ClassedComponent";
+import Button from "../Button";
+import { KeyboardInboxBox } from "../Input";
 
 function formNoop(e) {
     e.preventDefault();
@@ -17,7 +19,27 @@ const LoginContainer = classed.div(
     "justify-center",
 );
 
-const LoginPane = classed.div("p-2", "border", "border-gray-500", "rounded");
+const UnderConstruction = classed.div(
+    "py-2",
+    "px-4",
+    "max-w-md",
+    "text-center",
+    "rounded",
+    "shadow",
+    "m-2",
+    "border-red-500",
+    "border-2",
+    "bg-white",
+    "text-red-500",
+);
+
+const LoginPane = classed.div(
+    "p-2",
+    "border",
+    "border-gray-500",
+    "rounded",
+    "shadow",
+);
 
 const Title = classed.h3(
     "text-xl",
@@ -79,27 +101,35 @@ export default function LoginForm() {
 
     return (
         <LoginContainer>
+            <UnderConstruction>
+                This is the <strong>Alpha</strong> version of Nirvana.
+                <br />
+                Lots of the functionality and design is subject to change, and
+                will be updated based on user requirements
+            </UnderConstruction>
             <LoginPane>
                 <Title>Login</Title>
                 <Form onSubmit={formNoop}>
                     <Field>
-                        <label>Username</label>
-                        <input
+                        <label className="pr-2">Username</label>
+                        <KeyboardInboxBox
                             type="text"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
                         />
                     </Field>
                     <Field>
-                        <label>Password</label>
-                        <input
+                        <label className="pr-2">Password</label>
+                        <KeyboardInboxBox
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </Field>
                     <Field>
-                        <button onClick={requestJWT}>Login</button>
+                        <Button color="green" onClick={requestJWT}>
+                            Login
+                        </Button>
                     </Field>
                 </Form>
             </LoginPane>
