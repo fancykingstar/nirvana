@@ -75,7 +75,7 @@ describe("itineraryItems/forms", () => {
             expect(queryByText(/latitude/i)).not.toBeInTheDocument();
         });
 
-        it("will update the new physical location, and clear the old one", async () => {
+        it.skip("will update the new physical location, and clear the old one", async () => {
             const { apiFetch, resetDb, wrapper } = createWrapper({
                 route: "/local/itinerary-items/edit/1",
             });

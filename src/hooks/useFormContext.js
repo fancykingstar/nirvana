@@ -98,7 +98,7 @@ export function FormProvider({ children }) {
 
                 case "SET_LOCAL":
                     return assocPath(
-                        ["local", ...action.path],
+                        ["local", ...(action.path ?? [])],
                         action.value,
                         state,
                     );
