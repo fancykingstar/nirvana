@@ -14,7 +14,8 @@ export default function FormContentLoader({ getApi, children }) {
 
     React.useEffect(() => {
         if (data) {
-            dispatch({ type: "LOAD", data });
+            dispatch({ type: "SET_REMOTE", value: data, path: [] });
+            dispatch({ type: "SET_LOCAL", value: data, path: [] });
         }
     }, [data]);
 

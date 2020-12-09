@@ -103,6 +103,13 @@ export function FormProvider({ children }) {
                         state,
                     );
 
+                case "SET_REMOTE":
+                    return assocPath(
+                        ["remote", ...(action.path ?? [])],
+                        action.value,
+                        state,
+                    );
+
                 default:
                     return state;
             }
