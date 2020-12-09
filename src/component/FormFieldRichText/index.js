@@ -2,7 +2,7 @@ import React from "react";
 import "quill/dist/quill.snow.css";
 import Quill from "quill";
 
-import { useFormField } from "../../hooks/useFormContext";
+import { useFormField, useFormFieldRemote } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
 import classed from "../ClassedComponent";
@@ -95,7 +95,8 @@ function EditRichText({ value, onChange, remoteLoaded }) {
 }
 
 export default function FormFieldRichText({ required, prop, label }) {
-    const [state, setState, _, remoteLoaded] = useFormField(prop, null);
+    const [state, setState] = useFormField(prop, null);
+    const [_, __, remoteLoaded] = useFormFieldRemote(prop, null);
     const [viewRaw, setViewRaw] = React.useState(false);
 
     return (

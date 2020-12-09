@@ -13,7 +13,7 @@ export default function FormFieldEnum({
     prop,
     label,
 }) {
-    const [state, setState, changed] = useFormField(prop, null);
+    const [state, setState] = useFormField(prop, null);
     const id = useStableRandomId();
 
     React.useEffect(() => {
@@ -44,10 +44,6 @@ export default function FormFieldEnum({
             >
                 {children}
             </select>
-
-            {changed ? (
-                <span className="form-field-grid-row-updated">updated</span>
-            ) : null}
         </React.Fragment>
     );
 }

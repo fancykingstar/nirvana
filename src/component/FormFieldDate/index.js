@@ -7,7 +7,7 @@ import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
 export default function FormFieldDate({ required, prop, label }) {
-    const [state, setState, changed] = useFormField(
+    const [state, setState] = useFormField(
         prop,
         new Date().toISOString().slice(0, 10),
     );
@@ -25,10 +25,6 @@ export default function FormFieldDate({ required, prop, label }) {
                 value={state}
                 onChange={(e) => setState(e.target.value)}
             />
-
-            {changed ? (
-                <span className="form-field-grid-row-updated">updated</span>
-            ) : null}
         </React.Fragment>
     );
 }

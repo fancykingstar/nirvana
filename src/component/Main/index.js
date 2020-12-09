@@ -213,7 +213,10 @@ export default function Main() {
                     })}
                 />
 
-                <Route path="/:env/wizard/product" component={ProductWizard} />
+                <Route
+                    path="/:env/wizard/product/:id?/:step?"
+                    component={ProductWizard}
+                />
 
                 <Route component={EntityList} />
             </Switch>

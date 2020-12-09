@@ -95,9 +95,7 @@ export function createWrapper({ route, history = [route], loggedIn = true }) {
 }
 
 export function FormFieldTestable({ prop, ...props }) {
-    const [state, _, changed] = useFormField(prop);
+    const [state] = useFormField(prop);
 
-    return (
-        <code {...props} data-test-value={JSON.stringify({ state, changed })} />
-    );
+    return <code {...props} data-test-value={JSON.stringify({ state })} />;
 }
