@@ -6,7 +6,7 @@ import { useFormField } from "../../hooks/useFormContext";
 import FormFieldLabel from "../FormFieldLabel";
 
 export default function FormFieldBoolean({ required, prop, label }) {
-    const [state, setState, changed] = useFormField(prop);
+    const [state, setState] = useFormField(prop);
 
     React.useEffect(() => {
         if (state === undefined) {
@@ -30,10 +30,6 @@ export default function FormFieldBoolean({ required, prop, label }) {
                 value={state}
                 onChange={(e) => setState(e.target.value)}
             />
-
-            {changed ? (
-                <span className="form-field-grid-row-updated">updated</span>
-            ) : null}
         </React.Fragment>
     );
 }

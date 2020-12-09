@@ -6,9 +6,9 @@ import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
 export default function FormFieldItemOrder({ label }) {
-    const [startDay, setStartDay, c1] = useFormField("start_day", 1);
-    const [endDay, setEndDay, c2] = useFormField("end_day", 1);
-    const [ordering, setOrdering, c3] = useFormField("ordering", 1);
+    const [startDay, setStartDay] = useFormField("start_day", 1);
+    const [endDay, setEndDay] = useFormField("end_day", 1);
+    const [ordering, setOrdering] = useFormField("ordering", 1);
 
     return (
         <React.Fragment>
@@ -35,10 +35,6 @@ export default function FormFieldItemOrder({ label }) {
                 />
                 <span className="px-2 text-2xl font-bold">)</span>
             </div>
-
-            {c1 || c2 || c3 ? (
-                <span className="form-field-grid-row-updated">updated</span>
-            ) : null}
         </React.Fragment>
     );
 }

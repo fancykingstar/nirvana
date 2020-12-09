@@ -6,7 +6,7 @@ import FormFieldLabel from "../FormFieldLabel";
 import { KeyboardInboxBox } from "../Input";
 
 export default function FormFieldNumber({ required, prop, label, ...props }) {
-    const [state, setState, changed] = useFormField(prop, "");
+    const [state, setState] = useFormField(prop, "");
 
     return (
         <React.Fragment>
@@ -18,10 +18,6 @@ export default function FormFieldNumber({ required, prop, label, ...props }) {
                 value={state}
                 onChange={(e) => setState(Number(e.target.value))}
             />
-
-            {changed ? (
-                <span className="form-field-grid-row-updated">updated</span>
-            ) : null}
         </React.Fragment>
     );
 }

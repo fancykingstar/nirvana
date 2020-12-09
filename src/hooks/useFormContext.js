@@ -5,36 +5,34 @@ export const FormContext = React.createContext({
     dispatch: () => {},
 });
 
-export function useFormField(prop, defaultState) {
-    const [hasBeenUpdated, setHasBeenUpdated] = React.useState(false);
+function createUseFormField(localOrRemote) {
+    return function useFormField(prop, defaultState) {
+        const { state, dispatch } = React.useContext(FormContext);
 
-    const { state, dispatch } = React.useContext(FormContext);
-    const { local, remote } = state;
+        const trueSubState = state?.[localOrRemote]?.[prop];
+        const subState = trueSubState ?? defaultState;
+        const loaded = typeof trueSubState !== "undefined";
 
-    const subState = local?.[prop] ?? defaultState;
-    const isThereDiff = remote?.[prop] !== subState;
-    const changed = isThereDiff && hasBeenUpdated;
+        const setState = React.useCallback(
+            (updater) => {
+                const value =
+                    typeof updater === "function" ? updater(subState) : updater;
 
-    const setState = React.useCallback(
-        (updater, hasUpdated = true) => {
-            if (hasUpdated) {
-                setHasBeenUpdated(true);
-            }
+                dispatch({
+                    type: "SET_LOCAL",
+                    path: [prop],
+                    value,
+                });
+            },
+            [prop, subState],
+        );
 
-            const value =
-                typeof updater === "function" ? updater(subState) : updater;
-
-            dispatch({
-                type: "SET_LOCAL",
-                path: [prop],
-                value,
-            });
-        },
-        [prop, subState],
-    );
-
-    return [subState, setState, changed, Boolean(remote?.[prop])];
+        return [subState, setState, loaded];
+    };
 }
+
+export const useFormField = createUseFormField("local");
+export const useFormFieldRemote = createUseFormField("remote");
 
 function assocPath([head, ...tail], value, object) {
     if (head === undefined) {

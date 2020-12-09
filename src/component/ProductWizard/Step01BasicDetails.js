@@ -11,16 +11,16 @@ import { SubFormProvider } from "../../hooks/useFormContext";
 import { FormFieldButtonSave, FormFieldButtonBlock } from "../FormFieldButton";
 
 function requirementsMet(state) {
-    if (!state?.product?.name) {
+    if (!state?.name) {
         return false;
     }
-    if (!state?.product?.label) {
+    if (!state?.label) {
         return false;
     }
-    if (!state?.product?.code) {
+    if (!state?.code) {
         return false;
     }
-    if (!state?.product?.description) {
+    if (!state?.description) {
         return false;
     }
 
