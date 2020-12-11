@@ -29,7 +29,7 @@ function requirementsMet(state) {
 
 export default function Step01Description({
     match: {
-        params: { env, id },
+        params: { id },
     },
 }) {
     return (
@@ -67,10 +67,9 @@ export default function Step01Description({
                     <FormFieldRenderState>
                         {(state) => (
                             <ButtonEnvLink
-                                to={`/${env}/wizard/product/${id}/step-2`}
+                                to={`/wizard/product/${id}/structure`}
                                 color="blue"
                                 disabled={!requirementsMet(state)}
-                                onClick={console.log}
                             >
                                 Next
                             </ButtonEnvLink>

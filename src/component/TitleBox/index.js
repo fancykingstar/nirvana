@@ -37,4 +37,10 @@ TitleBox.Header = classed.h1(
     "z-10",
 );
 
-TitleBox.Body = classed.div("items-stretch", "flex", "flex-col", "p-3");
+TitleBox.Body = classed.div(
+    "items-stretch",
+    "flex",
+    "flex-col",
+    "p-3",
+    "bg-white",
+);
