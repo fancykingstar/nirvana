@@ -7,6 +7,25 @@ module.exports = {
     theme: {
         extend: {},
     },
-    variants: {},
+    variants: {
+        backgroundColor: [
+            "responsive",
+            "first",
+            "last",
+            "even",
+            "odd",
+            "hover",
+            "focus",
+        ],
+        textColor: [
+            "responsive",
+            "first",
+            "last",
+            "even",
+            "odd",
+            "hover",
+            "focus",
+        ],
+    },
     plugins: [],
 };
