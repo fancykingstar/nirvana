@@ -1,5 +1,5 @@
 import React from "react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 import Button from "../Button";
 import EnvLink from "../EnvLink";
@@ -24,6 +24,7 @@ function CreateForm({
     listApi,
     parentId,
     parentProp,
+    mutateApis,
 }) {
     const [isVisible, setIsVisible] = React.useState(false);
 
@@ -60,6 +61,10 @@ function CreateForm({
                                 onCreated={() => {
                                     setIsVisible(false);
                                     invalidateLocalCache();
+
+                                    for (const api of mutateApis) {
+                                        mutate(api);
+                                    }
                                 }}
                             />
                         </FormFieldButtonBlock>
@@ -78,6 +83,7 @@ function EditForm({
     getPutApi,
     item: { id },
     listApi,
+    mutateApis,
     setOpenedItem,
 }) {
     return (
@@ -109,7 +115,13 @@ function EditForm({
                                 putApi={getPutApi(id)}
                                 getApi={getGetApi(id)}
                                 listApi={listApi}
-                                onSaved={setOpenedItem.bind(null, false)}
+                                onSaved={() => {
+                                    setOpenedItem(false);
+
+                                    for (const api of mutateApis) {
+                                        mutate(api);
+                                    }
+                                }}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
@@ -132,6 +144,7 @@ export default function FormFieldSubformMultiple({
     listApi,
     parentId,
     parentProp,
+    mutateApis,
 }) {
     const [openedItem, setOpenedItem] = React.useState(null);
     const { data: items = [], mutate: invalidateLocalCache } = useSWR(
@@ -160,6 +173,7 @@ export default function FormFieldSubformMultiple({
                                     getPutApi,
                                     item,
                                     setOpenedItem,
+                                    mutateApis,
                                 }}
                             />
                         ) : (
@@ -182,6 +196,7 @@ export default function FormFieldSubformMultiple({
                         listApi,
                         parentId,
                         parentProp,
+                        mutateApis,
                     }}
                 />
             </div>
