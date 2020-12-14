@@ -5,7 +5,7 @@ import useStableRandomId from "../../hooks/useStableRandomId";
 
 import FormFieldLabel from "../FormFieldLabel";
 import Button from "../Button";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 function randomChar() {
     return String.fromCharCode(Math.floor(Math.random() * 26 + 65));
@@ -38,7 +38,7 @@ export default function FormFieldProductCode({ required, prop, label }) {
             </FormFieldLabel>
             <div className="form-field-grid-row-input">
                 <Button onClick={generateCode}>Generate</Button>
-                <KeyboardInboxBox
+                <KeyboardInputBox
                     id={id}
                     type="text"
                     className="ml-2"

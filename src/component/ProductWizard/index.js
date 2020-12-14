@@ -17,7 +17,7 @@ function StepSelector() {
                     component={Step01BasicDetails}
                 />
                 <Route
-                    path={`/:env/wizard/product/:id/structure`}
+                    path={`/:env/wizard/product/:id/itinerary`}
                     component={Step02Structure}
                 />
             </Switch>

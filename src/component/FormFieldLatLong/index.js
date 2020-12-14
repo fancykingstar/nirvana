@@ -4,7 +4,7 @@ import { useFormField } from "../../hooks/useFormContext";
 import useStableRandomId from "../../hooks/useStableRandomId";
 
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 export default function FormFieldLatLong({ required }) {
     const [latitude, setLatitude] = useFormField("latitude", "");
@@ -18,7 +18,7 @@ export default function FormFieldLatLong({ required }) {
             <FormFieldLabel htmlFor={idLat} required={required}>
                 Latitude
             </FormFieldLabel>
-            <KeyboardInboxBox
+            <KeyboardInputBox
                 id={idLat}
                 className="form-field-grid-row-input"
                 type="number"
@@ -32,7 +32,7 @@ export default function FormFieldLatLong({ required }) {
             <FormFieldLabel htmlFor={idLong} required={required}>
                 Longitude
             </FormFieldLabel>
-            <KeyboardInboxBox
+            <KeyboardInputBox
                 id={idLong}
                 className="form-field-grid-row-input"
                 type="number"

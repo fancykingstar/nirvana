@@ -23,15 +23,54 @@ const Tr = classed.tr(
     "border-b-2",
 );
 
-export default function ItinerarySearchByName({ productId }) {
-    const fetch = useAPIFetch();
+function uniqify(xs) {
+    return [...new Set(xs)];
+}
+function useDeepItinerariesSearch() {
     const [searchString, setSearchString] = React.useState("");
-    const { data } = useSWR(
-        `/itineraries?${qs.encode({
-            name_contains: searchString,
-        })}`,
+    const { data: departures } = useSWR(
+        searchString
+            ? `/departures?${qs.encode({
+                  date: searchString,
+
+                  _limit: 999,
+              })}`
+            : null,
     );
+
+    const { data: productItineraries } = useSWR(
+        departures?.length
+            ? `/product-itineraries?${qs.encode({
+                  product_in: uniqify(
+                      departures.map((departure) => departure.product.id),
+                  ),
+              })}`
+            : null,
+    );
+
+    const { data: itineraries } = useSWR(
+        productItineraries?.length
+            ? `/itineraries?${qs.encode({
+                  id_in: uniqify(
+                      productItineraries.map(
+                          (productItinerary) => productItinerary.itinerary.id,
+                      ),
+                  ),
+              })}`
+            : null,
+    );
+
+    return { searchString, setSearchString, itineraries };
+}
+
+export default function ItinerarySearchByProduct({ productId }) {
     const { addToast, removeToast } = useToast();
+    const fetch = useAPIFetch();
+    const {
+        searchString,
+        setSearchString,
+        itineraries,
+    } = useDeepItinerariesSearch();
 
     async function createProductItinerary({ itineraryId }) {
         const id = addToast({ title: "Adding Itinerary to product" });
@@ -72,20 +111,20 @@ export default function ItinerarySearchByName({ productId }) {
         <TitleBoxModalWithVisibilityButton
             Header={({ onClose }) => (
                 <React.Fragment>
-                    <span className="flex-1 pr-4">Search By Name</span>
+                    <span className="flex-1 pr-4">Search By Product</span>
                     <Button color="red" onClick={onClose}>
                         Close
                     </Button>
                 </React.Fragment>
             )}
-            buttonText="Add Itinerary By Name"
+            buttonText="Add Itinerary By Product"
         >
             {({ onClose }) => (
                 <React.Fragment>
                     <div className="flex items-center pb-2">
-                        <label className="pr-2">Name:</label>
+                        <label className="pr-2">Departure Date:</label>
                         <KeyboardInputBox
-                            type="text"
+                            type="date"
                             className="flex-1"
                             onChange={(e) => setSearchString(e.target.value)}
                             value={searchString}
@@ -104,8 +143,8 @@ export default function ItinerarySearchByName({ productId }) {
                             </Tr>
                         </thead>
                         <tbody>
-                            {data
-                                ? data.map(
+                            {searchString && itineraries
+                                ? itineraries.map(
                                       ({
                                           id,
                                           name,
@@ -141,13 +180,15 @@ export default function ItinerarySearchByName({ productId }) {
                                                   {
                                                       itinerary_items.slice(
                                                           -1,
-                                                      )[0]?.end_day
+                                                      )[0].end_day
                                                   }
                                               </Td>
                                               <Td>{products.length} </Td>
                                           </Tr>
                                       ),
                                   )
+                                : searchString
+                                ? "Loading..."
                                 : null}
                         </tbody>
                     </table>

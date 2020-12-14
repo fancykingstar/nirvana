@@ -39,7 +39,16 @@ export default function EntityList() {
 
     return (
         <nav className="p-2">
-            <h1 className="text-3lx">Select a data type to view and edit it</h1>
+            <h1 className="text-xl">Go to a wizard</h1>
+            <ul className="list-disc pl-4">
+                <li>
+                    <EnvLink to="/wizard/product">Product</EnvLink>
+                </li>
+            </ul>
+
+            <hr />
+
+            <h1 className="text-xl">Select a data type to view and edit it</h1>
             <ul className="list-disc pl-4">
                 {links.map(({ to, label, className }) => (
                     <li key={to}>
