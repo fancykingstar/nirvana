@@ -21,32 +21,33 @@ function requirementsMet(state) {
 
 function ProductItineraries() {
     const [productId] = useFormField("id", []);
-    const [itineraryIds] = useFormField("itineraries", []);
+    const [productItineraries] = useFormField("itineraries", []);
 
-    const itineraryIdsSorted = React.useMemo(() => {
-        const sorted = (itineraryIds ?? [])
-            .map((x, i) => ({ ...x, i }))
-            .sort((lhs, rhs) => lhs.ordering - rhs.ordering);
+    const productItinerariesSorted = React.useMemo(() => {
+        const sorted = [...productItineraries]
+            .sort((lhs, rhs) => lhs.ordering - rhs.ordering)
+            .map((x, index) => ({ index, ...x }));
 
         for (let i = 0; i < sorted.length; i++) {
-            sorted[i].prev = sorted[i - 1];
-            sorted[i].next = sorted[i + 1];
+            sorted[i].prev = sorted[i - 1] ? { ...sorted[i - 1] } : null;
+            sorted[i].next = sorted[i + 1] ? { ...sorted[i + 1] } : null;
+
+            delete sorted[i].next?.next;
+            delete sorted[i].next?.prev;
+            delete sorted[i].prev?.next;
+            delete sorted[i].prev?.prev;
         }
 
         return sorted;
-    }, [itineraryIds]);
+    }, [productItineraries]);
 
     return (
         <SubFormProvider prop="itineraries" defaultValue={[]}>
-            {itineraryIdsSorted.map(({ id, i, prev, next }) => (
-                <SubFormProvider key={id} prop={i} defaultValue={{}}>
-                    <ProductItinerary
-                        productId={productId}
-                        prev={prev}
-                        next={next}
-                    />
+            {productItinerariesSorted.map((props, index) => (
+                <React.Fragment key={props.id}>
+                    <ProductItinerary {...props} index={index} />
                     <hr className="form-field-grid-row-input" />
-                </SubFormProvider>
+                </React.Fragment>
             ))}
 
             <FormFieldButtonBlock>

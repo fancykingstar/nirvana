@@ -141,7 +141,7 @@ export default function ItinerarySearchByName({ productId }) {
                                                   {
                                                       itinerary_items.slice(
                                                           -1,
-                                                      )[0].end_day
+                                                      )[0]?.end_day
                                                   }
                                               </Td>
                                               <Td>{products.length} </Td>

@@ -37,6 +37,11 @@ export function useToast() {
         removeToast: (id) => dispatch({ type: "REMOVE", id }),
 
         addToast: (toast) => {
+            //color,
+            //title,
+            //timeout,
+            //message,
+
             const id = nanoid();
 
             dispatch({
