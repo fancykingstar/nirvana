@@ -47,7 +47,11 @@ export default function FormFieldItineraryItems() {
             getGetApi={(id) => `/itinerary-items/${id}`}
             getPutApi={(id) => `/itinerary-items/${id}`}
             label="Items"
-            listApi={`/itinerary-items?itinerary.id=${itineraryId}`}
+            listApi={`/itinerary-items`}
+            mutateApis={[
+                `/itineraries/${itineraryId}`,
+                `/itinerary-items?itinerary.id=${itineraryId}`,
+            ]}
             parentId={itineraryId}
             parentProp="itinerary"
         />
