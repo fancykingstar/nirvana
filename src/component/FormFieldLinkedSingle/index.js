@@ -7,7 +7,7 @@ import useStableRandomId from "../../hooks/useStableRandomId";
 
 import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 const InputArea = classed.div("p-1", "form-field-grid-row-input");
 
@@ -57,7 +57,7 @@ export default function FormFieldLinkedSingle({
                 <h3>
                     <label htmlFor={id}>Replace:</label>
                 </h3>
-                <KeyboardInboxBox
+                <KeyboardInputBox
                     id={id}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}

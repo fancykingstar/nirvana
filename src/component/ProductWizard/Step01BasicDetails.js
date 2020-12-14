@@ -1,14 +1,16 @@
 import React from "react";
 
+import FormFieldDebug from "../FormFieldDebug";
 import ButtonEnvLink from "../ButtonEnvLink";
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
+import FormFieldLinkedSingleSelect from "../FormFieldLinkedSingleSelect";
 import FormFieldProductCode from "../FormFieldProductCode";
 import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
 import FormFieldString from "../FormFieldString";
-import { SubFormProvider } from "../../hooks/useFormContext";
 import { FormFieldButtonSave, FormFieldButtonBlock } from "../FormFieldButton";
+import { SubFormProvider } from "../../hooks/useFormContext";
 
 function requirementsMet(state) {
     if (!state?.name) {
@@ -21,6 +23,12 @@ function requirementsMet(state) {
         return false;
     }
     if (!state?.description) {
+        return false;
+    }
+    if (!state?.operator) {
+        return false;
+    }
+    if (!state?.primary_accommodation) {
         return false;
     }
 
@@ -41,6 +49,8 @@ export default function Step01Description({
             <SubFormProvider prop="product" defaultValue={{}}>
                 <FormContentLoader getApi={`/products/${id}`} />
 
+                <FormFieldDebug />
+
                 <FormFieldString required label="Name" prop="name" />
                 <FormFieldString required label="Label" prop="label" />
                 <FormFieldProductCode
@@ -48,6 +58,31 @@ export default function Step01Description({
                     label="Product Code"
                     prop="code"
                 />
+
+                <hr className="form-field-grid-row-all" />
+
+                <FormFieldLinkedSingleSelect
+                    label="Primary Operator"
+                    nameProp="name"
+                    prop="operator"
+                    searchApi="/organisations"
+                />
+
+                <FormFieldRenderState>
+                    {({ operator }) => (
+                        <FormFieldLinkedSingleSelect
+                            label="Primary Accomodation"
+                            nameProp="name"
+                            prop="primary_accommodation"
+                            searchApi="/accommodations"
+                            staticFilter={{
+                                organisation: operator?.id,
+                            }}
+                        />
+                    )}
+                </FormFieldRenderState>
+
+                <hr className="form-field-grid-row-all" />
 
                 <FormFieldRichText
                     required
@@ -67,7 +102,7 @@ export default function Step01Description({
                     <FormFieldRenderState>
                         {(state) => (
                             <ButtonEnvLink
-                                to={`/wizard/product/${id}/structure`}
+                                to={`/wizard/product/${id}/itinerary`}
                                 color="blue"
                                 disabled={!requirementsMet(state)}
                             >

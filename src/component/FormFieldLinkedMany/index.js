@@ -6,7 +6,7 @@ import { useFormField } from "../../hooks/useFormContext";
 
 import classed from "../ClassedComponent";
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 const InputArea = classed.div("p-1", "form-field-grid-row-input");
 
@@ -68,7 +68,7 @@ export default function FormFieldLinkedMany({
                 <br />
 
                 <h3>Add:</h3>
-                <KeyboardInboxBox
+                <KeyboardInputBox
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />

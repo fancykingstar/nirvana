@@ -5,7 +5,7 @@ import { useToast } from "../ToastProvider";
 
 import classed from "../ClassedComponent";
 import Button from "../Button";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 function formNoop(e) {
     e.preventDefault();
@@ -112,7 +112,7 @@ export default function LoginForm() {
                 <Form onSubmit={formNoop}>
                     <Field>
                         <label className="pr-2">Username</label>
-                        <KeyboardInboxBox
+                        <KeyboardInputBox
                             type="text"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
@@ -120,7 +120,7 @@ export default function LoginForm() {
                     </Field>
                     <Field>
                         <label className="pr-2">Password</label>
-                        <KeyboardInboxBox
+                        <KeyboardInputBox
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

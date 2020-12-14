@@ -54,24 +54,35 @@ export function FormFieldButtonSave({
 
         mutate(getApi, local, false);
 
-        await fetcher(putApi, {
-            method: "PUT",
-            body: JSON.stringify(local),
-        });
+        try {
+            await fetcher(putApi, {
+                method: "PUT",
+                body: JSON.stringify(local),
+            });
 
-        removeToast(startSaveToastId);
+            removeToast(startSaveToastId);
 
-        addToast({
-            color: "green",
-            title: "Saved",
-            timeout: 3000,
-            message: local[nameProp],
-        });
+            addToast({
+                color: "green",
+                title: "Saved",
+                timeout: 3000,
+                message: local[nameProp],
+            });
 
-        mutate(getApi);
-        mutateMany(`${listApi}*`);
+            mutate(getApi);
+            mutateMany(`${listApi}*`);
 
-        onSaved();
+            onSaved();
+        } catch (e) {
+            removeToast(startSaveToastId);
+
+            addToast({
+                color: "red",
+                title: "Save Failed",
+                timeout: 3000,
+                message: Object.values(e).join("\n"),
+            });
+        }
     }
 
     return (

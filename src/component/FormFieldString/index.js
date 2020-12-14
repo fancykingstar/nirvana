@@ -4,7 +4,7 @@ import { useFormField } from "../../hooks/useFormContext";
 import useStableRandomId from "../../hooks/useStableRandomId";
 
 import FormFieldLabel from "../FormFieldLabel";
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 export default function FormFieldString({ required, prop, label }) {
     const [state, setState] = useFormField(prop, "");
@@ -15,7 +15,7 @@ export default function FormFieldString({ required, prop, label }) {
             <FormFieldLabel htmlFor={id} required={required}>
                 {label}
             </FormFieldLabel>
-            <KeyboardInboxBox
+            <KeyboardInputBox
                 id={id}
                 className="form-field-grid-row-input"
                 type="text"

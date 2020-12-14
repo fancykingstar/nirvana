@@ -2,7 +2,7 @@ import React from "react";
 
 import { ControlSectionContainer } from "./styled";
 
-import { KeyboardInboxBox } from "../Input";
+import { KeyboardInputBox } from "../Input";
 
 export default function SearchFilter({ count, searchFilter, setSearchFilter }) {
     return (
@@ -11,7 +11,7 @@ export default function SearchFilter({ count, searchFilter, setSearchFilter }) {
             <label className="pr-2" htmlFor="filter-list-search-filter">
                 Search:
             </label>
-            <KeyboardInboxBox
+            <KeyboardInputBox
                 id="filter-list-search-filter"
                 type="text"
                 value={searchFilter || ""}
