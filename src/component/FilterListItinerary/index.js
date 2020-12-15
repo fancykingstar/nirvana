@@ -56,7 +56,7 @@ export default function FilterListItinarary() {
             title="Itinarary"
             listApi="/itineraries"
             getDeleteApi={(id) => `/itineraries/${id}`}
-            createRoute="/create/itineraries"
+            createRoute="/itineraries/create"
             HeaderComponent={ItineraryHeader}
             FooterComponent={ItineraryHeader}
             RowComponent={ItineraryRow}
