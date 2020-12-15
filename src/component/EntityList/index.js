@@ -22,7 +22,7 @@ export default function EntityList() {
         ["menu-items", false],
         ["menus", false],
         ["offers", false],
-        ["organisations", false],
+        ["organisations"],
         ["pages", false],
         ["ports", true],
         ["price-labels", false],

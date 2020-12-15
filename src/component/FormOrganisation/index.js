@@ -1,13 +1,13 @@
 import React from "react";
-import { FormProvider } from "../../hooks/useFormContext";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox from "../TitleBox";
-
-import FormFieldUUID from "../FormFieldUUID";
+import FormFieldLinkedMany from "../FormFieldLinkedMany";
 import FormFieldString from "../FormFieldString";
 import FormFieldRichText from "../FormFieldRichText";
+import FormFieldUUID from "../FormFieldUUID";
+import TitleBox from "../TitleBox";
+import { FormProvider } from "../../hooks/useFormContext";
 
 import {
     FormFieldButtonBlock,
@@ -16,33 +16,29 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-export function FormFields() {
+function FormFields() {
     return (
         <React.Fragment>
-            <FormFieldString required prop="name" label="Name" />
-            <FormFieldString required prop="label" label="Label" />
-            <FormFieldRichText
-                required
-                prop="description"
-                label="Description"
-            />
+            <FormFieldString prop="name" label="Name" />
+            <FormFieldString prop="label" label="Label" />
+            <FormFieldRichText prop="description" label="Description" />
         </React.Fragment>
     );
 }
 
-export function FormAccommodationGradesCreate({
+export function FormOrganisationCreate({
     match: {
         params: { env },
     },
     history,
 }) {
-    const listApi = "/accommodation-grades";
-    const createApi = "/accommodation-grades";
+    const createApi = "/organisations";
+    const listApi = "/organisations";
 
     return (
         <FormProvider>
             <TitleBox>
-                <TitleBox.Header>Create Accommodation Grade</TitleBox.Header>
+                <TitleBox.Header>Create Organisation</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFieldUUID prop="uid" />
@@ -57,7 +53,7 @@ export function FormAccommodationGradesCreate({
                                 listApi={listApi}
                                 onCreated={(id) =>
                                     history.push(
-                                        `/${env}/accommodation-grades/edit/${id}`,
+                                        `/${env}/organisations/edit/${id}`,
                                     )
                                 }
                             />
@@ -69,23 +65,50 @@ export function FormAccommodationGradesCreate({
     );
 }
 
-export function FormAccommodationGradesEdit({
+export function FormOrganisationEdit({
     match: {
         params: { id },
     },
 }) {
-    const getApi = `/accommodation-grades/${id}`;
-    const listApi = "/accommodation-grades";
-    const putApi = `/accommodation-grades/${id}`;
+    const getApi = `/organisations/${id}`;
+    const listApi = "/organisations";
+    const putApi = `/organisations/${id}`;
 
     return (
         <FormProvider>
             <FormContentLoader getApi={getApi} />
+
             <TitleBox>
-                <TitleBox.Header>Edit Accommodation Grade</TitleBox.Header>
+                <TitleBox.Header>Edit Organisation</TitleBox.Header>
                 <TitleBox.Body>
                     <FormFieldGrid>
                         <FormFields />
+
+                        <FormFieldLinkedMany
+                            label="Accommodations"
+                            prop="accommodations"
+                            searchProp="name"
+                            RenderLinked={function LinkedAccomodation({
+                                id,
+                                name,
+                                remove,
+                            }) {
+                                return (
+                                    <li onClick={remove.bind(null, id)}>
+                                        {name}
+                                    </li>
+                                );
+                            }}
+                            RenderSearchResult={function ResultAccomodation({
+                                id,
+                                name,
+                                add,
+                            }) {
+                                return (
+                                    <li onClick={add.bind(null, id)}>{name}</li>
+                                );
+                            }}
+                        />
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />

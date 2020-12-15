@@ -14,7 +14,7 @@ import FormFieldSubformMultiple from "../FormFieldSubformMultiple";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
 import FormFieldUUID from "../FormFieldUUID";
 
-//import { FormFields as AccommodationGradeFormFields } from "../FormAccommodationGrades";
+import { FormFields as AccommodationGradeFormFields } from "../FormAccommodationGrades";
 
 import {
     FormFieldButtonBlock,
@@ -23,15 +23,11 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function AccommodationGradeFormFields() {
-    return <h1>TODO</h1>;
-}
-
-function LinkedCity({ name }) {
+function Linked({ name }) {
     return <span>{name}</span>;
 }
 
-function ResultCity({ id, name, set }) {
+function Result({ id, name, set }) {
     return <li onClick={set.bind(null, id)}>{name}</li>;
 }
 
@@ -53,17 +49,6 @@ export function FormFields() {
             </FormFieldEnum>
 
             <FormFieldRichText prop="description" label="Description" />
-
-            <hr className="form-field-grid-row-all" />
-
-            <FormFieldLinkedSingle
-                prop="city"
-                label="City"
-                searchProp="name"
-                searchApi="/cities"
-                RenderLinked={LinkedCity}
-                RenderSearchResult={ResultCity}
-            />
         </React.Fragment>
     );
 }
@@ -147,14 +132,34 @@ export function FormAccommodationEdit({
 
                         <hr className="form-field-grid-row-all" />
 
+                        <FormFieldLinkedSingle
+                            prop="city"
+                            label="City"
+                            searchProp="name"
+                            searchApi="/cities"
+                            RenderLinked={Linked}
+                            RenderSearchResult={Result}
+                        />
+
+                        <FormFieldLinkedSingle
+                            prop="organisation"
+                            label="Organisation"
+                            searchProp="name"
+                            searchApi="/organisations"
+                            RenderLinked={Linked}
+                            RenderSearchResult={Result}
+                        />
+
+                        <hr className="form-field-grid-row-all" />
+
                         <FormFieldSubformMultiple
                             RenderCreateFields={AccommodationGradeFormFields}
                             RenderEditFields={AccommodationGradeFormFields}
                             RenderPreview={PreviewAccommodationGrade}
                             compareFn={compareAccommodationGrade}
-                            createApi="/accommodation_grades"
+                            createApi="/accommodation-grades"
                             getEditRoute={(id) =>
-                                `/accommodation_grades/edit/${id}`
+                                `/accommodation-grades/edit/${id}`
                             }
                             getGetApi={(id) => `/accommodation-grades/${id}`}
                             getPutApi={(id) => `/accommodation-grades/${id}`}
