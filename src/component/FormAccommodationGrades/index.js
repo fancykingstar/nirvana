@@ -16,7 +16,7 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
-function FormFields() {
+export function FormFields() {
     return (
         <React.Fragment>
             <FormFieldString required prop="name" label="Name" />
