@@ -9,7 +9,7 @@ export default function OperatorField() {
             label="Operator"
             prop="operator"
             searchProp="name"
-            searchApi="/operators"
+            searchApi="/organisations"
             RenderLinked={function LinkedOperator({ name }) {
                 return <span>{name}</span>;
             }}
