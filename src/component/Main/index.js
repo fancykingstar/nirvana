@@ -17,6 +17,7 @@ import FilterListExchangeRate from "../FilterListExchangeRate";
 import FilterListGradeMapping from "../FilterListGradeMapping";
 import FilterListItinerary from "../FilterListItinerary";
 import FilterListItineraryItem from "../FilterListItineraryItem";
+import FilterListOrganisation from "../FilterListOrganisation";
 import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
 import FilterListProduct from "../FilterListProduct";
@@ -48,6 +49,10 @@ import {
     FormItineraryItemCreate,
     FormItineraryItemEdit,
 } from "../FormItineraryItem";
+import {
+    FormOrganisationCreate,
+    FormOrganisationEdit,
+} from "../FormOrganisation";
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
 import { FormProductCreate, FormProductEdit } from "../FormProduct";
@@ -174,6 +179,15 @@ export default function Main() {
                         Create: FormItineraryItemCreate,
                         Edit: FormItineraryItemEdit,
                         List: FilterListItineraryItem,
+                    })}
+                />
+
+                <Route
+                    path="/:env/organisations"
+                    component={createEntityBlock({
+                        Create: FormOrganisationCreate,
+                        Edit: FormOrganisationEdit,
+                        List: FilterListOrganisation,
                     })}
                 />
 
