@@ -20,7 +20,6 @@ pipelines:
         script:
           - npm ci
           - npm run lint
-          - npm run test
           - npm run build
 
   branches:
@@ -34,7 +33,6 @@ pipelines:
           script:
             - npm ci
             - npm run lint
-            - npm run test
             - npm run build
           artifacts:
             - dist/**
