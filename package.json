@@ -1,5 +1,6 @@
 {
     "name": "nirvana",
+    "version": "0.1.0",
     "scripts": {
         "start": "parcel serve ./src/index.html",
         "build": "NODE_ENV=production parcel build ./src/index.html",

@@ -60,7 +60,12 @@ function useDeepItinerariesSearch() {
             : null,
     );
 
-    return { searchString, setSearchString, itineraries };
+    return {
+        searchString,
+        setSearchString,
+        itineraries,
+        noResults: departures && departures.length === 0,
+    };
 }
 
 export default function ItinerarySearchByProduct({ productId }) {
@@ -70,6 +75,7 @@ export default function ItinerarySearchByProduct({ productId }) {
         searchString,
         setSearchString,
         itineraries,
+        noResults,
     } = useDeepItinerariesSearch();
 
     async function createProductItinerary({ itineraryId }) {
@@ -106,6 +112,8 @@ export default function ItinerarySearchByProduct({ productId }) {
             });
         }
     }
+
+    console.log({ itineraries });
 
     return (
         <TitleBoxModalWithVisibilityButton
@@ -188,7 +196,9 @@ export default function ItinerarySearchByProduct({ productId }) {
                                       ),
                                   )
                                 : searchString
-                                ? "Loading..."
+                                ? noResults
+                                    ? "No Results"
+                                    : "Loading..."
                                 : null}
                         </tbody>
                     </table>
