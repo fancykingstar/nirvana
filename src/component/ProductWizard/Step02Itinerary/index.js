@@ -58,9 +58,9 @@ function ProductItineraries() {
     );
 }
 
-export default function Step02Description({
+export default function Step02Itinerary({
     match: {
-        params: { env, id },
+        params: { id },
     },
 }) {
     return (
@@ -69,31 +69,29 @@ export default function Step02Description({
                 <h2 className="text-xl">Step 2: Itineraries</h2>
             </div>
 
-            <SubFormProvider prop="product" defaultValue={{}}>
-                <FormContentLoader getApi={`/products/${id}`} />
+            <FormContentLoader getApi={`/products/${id}`} />
 
-                <hr className="form-field-grid-row-all" />
+            <hr className="form-field-grid-row-all" />
 
-                <h3 className="form-field-grid-row-label">Itineraries</h3>
+            <h3 className="form-field-grid-row-label">Itineraries</h3>
 
-                <ProductItineraries />
+            <ProductItineraries />
 
-                <hr className="form-field-grid-row-all" />
+            <hr className="form-field-grid-row-all" />
 
-                <FormFieldButtonBlock>
-                    <FormFieldRenderState>
-                        {(state) => (
-                            <ButtonEnvLink
-                                to={`/${env}/wizard/product/${id}/step-2`}
-                                color="blue"
-                                disabled={!requirementsMet(state)}
-                            >
-                                Next
-                            </ButtonEnvLink>
-                        )}
-                    </FormFieldRenderState>
-                </FormFieldButtonBlock>
-            </SubFormProvider>
+            <FormFieldButtonBlock>
+                <FormFieldRenderState>
+                    {(state) => (
+                        <ButtonEnvLink
+                            to={`/wizard/product/${id}/departures`}
+                            color="blue"
+                            disabled={!requirementsMet(state)}
+                        >
+                            Next
+                        </ButtonEnvLink>
+                    )}
+                </FormFieldRenderState>
+            </FormFieldButtonBlock>
         </FormFieldGrid>
     );
 }

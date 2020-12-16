@@ -6,7 +6,8 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import SelectProduct from "./SelectProduct";
 import Step01BasicDetails from "./Step01BasicDetails";
-import Step02Structure from "./Step02Structure";
+import Step02Itinerary from "./Step02Itinerary";
+import Step03Departures from "./Step03Departures";
 
 function StepSelector() {
     return (
@@ -18,7 +19,11 @@ function StepSelector() {
                 />
                 <Route
                     path={`/:env/wizard/product/:id/itinerary`}
-                    component={Step02Structure}
+                    component={Step02Itinerary}
+                />
+                <Route
+                    path={`/:env/wizard/product/:id/departures`}
+                    component={Step03Departures}
                 />
             </Switch>
         </FormProvider>
