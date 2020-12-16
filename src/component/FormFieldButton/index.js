@@ -111,25 +111,36 @@ export function FormFieldButtonCreate({
             message: local[nameProp],
         });
 
-        const response = await fetcher(createApi, {
-            method: "POST",
-            body: JSON.stringify(local),
-        });
+        try {
+            const response = await fetcher(createApi, {
+                method: "POST",
+                body: JSON.stringify(local),
+            });
 
-        removeToast(startSaveToastId);
+            removeToast(startSaveToastId);
 
-        addToast({
-            color: "green",
-            title: "Saved",
-            timeout: 3000,
-            message: local[nameProp],
-        });
+            addToast({
+                color: "green",
+                title: "Saved",
+                timeout: 3000,
+                message: local[nameProp],
+            });
 
-        const { id } = response;
+            const { id } = response;
 
-        mutate(listApi);
+            mutate(listApi);
 
-        onCreated(id);
+            onCreated(id);
+        } catch (e) {
+            removeToast(startSaveToastId);
+
+            addToast({
+                color: "red",
+                title: "Create Failed",
+                timeout: 3000,
+                message: Object.values(e).join("\n"),
+            });
+        }
     }
 
     return (
