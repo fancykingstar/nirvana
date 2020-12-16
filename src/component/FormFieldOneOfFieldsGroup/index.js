@@ -28,7 +28,7 @@ function SectionSelector({
         for (const prop of activeChild?.props?.props ?? []) {
             upperFormContext.dispatch({
                 type: "SET_LOCAL",
-                prop,
+                path: [prop],
                 value: lowerFormContext.state.local?.[prop],
             });
         }
@@ -38,7 +38,7 @@ function SectionSelector({
         for (const prop of oldSection.props) {
             upperFormContext.dispatch({
                 type: "SET_LOCAL",
-                prop,
+                path: [prop],
                 value: oldSection.defaultValues[prop],
             });
         }
@@ -46,7 +46,7 @@ function SectionSelector({
         for (const prop of newSection.props) {
             upperFormContext.dispatch({
                 type: "SET_LOCAL",
-                prop,
+                path: [prop],
                 value: lowerFormContext.state.local?.[prop],
             });
         }
