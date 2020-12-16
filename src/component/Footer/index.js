@@ -9,7 +9,7 @@ const FooterContainer = classed.footer(
     "text-gray-800",
 );
 
-const FooterInfo = classed.span("py-1");
+const FooterInfo = classed.span("px-1");
 
 export default function Footer() {
     if (!process.env.CI) {
