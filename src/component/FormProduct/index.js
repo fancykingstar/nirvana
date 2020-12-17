@@ -38,11 +38,12 @@ function FormFields() {
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
             <FormFieldString required prop="code" label="Code" />
-            <FormFieldBoolean prop="active" label="Is Active" />
+
             <FormFieldBoolean
-                prop="include_in_search"
-                label="Include in Search"
+                prop="exclude_from_search"
+                label="Exclude From Search"
             />
+
             <FormFieldBoolean prop="feed_product" label="Is Feed Product" />
             <FormFieldEnum
                 prop="product_template"
