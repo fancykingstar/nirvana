@@ -121,7 +121,7 @@ export function FormFieldButtonCreate({
 
             addToast({
                 color: "green",
-                title: "Saved",
+                title: "Created",
                 timeout: 3000,
                 message: local[nameProp],
             });

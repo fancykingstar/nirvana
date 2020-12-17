@@ -116,7 +116,7 @@ export default function SelectProduct({ history, match: { url } }) {
                     color="green"
                     onClick={setShowCreateProductModal.bind(null, true)}
                 >
-                    Create New Modal
+                    Create New Product
                 </Button>
             ) : (
                 "loading..."
