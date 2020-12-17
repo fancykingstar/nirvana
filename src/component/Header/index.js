@@ -45,13 +45,13 @@ export default function Header() {
     return (
         <HeaderContainer>
             <Title>
-                Valhalla
+                Nirvana
                 <UnderConstruction>Alpha Version</UnderConstruction>
                 <span className="text-xl pl-16">{packageJson.version}</span>
             </Title>
 
             {window.location.hostname ===
-            "prod.valhalla.imaginecruising.net" ? null : (
+            "prod.nirvana.imaginecruising.net" ? null : (
                 <EnvSelectorContainer>
                     environment:
                     <select
