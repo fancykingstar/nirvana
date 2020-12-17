@@ -1,5 +1,6 @@
 import React from "react";
 import useSWR, { mutate } from "swr";
+import qs from "querystring";
 
 import Button from "../Button";
 import EnvLink from "../EnvLink";
@@ -148,7 +149,9 @@ export default function FormFieldSubformMultiple({
 }) {
     const [openedItem, setOpenedItem] = React.useState(null);
     const { data: items = [], mutate: invalidateLocalCache } = useSWR(
-        `${listApi}?${parentProp}.id=${parentId}`,
+        `${listApi}?${qs.encode({
+            [parentProp]: parentId,
+        })}`,
     );
 
     const itemsSorted = React.useMemo(() => [...items].sort(compareFn), [

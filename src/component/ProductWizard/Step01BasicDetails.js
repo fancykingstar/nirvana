@@ -10,7 +10,6 @@ import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
 import FormFieldString from "../FormFieldString";
 import { FormFieldButtonSave, FormFieldButtonBlock } from "../FormFieldButton";
-import { SubFormProvider } from "../../hooks/useFormContext";
 
 function requirementsMet(state) {
     if (!state?.name) {
@@ -46,72 +45,66 @@ export default function Step01Description({
                 <h2 className="text-xl">Step 1: Product Basic Details</h2>
             </div>
 
-            <SubFormProvider prop="product" defaultValue={{}}>
-                <FormContentLoader getApi={`/products/${id}`} />
+            <FormContentLoader getApi={`/products/${id}`} />
 
-                <FormFieldDebug />
+            <FormFieldDebug />
 
-                <FormFieldString required label="Name" prop="name" />
-                <FormFieldString required label="Label" prop="label" />
-                <FormFieldProductCode
-                    required
-                    label="Product Code"
-                    prop="code"
-                />
+            <FormFieldString required label="Name" prop="name" />
+            <FormFieldString required label="Label" prop="label" />
+            <FormFieldProductCode required label="Product Code" prop="code" />
 
-                <hr className="form-field-grid-row-all" />
+            <hr className="form-field-grid-row-all" />
 
-                <FormFieldLinkedSingleSelect
-                    label="Primary Operator"
+            <FormFieldLinkedSingleSelect
+                label="Primary Operator"
+                nameProp="name"
+                prop="operator"
+                searchApi="/organisations"
+            />
+
+            <FormFieldRenderState>
+                {({ operator }) => (
+                    <FormFieldLinkedSingleSelect
+                        label="Primary Accomodation"
+                        nameProp="name"
+                        prop="primary_accommodation"
+                        searchApi="/accommodations"
+                        staticFilter={{
+                            organisation: operator?.id,
+                        }}
+                    />
+                )}
+            </FormFieldRenderState>
+
+            <hr className="form-field-grid-row-all" />
+
+            <FormFieldRichText
+                required
+                label="Description"
+                prop="description"
+            />
+
+            <hr className="form-field-grid-row-all" />
+
+            <FormFieldButtonBlock>
+                <FormFieldButtonSave
                     nameProp="name"
-                    prop="operator"
-                    searchApi="/organisations"
+                    listApi="/products"
+                    getApi={`/products/${id}`}
+                    putApi={`/products/${id}`}
                 />
-
                 <FormFieldRenderState>
-                    {({ operator }) => (
-                        <FormFieldLinkedSingleSelect
-                            label="Primary Accomodation"
-                            nameProp="name"
-                            prop="primary_accommodation"
-                            searchApi="/accommodations"
-                            staticFilter={{
-                                organisation: operator?.id,
-                            }}
-                        />
+                    {(state) => (
+                        <ButtonEnvLink
+                            to={`/wizard/product/${id}/itinerary`}
+                            color="blue"
+                            disabled={!requirementsMet(state)}
+                        >
+                            Next
+                        </ButtonEnvLink>
                     )}
                 </FormFieldRenderState>
-
-                <hr className="form-field-grid-row-all" />
-
-                <FormFieldRichText
-                    required
-                    label="Description"
-                    prop="description"
-                />
-
-                <hr className="form-field-grid-row-all" />
-
-                <FormFieldButtonBlock>
-                    <FormFieldButtonSave
-                        nameProp="name"
-                        listApi="/products"
-                        getApi={`/products/${id}`}
-                        putApi={`/products/${id}`}
-                    />
-                    <FormFieldRenderState>
-                        {(state) => (
-                            <ButtonEnvLink
-                                to={`/wizard/product/${id}/itinerary`}
-                                color="blue"
-                                disabled={!requirementsMet(state)}
-                            >
-                                Next
-                            </ButtonEnvLink>
-                        )}
-                    </FormFieldRenderState>
-                </FormFieldButtonBlock>
-            </SubFormProvider>
+            </FormFieldButtonBlock>
         </FormFieldGrid>
     );
 }
