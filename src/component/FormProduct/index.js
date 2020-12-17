@@ -44,7 +44,6 @@ function FormFields() {
                 label="Exclude From Search"
             />
 
-            <FormFieldBoolean prop="feed_product" label="Is Feed Product" />
             <FormFieldEnum
                 prop="product_template"
                 label="Product Template"

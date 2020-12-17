@@ -1,15 +1,13 @@
 import React from "react";
 
-import { FormProvider } from "../../hooks/useFormContext";
-
 import FormContentLoader from "../FormContentLoader";
+import FormFieldBoolean from "../FormFieldBoolean";
 import FormFieldGrid from "../FormFieldGrid";
-import TitleBox from "../TitleBox";
-
-import FormFieldUUID from "../FormFieldUUID";
-import FormFieldString from "../FormFieldString";
-
 import FormFieldItineraryItems from "./FormFieldItineraryItems";
+import FormFieldString from "../FormFieldString";
+import FormFieldUUID from "../FormFieldUUID";
+import TitleBox from "../TitleBox";
+import { FormProvider } from "../../hooks/useFormContext";
 
 import {
     FormFieldButtonBlock,
@@ -23,6 +21,8 @@ function FormFields() {
         <React.Fragment>
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
+
+            <FormFieldBoolean prop="feed_itinerary" label="Is Feed Itinerary" />
         </React.Fragment>
     );
 }
