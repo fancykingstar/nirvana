@@ -166,7 +166,7 @@ export function FormAccommodationEdit({
                             label="Accommodation Grades"
                             listApi="/accommodation-grades"
                             parentId={id}
-                            parentProp="accommodation"
+                            parentProp="accommodations"
                         />
 
                         <FormFieldButtonBlock>
