@@ -53,6 +53,10 @@ function FormFields() {
                 <FormFieldEnum.Option value="operated">
                     Operated
                 </FormFieldEnum.Option>
+
+                <FormFieldEnum.Option value="imported">
+                    Imported
+                </FormFieldEnum.Option>
             </FormFieldEnum>
             <FormFieldEnum prop="status" label="Status" defaultValue="live">
                 <FormFieldEnum.Option value="live">Live</FormFieldEnum.Option>
