@@ -16,8 +16,6 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
 
             <FilterList.ControlCell width="10%">Index</FilterList.ControlCell>
 
-            <FilterList.ControlCell width="10%">Active</FilterList.ControlCell>
-
             <FilterList.ControlCell
                 width="10%"
                 onClick={onChangeSort.bind(null, "code")}
@@ -37,7 +35,7 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
     );
 }
 
-function ProductRow({ id, active, code, i, name }) {
+function ProductRow({ id, code, i, name }) {
     return (
         <React.Fragment>
             <FilterList.Cell>
@@ -45,7 +43,6 @@ function ProductRow({ id, active, code, i, name }) {
             </FilterList.Cell>
 
             <FilterList.Cell>{i}</FilterList.Cell>
-            <FilterList.Cell>{active ? "✔️" : "❌"}</FilterList.Cell>
             <FilterList.Cell>{code}</FilterList.Cell>
             <FilterList.Cell>{name}</FilterList.Cell>
         </React.Fragment>
@@ -62,7 +59,7 @@ export default function FilterListProduct() {
             HeaderComponent={ProductHeader}
             FooterComponent={ProductHeader}
             RowComponent={ProductRow}
-            rows={5}
+            rows={4}
             searchFilterColName="name"
         />
     );

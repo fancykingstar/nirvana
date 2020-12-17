@@ -27,8 +27,8 @@ export default function FormFieldBoolean({ required, prop, label }) {
                     "rounded",
                 )}
                 type="checkbox"
-                value={state}
-                onChange={(e) => setState(e.target.value)}
+                checked={state}
+                onChange={(e) => setState(e.target.checked)}
             />
         </React.Fragment>
     );

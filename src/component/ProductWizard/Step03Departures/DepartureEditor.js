@@ -85,8 +85,6 @@ function PricesEditor() {
     return (
         <div
             className={cn(
-                "list-disc",
-                "pl-4",
                 "form-field-grid-row-input",
                 "gap-2",
                 "grid",
@@ -138,6 +136,8 @@ export default function DepartureEditor({ id, sortedItineraryItems }) {
             <FormFieldGrid className="form-field-grid-row-input border rounded shadow p-2 m-2">
                 <FormContentLoader getApi={`/departures/${id}`} />
                 <DepartureHeader />
+
+                <div className="form-field-grid-row-label">Prices</div>
                 <PricesEditor />
 
                 <details className="form-field-grid-row-all cursor-pointer">

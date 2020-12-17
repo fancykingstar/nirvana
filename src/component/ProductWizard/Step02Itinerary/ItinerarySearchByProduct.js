@@ -24,7 +24,7 @@ const Tr = classed.tr(
 );
 
 function uniqify(xs) {
-    return [...new Set(xs)];
+    return [...new Set(xs.filter(Boolean))];
 }
 function useDeepItinerariesSearch() {
     const [searchString, setSearchString] = React.useState("");
@@ -42,7 +42,7 @@ function useDeepItinerariesSearch() {
         departures?.length
             ? `/product-itineraries?${qs.encode({
                   product_in: uniqify(
-                      departures.map((departure) => departure.product.id),
+                      departures.map((departure) => departure.product?.id),
                   ),
               })}`
             : null,
@@ -53,7 +53,7 @@ function useDeepItinerariesSearch() {
             ? `/itineraries?${qs.encode({
                   id_in: uniqify(
                       productItineraries.map(
-                          (productItinerary) => productItinerary.itinerary.id,
+                          (productItinerary) => productItinerary.itinerary?.id,
                       ),
                   ),
               })}`
