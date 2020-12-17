@@ -5,9 +5,10 @@ import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
 
 import ProductWizard from "../ProductWizard";
+
 import FilterListAccommodation from "../FilterListAccommodation";
-import FilterListAirport from "../FilterListAirport";
 import FilterListAccommodationGrades from "../FilterListAccommodationGrades";
+import FilterListAirport from "../FilterListAirport";
 import FilterListCity from "../FilterListCity";
 import FilterListCountry from "../FilterListCountry";
 import FilterListCurrency from "../FilterListCurrency";
@@ -21,16 +22,16 @@ import FilterListOrganisation from "../FilterListOrganisation";
 import FilterListPort from "../FilterListPort";
 import FilterListPrice from "../FilterListPrice";
 import FilterListProduct from "../FilterListProduct";
-import FilterListVersion from "../FilterListVersion";
+
 import {
     FormAccommodationCreate,
     FormAccommodationEdit,
 } from "../FormAccommodation";
-import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import {
     FormAccommodationGradesCreate,
     FormAccommodationGradesEdit,
 } from "../FormAccommodationGrades";
+import { FormAirportCreate, FormAirportEdit } from "../FormAirport";
 import { FormCityCreate, FormCityEdit } from "../FormCity";
 import { FormCountryCreate, FormCountryEdit } from "../FormCountry";
 import { FormCurrencyCreate, FormCurrencyEdit } from "../FormCurrency";
@@ -56,7 +57,6 @@ import {
 import { FormPortCreate, FormPortEdit } from "../FormPort";
 import { FormPriceCreate, FormPriceEdit } from "../FormPrice";
 import { FormProductCreate, FormProductEdit } from "../FormProduct";
-import { FormVersionCreate, FormVersionEdit } from "../FormVersion";
 
 function createEntityBlock({ Create, Edit, List }) {
     return function EntityBlock({ match: { path } }) {
@@ -215,15 +215,6 @@ export default function Main() {
                         Create: FormProductCreate,
                         Edit: FormProductEdit,
                         List: FilterListProduct,
-                    })}
-                />
-
-                <Route
-                    path="/:env/versions"
-                    component={createEntityBlock({
-                        Create: FormVersionCreate,
-                        Edit: FormVersionEdit,
-                        List: FilterListVersion,
                     })}
                 />
 

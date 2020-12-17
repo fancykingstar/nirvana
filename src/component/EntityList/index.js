@@ -28,9 +28,7 @@ export default function EntityList() {
         ["price-labels", false],
         ["prices", true],
         ["product-regions", false],
-        ["product-types", false],
         ["products", true],
-        ["versions", true],
     ].map(([slug, exists]) => ({
         to: `/${slug}`,
         label: slug.replace("-", " "),

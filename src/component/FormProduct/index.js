@@ -25,7 +25,6 @@ import AccommodationField from "./AccommodationField";
 import ApisField from "./ApisField";
 import CategoriesField from "./CategoriesField";
 import OperatorField from "./OperatorField";
-import ProductGroupsField from "./ProductGroupsField";
 import ProductTypeField from "./ProductTypeField";
 import RegionsField from "./RegionsField";
 import RelatedProductsField from "./RelatedProductsField";
@@ -80,7 +79,6 @@ function FormFields() {
             <hr className="form-field-grid-row-all" />
             <CategoriesField />
             <hr className="form-field-grid-row-all" />
-            <ProductGroupsField />
             <hr className="form-field-grid-row-all" />
             <RegionsField />
             <hr className="form-field-grid-row-all" />
