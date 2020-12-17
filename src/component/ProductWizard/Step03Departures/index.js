@@ -62,7 +62,7 @@ export default function Step03Departures({
                     Back
                 </ButtonEnvLink>
                 <ButtonEnvLink
-                    to={`/wizard/product/${id}/itinerary`}
+                    to={`/wizard/product/${id}/meta-groups`}
                     color="blue"
                 >
                     Next

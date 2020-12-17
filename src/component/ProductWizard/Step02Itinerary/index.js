@@ -3,21 +3,12 @@ import React from "react";
 import ButtonEnvLink from "../../ButtonEnvLink";
 import FormContentLoader from "../../FormContentLoader";
 import FormFieldGrid from "../../FormFieldGrid";
-import FormFieldRenderState from "../../FormFieldRenderState";
 import { FormFieldButtonBlock } from "../../FormFieldButton";
 import { useFormField, SubFormProvider } from "../../../hooks/useFormContext";
 
 import ProductItinerary from "./ProductItinerary";
 import ItinerarySearchByName from "./ItinerarySearchByName";
 import ItinerarySearchByProduct from "./ItinerarySearchByProduct";
-
-function requirementsMet(state) {
-    if (!state?.name) {
-        return false;
-    }
-
-    return true;
-}
 
 function ProductItineraries() {
     const [productId] = useFormField("id", []);
@@ -80,17 +71,18 @@ export default function Step02Itinerary({
             <hr className="form-field-grid-row-all" />
 
             <FormFieldButtonBlock>
-                <FormFieldRenderState>
-                    {(state) => (
-                        <ButtonEnvLink
-                            to={`/wizard/product/${id}/departures`}
-                            color="blue"
-                            disabled={!requirementsMet(state)}
-                        >
-                            Next
-                        </ButtonEnvLink>
-                    )}
-                </FormFieldRenderState>
+                <ButtonEnvLink
+                    to={`/wizard/product/${id}/basic-details`}
+                    color="blue"
+                >
+                    Back
+                </ButtonEnvLink>
+                <ButtonEnvLink
+                    to={`/wizard/product/${id}/departures`}
+                    color="blue"
+                >
+                    Next
+                </ButtonEnvLink>
             </FormFieldButtonBlock>
         </FormFieldGrid>
     );

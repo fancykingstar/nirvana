@@ -49,14 +49,22 @@ export default function Header() {
                 <UnderConstruction>Alpha Version</UnderConstruction>
                 <span className="text-xl pl-16">{packageJson.version}</span>
             </Title>
-            <EnvSelectorContainer>
-                environment:{" "}
-                <select onChange={(e) => setEnv(e.target.value)} value={apiEnv}>
-                    <option value="prod">production</option>
-                    <option value="dev">develop</option>
-                    <option value="local">local</option>
-                </select>
-            </EnvSelectorContainer>
+
+            {window.location.hostname ===
+            "prod.nirvana.imaginecruising.net" ? null : (
+                <EnvSelectorContainer>
+                    environment:
+                    <select
+                        className="ml-2"
+                        onChange={(e) => setEnv(e.target.value)}
+                        value={apiEnv}
+                    >
+                        <option value="prod">production</option>
+                        <option value="dev">develop</option>
+                        <option value="local">local</option>
+                    </select>
+                </EnvSelectorContainer>
+            )}
         </HeaderContainer>
     );
 }
