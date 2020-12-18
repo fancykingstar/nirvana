@@ -8,6 +8,7 @@ import SelectProduct from "./SelectProduct";
 import Step01BasicDetails from "./Step01BasicDetails";
 import Step02Itinerary from "./Step02Itinerary";
 import Step03Departures from "./Step03Departures";
+import Step04MetaGroups from "./Step04MetaGroups";
 
 function StepSelector() {
     return (
@@ -24,6 +25,10 @@ function StepSelector() {
                 <Route
                     path={`/:env/wizard/product/:id/departures`}
                     component={Step03Departures}
+                />
+                <Route
+                    path={`/:env/wizard/product/:id/meta-groups`}
+                    component={Step04MetaGroups}
                 />
             </Switch>
         </FormProvider>
