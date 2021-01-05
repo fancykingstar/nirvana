@@ -34,7 +34,7 @@
         "classname": "0.0.0",
         "core-js": "^3.6.5",
         "date-fns": "^2.16.1",
-        "jwt-decode": "^3.0.0",
+        "jwt-decode": "^3.1.2",
         "nanoid": "^3.1.12",
         "parcel-bundler": "^1.12.4",
         "polished": "^4.0.3",

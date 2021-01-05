@@ -223,7 +223,7 @@ export default function Main() {
                     component={ProductWizard}
                 />
 
-                <Route component={EntityList} />
+                <Route path="/:env" component={EntityList} />
             </Switch>
         </main>
     );
