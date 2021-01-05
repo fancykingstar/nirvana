@@ -1,4 +1,5 @@
 import React from "react";
+import jwtDecode from "jwt-decode";
 import {
     Redirect,
     Route,
@@ -28,6 +29,7 @@ export function useAPIFetch() {
 export default function AppContextProvider({ children }) {
     const history = useHistory();
     const routeMatch = useRouteMatch("/:env");
+    const [now, setNow] = React.useState(new Date().getTime() / 1000);
 
     const env = routeMatch?.params?.env ?? "prod";
 
@@ -37,6 +39,24 @@ export default function AppContextProvider({ children }) {
         },
         `app-session-${env}`,
     );
+
+    React.useEffect(() => {
+        const id = setInterval(() => {
+            setNow(new Date().getTime() / 1000);
+        }, 60 * 1000);
+
+        return () => {
+            clearTimeout(id);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        const exp = session.jwt ? jwtDecode(session.jwt)?.exp : null;
+
+        if (exp - 60 * 60 * 24 < now) {
+            setSession({ jwt: null });
+        }
+    }, [session, now]);
 
     const value = React.useMemo(
         () => ({
