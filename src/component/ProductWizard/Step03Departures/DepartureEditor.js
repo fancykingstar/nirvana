@@ -1,27 +1,44 @@
 import React from "react";
 import { format, addDays } from "date-fns";
 import cn from "classnames";
+import { mutate } from "swr";
 
+import Button from "../../Button";
 import FormContentLoader from "../../FormContentLoader";
 import FormFieldBoolean from "../../FormFieldBoolean";
 import FormFieldDate from "../../FormFieldDate";
 import FormFieldGrid from "../../FormFieldGrid";
 import FormFieldNumber from "../../FormFieldNumber";
 import FormFieldRenderState from "../../FormFieldRenderState";
-import { FormProvider, useFormField } from "../../../hooks/useFormContext";
 import {
     FormFieldButtonSave,
     FormFieldButtonReset,
 } from "../../FormFieldButton";
+import { FormProvider, useFormField } from "../../../hooks/useFormContext";
+import { useAPIFetch } from "../../AppContextProvider";
 
 function DepartureHeader() {
+    const fetch = useAPIFetch();
     const [id] = useFormField("id");
     const [dateIso] = useFormField("date", 0);
     const date = new Date(dateIso);
 
+    const [product] = useFormField("product", null);
+    const productId = product?.id;
+
     return (
         <React.Fragment>
             <h3 className="form-field-grid-row-all text-lg">
+                <Button
+                    className="mr-2"
+                    color="red"
+                    onClick={async function () {
+                        await fetch(`/departures/${id}`, { method: "DELETE" });
+                        await mutate(`/products/${productId}`);
+                    }}
+                >
+                    &#10005;
+                </Button>
                 {dateIso ? format(date, "dd/MM/yyyy") : "loading..."}
             </h3>
             <FormFieldDate prop="date" label="Date" />
