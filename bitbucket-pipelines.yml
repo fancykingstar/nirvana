@@ -19,6 +19,7 @@ pipelines:
           - node
         script:
           - mv .npmrc_bbpl .npmrc
+          - npm whoami
           - npm ci
           - npm run lint
           - npm run build
