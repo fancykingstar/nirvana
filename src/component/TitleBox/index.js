@@ -34,7 +34,6 @@ TitleBox.Header = classed.h1(
     "text-3xl",
     "text-black",
     "top-0",
-    "z-10",
 );
 
 TitleBox.Body = classed.div(
