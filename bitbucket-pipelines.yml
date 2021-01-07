@@ -18,6 +18,7 @@ pipelines:
         caches:
           - node
         script:
+          - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           - npm ci
           - npm run lint
           - npm run build
@@ -31,6 +32,7 @@ pipelines:
           caches:
             - node
           script:
+            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
             - npm ci
             - npm run lint
             - npm run build
@@ -43,6 +45,7 @@ pipelines:
           caches:
             - node
           script:
+            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
             - npm ci
             - pipe: atlassian/aws-s3-deploy:0.4.5
               variables:
@@ -57,6 +60,7 @@ pipelines:
           caches:
             - node
           script:
+            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
             - npm ci
             - pipe: atlassian/aws-s3-deploy:0.4.5
               variables:

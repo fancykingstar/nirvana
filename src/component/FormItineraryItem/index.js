@@ -1,9 +1,15 @@
 import React from "react";
 import useSWR from "swr";
 
+import {
+    FormFieldMultiple,
+    FormFieldAsset,
+} from "@imagine-developer/utopia-forms";
+
 import FormContentLoader from "../FormContentLoader";
 import FormFieldBoolean from "../FormFieldBoolean";
 import FormFieldGrid from "../FormFieldGrid";
+import FormFieldItemOrder from "./FormFieldItemOrder";
 import FormFieldLatLong from "../FormFieldLatLong";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
 import FormFieldOneOfFieldsGroup from "../FormFieldOneOfFieldsGroup";
@@ -12,8 +18,6 @@ import FormFieldString from "../FormFieldString";
 import FormFieldUUID from "../FormFieldUUID";
 import TitleBox from "../TitleBox";
 import { FormProvider } from "../../hooks/useFormContext";
-
-import FormFieldItemOrder from "./FormFieldItemOrder";
 
 import {
     FormFieldButtonBlock,
@@ -75,6 +79,13 @@ function FormFields() {
             <RequiredFormFields />
 
             <FormFieldRichText prop="description" label="Description" />
+
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
+            />
 
             <FormFieldOneOfFieldsGroup label="Physical Location">
                 <FormFieldOneOfFieldsGroup.Section
