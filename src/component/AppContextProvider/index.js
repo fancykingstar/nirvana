@@ -53,6 +53,10 @@ export default function AppContextProvider({ children }) {
     React.useEffect(() => {
         const exp = session.jwt ? jwtDecode(session.jwt)?.exp : null;
 
+        if (!exp) {
+            return;
+        }
+
         if (exp - 60 * 60 * 24 < now) {
             setSession({ jwt: null });
         }

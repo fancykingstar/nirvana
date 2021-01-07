@@ -81,6 +81,7 @@ function FormFields() {
             <FormFieldRichText prop="description" label="Description" />
 
             <FormFieldMultiple
+                label="Media"
                 prop="media"
                 addNewButton="Add New Image"
                 MultipleOf={FormFieldAsset}
