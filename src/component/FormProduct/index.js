@@ -24,11 +24,10 @@ import {
 import AccommodationField from "./AccommodationField";
 import ApisField from "./ApisField";
 import CategoriesField from "./CategoriesField";
+import CopyItems from "./CopyItems";
 import OperatorField from "./OperatorField";
-import ProductTypeField from "./ProductTypeField";
 import RegionsField from "./RegionsField";
 import RelatedProductsField from "./RelatedProductsField";
-import VersionsField from "./VersionsField";
 
 function FormFields() {
     return (
@@ -56,35 +55,26 @@ function FormFields() {
                     Imported
                 </FormFieldEnum.Option>
             </FormFieldEnum>
-            <FormFieldEnum prop="status" label="Status" defaultValue="live">
+            <FormFieldEnum prop="status" label="Status" defaultValue="draft">
                 <FormFieldEnum.Option value="live">Live</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="draft">Draft</FormFieldEnum.Option>
             </FormFieldEnum>
             <hr className="form-field-grid-row-all" />
             <FormFieldRichText prop="description" label="Description" />
             <hr className="form-field-grid-row-all" />
-            <FormFieldRichText
-                prop="product_includes"
-                label="Product Includes"
-            />
-
+            <CopyItems />
             <hr className="form-field-grid-row-all" />
             <OperatorField />
             <hr className="form-field-grid-row-all" />
             <AccommodationField />
             <hr className="form-field-grid-row-all" />
-            <ProductTypeField />
-            <hr className="form-field-grid-row-all" />
-
             <ApisField />
             <hr className="form-field-grid-row-all" />
             <CategoriesField />
             <hr className="form-field-grid-row-all" />
-            <hr className="form-field-grid-row-all" />
             <RegionsField />
             <hr className="form-field-grid-row-all" />
             <RelatedProductsField />
-            <hr className="form-field-grid-row-all" />
-            <VersionsField />
             <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
