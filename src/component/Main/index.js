@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 
 import Breadcrumb from "../Breadcrumb";
 import EntityList from "../EntityList";
+import AssetsEditor from "../AssetsEditor";
 
 import ProductWizard from "../ProductWizard";
 
@@ -75,6 +76,12 @@ export default function Main() {
         <main>
             <Breadcrumb />
             <Switch>
+                <Route path="/:env/assets-manager" component={AssetsEditor} />
+                <Route
+                    path="/:env/:site/assets-manager"
+                    component={AssetsEditor}
+                />
+
                 <Route
                     path="/:env/accommodation-grades"
                     component={createEntityBlock({
