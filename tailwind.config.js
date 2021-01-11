@@ -3,7 +3,7 @@ module.exports = {
         // removeDeprecatedGapUtilities: true,
         // purgeLayersByDefault: true,
     },
-    purge: ["src/**/*"],
+    purge: ["./src/**/*", "./node_modules/@imagine-developer/**/*"],
     theme: {
         extend: {
             gridTemplateColumns: {
