@@ -1,13 +1,20 @@
 import React from "react";
 
+import {
+    FormFieldLabel,
+    FormFieldAsset,
+    FormFieldLinkedUtopiaEntity,
+    FormFieldRichText,
+    FormFieldString,
+    FormProvider,
+    SubFormProvider,
+} from "@imagine-developer/utopia-forms";
+
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import FormFieldLinkedMany from "../FormFieldLinkedMany";
-import FormFieldString from "../FormFieldString";
-import FormFieldRichText from "../FormFieldRichText";
 import FormFieldUUID from "../FormFieldUUID";
 import TitleBox from "../TitleBox";
-import { FormProvider } from "../../hooks/useFormContext";
 
 import {
     FormFieldButtonBlock,
@@ -16,12 +23,49 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
+function CopyItem({ prop, label }) {
+    return (
+        <SubFormProvider prop={prop} defaultValue={{}}>
+            <FormFieldLabel>{label}</FormFieldLabel>
+
+            <FormFieldGrid className="form-field-grid-row-input">
+                <FormFieldString prop="title" label="Title" />
+                <FormFieldLinkedUtopiaEntity
+                    LinkedOf={FormFieldAsset}
+                    collectionType="assets"
+                    prop="image"
+                    label="Image"
+                />
+                <FormFieldRichText prop="description" label="Body" />
+            </FormFieldGrid>
+        </SubFormProvider>
+    );
+}
+
 function FormFields() {
     return (
         <React.Fragment>
             <FormFieldString prop="name" label="Name" />
             <FormFieldString prop="label" label="Label" />
             <FormFieldRichText prop="description" label="Description" />
+
+            <hr className="form-field-grid-row-all" />
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <CopyItem prop="accommodation" label="Accommodation" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="activities" label="Activities" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="dining" label="Dining" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="entertainment" label="Entertainment" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="events" label="Events" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="experience" label="Experience" />
+                <hr className="form-field-grid-row-all" />
+            </SubFormProvider>
+
+            <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
 }

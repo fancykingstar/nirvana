@@ -1,14 +1,20 @@
 import React from "react";
 
-import { FormProvider } from "../../hooks/useFormContext";
+import {
+    FormFieldAsset,
+    FormFieldLabel,
+    FormFieldLinkedUtopiaEntity,
+    FormFieldRichText,
+    FormFieldString,
+    FormProvider,
+    SubFormProvider,
+} from "@imagine-developer/utopia-forms";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
 import FormFieldDebug from "../FormFieldDebug";
-import FormFieldRichText from "../FormFieldRichText";
-import FormFieldString from "../FormFieldString";
 import FormFieldEnum from "../FormFieldEnum";
 import FormFieldSubformMultiple from "../FormFieldSubformMultiple";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
@@ -31,6 +37,25 @@ function Result({ id, name, set }) {
     return <li onClick={set.bind(null, id)}>{name}</li>;
 }
 
+function CopyItem({ prop, label }) {
+    return (
+        <SubFormProvider prop={prop} defaultValue={{}}>
+            <FormFieldLabel>{label}</FormFieldLabel>
+
+            <FormFieldGrid className="form-field-grid-row-input">
+                <FormFieldString prop="title" label="Title" />
+                <FormFieldLinkedUtopiaEntity
+                    LinkedOf={FormFieldAsset}
+                    collectionType="assets"
+                    prop="image"
+                    label="Image"
+                />
+                <FormFieldRichText prop="description" label="Body" />
+            </FormFieldGrid>
+        </SubFormProvider>
+    );
+}
+
 export function FormFields() {
     return (
         <React.Fragment>
@@ -49,6 +74,35 @@ export function FormFields() {
             </FormFieldEnum>
 
             <FormFieldRichText prop="description" label="Description" />
+
+            <hr className="form-field-grid-row-all" />
+
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <FormFieldLinkedUtopiaEntity
+                    LinkedOf={FormFieldAsset}
+                    collectionType="assets"
+                    prop="lifestyleHeroBanner"
+                    label="Lifestyle Hero Banner"
+                />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="keyFacts" label="Key Facts" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="entertainment" label="Entertainment" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="dining" label="Dining" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem prop="activities" label="Activities" />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem
+                    prop="whatsIncludedNoFly"
+                    label="What's included No Fly"
+                />
+                <hr className="form-field-grid-row-all" />
+                <CopyItem
+                    prop="whatsIncludedWithFly"
+                    label="What's included Fly"
+                />
+            </SubFormProvider>
         </React.Fragment>
     );
 }
