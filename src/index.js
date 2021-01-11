@@ -3,6 +3,7 @@ import "babel-polyfill";
 
 import React from "react";
 import { render } from "react-dom";
+import { WidgetLoader } from "react-cloudinary-upload-widget";
 
 import { BrowserRouter as RouterProvider } from "react-router-dom";
 
@@ -17,6 +18,7 @@ render(
         <AppContextProvider>
             <ToastProvider>
                 <SWRErrorProvider>
+                    <WidgetLoader />
                     <App />
                 </SWRErrorProvider>
             </ToastProvider>
