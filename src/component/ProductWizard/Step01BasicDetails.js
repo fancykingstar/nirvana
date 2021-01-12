@@ -1,10 +1,12 @@
 import React from "react";
 
-import FormFieldDebug from "../FormFieldDebug";
+import { SubFormProvider } from "@imagine-developer/utopia-forms";
+
 import ButtonEnvLink from "../ButtonEnvLink";
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import FormFieldLinkedSingleSelect from "../FormFieldLinkedSingleSelect";
+import FormFieldProductCardIncludes from "../FormFieldProductCardIncludes";
 import FormFieldProductCode from "../FormFieldProductCode";
 import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
@@ -44,8 +46,6 @@ export default function Step01Description({
 
             <FormContentLoader getApi={`/products/${id}`} />
 
-            <FormFieldDebug />
-
             <FormFieldString required label="Name" prop="name" />
             <FormFieldString required label="Label" prop="label" />
             <FormFieldProductCode required label="Product Code" prop="code" />
@@ -78,13 +78,20 @@ export default function Step01Description({
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldString label="USP Top" prop="uspTop" />
-            <FormFieldString label="USP Bottom" prop="uspBottom" />
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <FormFieldString label="USP Top" prop="uspTop" />
+                <FormFieldString label="USP Bottom" prop="uspBottom" />
+            </SubFormProvider>
+
             <FormFieldRichText prop="description" label="Description" />
             <FormFieldRichText
                 prop="product_includes"
                 label="Product Includes"
             />
+
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <FormFieldProductCardIncludes />
+            </SubFormProvider>
 
             <hr className="form-field-grid-row-all" />
 
