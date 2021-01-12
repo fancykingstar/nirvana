@@ -64,8 +64,11 @@ function FormFields() {
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldString label="USP Top" prop="uspTop" />
-            <FormFieldString label="USP Bottom" prop="uspBottom" />
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <FormFieldString label="USP Top" prop="uspTop" />
+                <FormFieldString label="USP Bottom" prop="uspBottom" />
+            </SubFormProvider>
+
             <FormFieldRichText prop="description" label="Description" />
             <FormFieldRichText
                 prop="product_includes"
