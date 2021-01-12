@@ -1,6 +1,7 @@
 import React from "react";
 
 import {
+    FormFieldMultiple,
     FormFieldAsset,
     FormFieldLabel,
     FormFieldLinkedUtopiaEntity,
@@ -85,7 +86,14 @@ export function FormFields() {
                     label="Lifestyle Hero Banner"
                 />
                 <hr className="form-field-grid-row-all" />
-                <CopyItem prop="keyFacts" label="Key Facts" />
+
+                <FormFieldMultiple
+                    label="Ship Facts"
+                    prop="shipFacts"
+                    addNewButton="Add New Fact"
+                    MultipleOf={FormFieldString}
+                />
+
                 <hr className="form-field-grid-row-all" />
                 <CopyItem prop="entertainment" label="Entertainment" />
                 <hr className="form-field-grid-row-all" />
