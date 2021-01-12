@@ -3,11 +3,11 @@ import { mutate } from "swr";
 import { mutateMany } from "swr-mutate-many";
 import { useHistory } from "react-router-dom";
 
+import { TitleBoxModal, FormContext } from "@imagine-developer/utopia-forms";
+
 import { useAPIFetch } from "../AppContextProvider";
 import { useToast } from "../ToastProvider";
 import classed from "../ClassedComponent";
-
-import { FormContext } from "../../hooks/useFormContext";
 
 import FormFieldButton from "../Button";
 
@@ -31,6 +31,85 @@ export function FormFieldButtonReset() {
     );
 }
 
+export function FormFieldButtonDelete({
+    nameProp,
+    listApi,
+    deleteApi,
+    onDeleted = noop,
+    children,
+}) {
+    const fetcher = useAPIFetch();
+    const { addToast, removeToast } = useToast();
+
+    const {
+        state: { local },
+    } = React.useContext(FormContext);
+
+    async function onDelete(onClose) {
+        const startSaveToastId = addToast({
+            title: "Deleting",
+            message: local[nameProp],
+        });
+
+        try {
+            await fetcher(deleteApi, {
+                method: "DELETE",
+            });
+
+            onClose();
+            onDeleted();
+
+            removeToast(startSaveToastId);
+
+            addToast({
+                color: "green",
+                title: "Deleted",
+                timeout: 3000,
+                message: local[nameProp],
+            });
+
+            mutateMany(`${listApi}*`);
+        } catch (e) {
+            removeToast(startSaveToastId);
+
+            addToast({
+                color: "red",
+                title: "Delete Failed",
+                timeout: 3000,
+                message: Object.values(e).join("\n"),
+            });
+        }
+    }
+
+    return (
+        <TitleBoxModal
+            buttonText={children ? children : "Delete"}
+            buttonColor="red"
+            Header={() => <React.Fragment>Confirm Delete</React.Fragment>}
+        >
+            {({ onClose }) => (
+                <React.Fragment>
+                    <div>
+                        Are you sure you want to delete{" "}
+                        {`"${local[nameProp]}"?`}
+                    </div>
+
+                    <div className="flex justify-between">
+                        <FormFieldButton color="green" onClick={onClose}>
+                            No, Go Back
+                        </FormFieldButton>
+                        <FormFieldButton
+                            color="red"
+                            onClick={onDelete.bind(null, onClose)}
+                        >
+                            Yes, Delete
+                        </FormFieldButton>
+                    </div>
+                </React.Fragment>
+            )}
+        </TitleBoxModal>
+    );
+}
 export function FormFieldButtonSave({
     nameProp,
     listApi,

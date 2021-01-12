@@ -21,8 +21,9 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import {
     FormFieldButtonBlock,
-    FormFieldButtonReset,
     FormFieldButtonCreate,
+    FormFieldButtonDelete,
+    FormFieldButtonReset,
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
@@ -195,6 +196,7 @@ export function FormItineraryItemCreate({
 }
 
 export function FormItineraryItemEdit({
+    history,
     match: {
         params: { id },
     },
@@ -202,6 +204,7 @@ export function FormItineraryItemEdit({
     const getApi = `/itinerary-items/${id}`;
     const listApi = "/itinerary-items";
     const putApi = `/itinerary-items/${id}`;
+    const deleteApi = `/itinerary-items/${id}`;
 
     return (
         <FormProvider>
@@ -220,6 +223,12 @@ export function FormItineraryItemEdit({
                                 putApi={putApi}
                                 getApi={getApi}
                                 listApi={listApi}
+                            />
+                            <FormFieldButtonDelete
+                                nameProp="name"
+                                deleteApi={deleteApi}
+                                listApi={listApi}
+                                onDeleted={history.goBack}
                             />
                         </FormFieldButtonBlock>
                     </FormFieldGrid>
