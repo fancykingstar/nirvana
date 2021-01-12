@@ -21,9 +21,6 @@ function requirementsMet(state) {
     if (!state?.code) {
         return false;
     }
-    if (!state?.description) {
-        return false;
-    }
     if (!state?.operator) {
         return false;
     }
@@ -70,7 +67,10 @@ export default function Step01Description({
                         prop="primary_accommodation"
                         searchApi="/accommodations"
                         staticFilter={{
-                            organisation: operator?.id,
+                            organisation:
+                                typeof operator === "number"
+                                    ? operator
+                                    : operator?.id,
                         }}
                     />
                 )}
@@ -78,10 +78,12 @@ export default function Step01Description({
 
             <hr className="form-field-grid-row-all" />
 
+            <FormFieldString label="USP Top" prop="uspTop" />
+            <FormFieldString label="USP Bottom" prop="uspBottom" />
+            <FormFieldRichText prop="description" label="Description" />
             <FormFieldRichText
-                required
-                label="Description"
-                prop="description"
+                prop="product_includes"
+                label="Product Includes"
             />
 
             <hr className="form-field-grid-row-all" />

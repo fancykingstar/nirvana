@@ -37,6 +37,8 @@ function FormFields() {
             <FormFieldString required prop="label" label="Label" />
             <FormFieldString required prop="code" label="Code" />
 
+            <hr className="form-field-grid-row-all" />
+
             <FormFieldBoolean
                 prop="exclude_from_search"
                 label="Exclude From Search"
@@ -55,16 +57,22 @@ function FormFields() {
                     Imported
                 </FormFieldEnum.Option>
             </FormFieldEnum>
+
             <FormFieldEnum prop="status" label="Status" defaultValue="draft">
                 <FormFieldEnum.Option value="live">Live</FormFieldEnum.Option>
                 <FormFieldEnum.Option value="draft">Draft</FormFieldEnum.Option>
             </FormFieldEnum>
+
             <hr className="form-field-grid-row-all" />
+
+            <FormFieldString label="USP Top" prop="uspTop" />
+            <FormFieldString label="USP Bottom" prop="uspBottom" />
             <FormFieldRichText prop="description" label="Description" />
             <FormFieldRichText
                 prop="product_includes"
                 label="Product Includes"
             />
+
             <hr className="form-field-grid-row-all" />
             <CopyItems />
             <hr className="form-field-grid-row-all" />
