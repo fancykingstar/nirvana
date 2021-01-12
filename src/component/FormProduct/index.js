@@ -1,14 +1,14 @@
 import React from "react";
 
-import { FormProvider } from "../../hooks/useFormContext";
+import { SubFormProvider, FormProvider } from "@imagine-developer/utopia-forms";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
 import TitleBox from "../TitleBox";
 
 import FormFieldBoolean from "../FormFieldBoolean";
-import FormFieldDebug from "../FormFieldDebug";
 import FormFieldEnum from "../FormFieldEnum";
+import FormFieldProductCardIncludes from "../FormFieldProductCardIncludes";
 import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
 import FormFieldString from "../FormFieldString";
@@ -32,7 +32,6 @@ import RelatedProductsField from "./RelatedProductsField";
 function FormFields() {
     return (
         <React.Fragment>
-            <FormFieldDebug />
             <FormFieldString required prop="name" label="Name" />
             <FormFieldString required prop="label" label="Label" />
             <FormFieldString required prop="code" label="Code" />
@@ -72,6 +71,10 @@ function FormFields() {
                 prop="product_includes"
                 label="Product Includes"
             />
+
+            <SubFormProvider prop="copy_items" defaultValue={{}}>
+                <FormFieldProductCardIncludes />
+            </SubFormProvider>
 
             <hr className="form-field-grid-row-all" />
             <CopyItems />
