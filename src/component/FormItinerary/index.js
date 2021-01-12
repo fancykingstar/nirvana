@@ -14,6 +14,7 @@ import {
     FormFieldButtonReset,
     FormFieldButtonCreate,
     FormFieldButtonSave,
+    FormFieldButtonDuplicate,
 } from "../FormFieldButton";
 
 function FormFields() {
@@ -67,13 +68,15 @@ export function FormItineraryCreate({
 }
 
 export function FormItineraryEdit({
+    history,
     match: {
-        params: { id },
+        params: { env, id },
     },
 }) {
     const getApi = `/itineraries/${id}`;
     const listApi = "/itineraries";
     const putApi = `/itineraries/${id}`;
+    const duplicateApi = `/itineraries/${id}`;
 
     return (
         <FormProvider>
@@ -89,6 +92,17 @@ export function FormItineraryEdit({
 
                         <FormFieldButtonBlock>
                             <FormFieldButtonReset />
+
+                            <FormFieldButtonDuplicate
+                                nameProp="name"
+                                listApi={listApi}
+                                duplicateApi={duplicateApi}
+                                onDuplicated={(id) =>
+                                    history.push(
+                                        `/${env}/itineraries/edit/${id}`,
+                                    )
+                                }
+                            />
                             <FormFieldButtonSave
                                 nameProp="name"
                                 putApi={putApi}
