@@ -61,6 +61,10 @@ function FormFields() {
             </FormFieldEnum>
             <hr className="form-field-grid-row-all" />
             <FormFieldRichText prop="description" label="Description" />
+            <FormFieldRichText
+                prop="product_includes"
+                label="Product Includes"
+            />
             <hr className="form-field-grid-row-all" />
             <CopyItems />
             <hr className="form-field-grid-row-all" />
