@@ -35,7 +35,7 @@ function AirportHeader({ onChangeSort, sortBy, sortDirection }) {
 
 function AirportRow(props) {
     const { data: cityData } = useSWR(
-        props.city ? `/cities/${props.city.id}` : null,
+        props.city?.id ? `/cities/${props.city.id}` : null,
     );
 
     return (
@@ -49,8 +49,8 @@ function AirportRow(props) {
                 {props.latitude}, {props.longitude}
             </FilterList.Cell>
             <FilterList.Cell>
-                <EnvLink to={`/cities/edit/${props.city.id}`}>
-                    {props.city.name} ({cityData?.country?.name ?? "..."})
+                <EnvLink to={`/cities/edit/${props.city?.id}`}>
+                    {props.city?.name} ({cityData?.country?.name ?? "..."})
                 </EnvLink>
             </FilterList.Cell>
         </React.Fragment>
