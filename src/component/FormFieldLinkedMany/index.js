@@ -18,6 +18,7 @@ export default function FormFieldLinkedMany({
     searchApi,
     RenderLinked,
     RenderSearchResult,
+    staticFilter = {},
 }) {
     const [search, setSearch] = React.useState("");
     const [linked, setLinked] = useFormField(prop, []);
@@ -25,6 +26,7 @@ export default function FormFieldLinkedMany({
     const { data } = useSWR(
         search.length
             ? `${searchApi}?${qs.stringify({
+                  ...staticFilter,
                   [`${searchProp}_contains`]: search,
               })}`
             : null,

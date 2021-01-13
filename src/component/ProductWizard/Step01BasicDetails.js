@@ -5,6 +5,7 @@ import { SubFormProvider } from "@imagine-developer/utopia-forms";
 import ButtonEnvLink from "../ButtonEnvLink";
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
+import FormFieldLinkedMany from "../FormFieldLinkedMany";
 import FormFieldLinkedSingleSelect from "../FormFieldLinkedSingleSelect";
 import FormFieldProductCardIncludes from "../FormFieldProductCardIncludes";
 import FormFieldProductCode from "../FormFieldProductCode";
@@ -75,6 +76,29 @@ export default function Step01Description({
                     />
                 )}
             </FormFieldRenderState>
+
+            <hr className="form-field-grid-row-input" />
+
+            <FormFieldLinkedMany
+                label="Secondary Accomodations"
+                prop="additional_accommodations"
+                searchProp="name"
+                searchApi="/accommodations"
+                RenderLinked={function LinkedAccomodation({
+                    name,
+                    id,
+                    remove,
+                }) {
+                    return <li onClick={remove.bind(null, id)}>{name}</li>;
+                }}
+                RenderSearchResult={function ResultAccomodation({
+                    id,
+                    name,
+                    add,
+                }) {
+                    return <li onClick={add.bind(null, id)}>{name}</li>;
+                }}
+            />
 
             <hr className="form-field-grid-row-all" />
 
