@@ -2,9 +2,9 @@ import React from "react";
 import useSWR, { mutate } from "swr";
 import qs from "querystring";
 
-import Button from "../../Button";
+import { Button, TitleBoxModal } from "@imagine-developer/utopia-forms";
+
 import EnvLink from "../../EnvLink";
-import TitleBoxModalWithVisibilityButton from "../../TitleBoxModalWithVisibilityButton";
 import classed from "../../ClassedComponent";
 import { KeyboardInputBox } from "../../Input";
 import { useAPIFetch } from "../../AppContextProvider";
@@ -69,7 +69,7 @@ export default function ItinerarySearchByName({ productId }) {
     }
 
     return (
-        <TitleBoxModalWithVisibilityButton
+        <TitleBoxModal
             Header={({ onClose }) => (
                 <React.Fragment>
                     <span className="flex-1 pr-4">Search By Name</span>
@@ -91,68 +91,71 @@ export default function ItinerarySearchByName({ productId }) {
                             value={searchString}
                         />
                     </div>
-
-                    <table className="border-t-2 border-l-2">
-                        <thead>
-                            <Tr>
-                                <Td>Add</Td>
-                                <Td>Id</Td>
-                                <Td>Name</Td>
-                                <Td>Items</Td>
-                                <Td>Days</Td>
-                                <Td>Products</Td>
-                            </Tr>
-                        </thead>
-                        <tbody>
-                            {data
-                                ? data.map(
-                                      ({
-                                          id,
-                                          name,
-                                          products,
-                                          itinerary_items,
-                                      }) => (
-                                          <Tr key={id}>
-                                              <Td>
-                                                  <Button
-                                                      color="green"
-                                                      onClick={() => {
-                                                          createProductItinerary(
-                                                              {
-                                                                  itineraryId: id,
-                                                              },
-                                                          );
-                                                          onClose();
-                                                      }}
-                                                  >
-                                                      Add
-                                                  </Button>
-                                              </Td>
-                                              <Td>
-                                                  <EnvLink
-                                                      to={`/itineraries/${id}`}
-                                                  >
-                                                      {id}
-                                                  </EnvLink>
-                                              </Td>
-                                              <Td>{name}</Td>
-                                              <Td>{itinerary_items.length}</Td>
-                                              <Td>
-                                                  {
-                                                      itinerary_items.slice(
-                                                          -1,
-                                                      )[0]?.end_day
-                                                  }
-                                              </Td>
-                                              <Td>{products.length} </Td>
-                                          </Tr>
-                                      ),
-                                  )
-                                : null}
-                        </tbody>
-                    </table>
+                    <div className="overflow-y-auto ">
+                        <table className="border-t-2 border-l-2">
+                            <thead>
+                                <Tr>
+                                    <Td>Add</Td>
+                                    <Td>Id</Td>
+                                    <Td>Name</Td>
+                                    <Td>Items</Td>
+                                    <Td>Days</Td>
+                                    <Td>Products</Td>
+                                </Tr>
+                            </thead>
+                            <tbody>
+                                {data
+                                    ? data.map(
+                                          ({
+                                              id,
+                                              name,
+                                              products,
+                                              itinerary_items,
+                                          }) => (
+                                              <Tr key={id}>
+                                                  <Td>
+                                                      <Button
+                                                          color="green"
+                                                          onClick={() => {
+                                                              createProductItinerary(
+                                                                  {
+                                                                      itineraryId: id,
+                                                                  },
+                                                              );
+                                                              onClose();
+                                                          }}
+                                                      >
+                                                          Add
+                                                      </Button>
+                                                  </Td>
+                                                  <Td>
+                                                      <EnvLink
+                                                          to={`/itineraries/${id}`}
+                                                      >
+                                                          {id}
+                                                      </EnvLink>
+                                                  </Td>
+                                                  <Td>{name}</Td>
+                                                  <Td>
+                                                      {itinerary_items.length}
+                                                  </Td>
+                                                  <Td>
+                                                      {
+                                                          itinerary_items.slice(
+                                                              -1,
+                                                          )[0]?.end_day
+                                                      }
+                                                  </Td>
+                                                  <Td>{products.length} </Td>
+                                              </Tr>
+                                          ),
+                                      )
+                                    : null}
+                            </tbody>
+                        </table>
+                    </div>
                 </React.Fragment>
             )}
-        </TitleBoxModalWithVisibilityButton>
+        </TitleBoxModal>
     );
 }
