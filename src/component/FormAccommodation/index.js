@@ -72,6 +72,9 @@ export function FormFields() {
                 defaultValue="Ship"
             >
                 <FormFieldEnum.Option value="Ship">Ship</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="Event">Event</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="Train">Train</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="Hotel">Hotel</FormFieldEnum.Option>
             </FormFieldEnum>
 
             <FormFieldRichText prop="description" label="Description" />
