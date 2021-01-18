@@ -1,5 +1,4 @@
 import React from "react";
-import useSWR from "swr";
 import cn from "classnames";
 
 import Button from "../Button";
@@ -48,7 +47,7 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
     );
 }
 
-function ProductRow({ id, code, i, name }) {
+function ProductRow({ id, code, name }) {
     return (
         <React.Fragment>
             <FilterList.Cell>
