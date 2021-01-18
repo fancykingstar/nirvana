@@ -148,9 +148,11 @@ export default function FilterList({
             <TitleBox.Header>
                 <div className="flex-1">{title}</div>
 
-                <EnvLink to={createRoute} className="flex no-underline">
-                    <Button color="green">Create New</Button>
-                </EnvLink>
+                {createRoute ? (
+                    <EnvLink to={createRoute} className="flex no-underline">
+                        <Button color="green">Create New</Button>
+                    </EnvLink>
+                ) : null}
             </TitleBox.Header>
             <TitleBox.Body>
                 <SearchFilter {...{ count, searchFilter, setSearchFilter }} />
