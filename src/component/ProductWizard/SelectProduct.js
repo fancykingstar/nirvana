@@ -1,9 +1,9 @@
 import React from "react";
-import useSWR from "swr";
 import cn from "classnames";
 
 import Button from "../Button";
 import EnvLink from "../EnvLink";
+import FilterList from "../FilterList";
 import FormFieldGrid from "../FormFieldGrid";
 import FormFieldProductCode from "../FormFieldProductCode";
 import FormFieldStatic from "../FormFieldStatic";
@@ -16,6 +16,67 @@ import {
     FormFieldButtonBlock,
     FormFieldButtonCreate,
 } from "../FormFieldButton";
+
+function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
+    return (
+        <React.Fragment>
+            <FilterList.ControlCell
+                width="10%"
+                onClick={onChangeSort.bind(null, "id")}
+                arrowDirection={sortBy === "id" ? sortDirection : null}
+            >
+                Id
+            </FilterList.ControlCell>
+
+            <FilterList.ControlCell
+                width="10%"
+                onClick={onChangeSort.bind(null, "code")}
+                arrowDirection={sortBy === "code" ? sortDirection : null}
+            >
+                Code
+            </FilterList.ControlCell>
+
+            <FilterList.ControlCell
+                width="40%"
+                onClick={onChangeSort.bind(null, "name")}
+                arrowDirection={sortBy === "name" ? sortDirection : null}
+            >
+                Name
+            </FilterList.ControlCell>
+        </React.Fragment>
+    );
+}
+
+function ProductRow({ id, code, name }) {
+    return (
+        <React.Fragment>
+            <FilterList.Cell>
+                <EnvLink to={`/wizard/product/${id}`}>{id}</EnvLink>
+            </FilterList.Cell>
+            <FilterList.Cell>
+                <EnvLink to={`/wizard/product/${id}`}>{code}</EnvLink>
+            </FilterList.Cell>
+            <FilterList.Cell>
+                <EnvLink to={`/wizard/product/${id}`}>{name}</EnvLink>
+            </FilterList.Cell>
+        </React.Fragment>
+    );
+}
+
+function FilterListProduct() {
+    return (
+        <FilterList
+            title="Products"
+            listApi="/products"
+            getDeleteApi={(id) => `/products/${id}`}
+            HeaderComponent={ProductHeader}
+            FooterComponent={ProductHeader}
+            RowComponent={ProductRow}
+            rows={4}
+            searchFilterColName="name"
+        />
+    );
+}
 
 function NewProductModal({ history, url, onClose }) {
     return (
@@ -90,37 +151,19 @@ export default function SelectProduct({ history, match: { url } }) {
     const [showCreateProductModal, setShowCreateProductModal] = React.useState(
         false,
     );
-    const { data } = useSWR("/products");
-    const products = data ?? [];
 
     return (
         <React.Fragment>
             <h2>Select A Product:</h2>
 
-            <ul className="list-disc pl-4">
-                {products.map(({ code, active, name, status, id }) => (
-                    <li key={id}>
-                        <EnvLink to={`/wizard/product/${id}`}>
-                            <span className="px-1">({code})</span>
-                            <span className="px-1">
-                                [{active ? "active" : "inactive"} | {status}]
-                            </span>
-                            <span className="px-1">{name}</span>
-                        </EnvLink>
-                    </li>
-                ))}
-            </ul>
+            <FilterListProduct />
 
-            {data ? (
-                <Button
-                    color="green"
-                    onClick={setShowCreateProductModal.bind(null, true)}
-                >
-                    Create New Product
-                </Button>
-            ) : (
-                "loading..."
-            )}
+            <Button
+                color="green"
+                onClick={setShowCreateProductModal.bind(null, true)}
+            >
+                Create New Product
+            </Button>
 
             {showCreateProductModal ? (
                 <NewProductModal
