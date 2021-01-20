@@ -17,7 +17,13 @@ import {
     FormFieldButtonReset,
     FormFieldButtonCreate,
     FormFieldButtonSave,
+    FormFieldRichText,
 } from "../FormFieldButton";
+
+import {
+    FormFieldMultiple,
+    FormFieldAsset,
+} from "@imagine-developer/utopia-forms";
 
 function LinkedAirport({ name }) {
     return <span>{name}</span>;
@@ -70,6 +76,15 @@ function FormFields() {
                 searchApi="/cities"
                 RenderLinked={LinkedCity}
                 RenderSearchResult={SearchResultCity}
+            />
+
+            <FormFieldRichText prop="description" label="Description" />
+
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
             />
         </React.Fragment>
     );

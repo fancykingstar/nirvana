@@ -36,7 +36,7 @@ function PortHeader({ onChangeSort, sortBy, sortDirection }) {
 
 function PortRow(props) {
     const { data: cityData } = useSWR(
-        props.city ? `/cities/${props.city.id}` : null,
+        props.city?.id ? `/cities/${props.city.id}` : null,
     );
 
     return (
@@ -49,13 +49,13 @@ function PortRow(props) {
                 {props.latitude}, {props.longitude}
             </FilterList.Cell>
             <FilterList.Cell>
-                <EnvLink to={`/cities/edit/${props.city.id}`}>
-                    {props.city.name} ({cityData?.country?.name ?? "..."})
+                <EnvLink to={`/cities/edit/${props.city?.id}`}>
+                    {props.city?.name} ({cityData?.country?.name ?? "..."})
                 </EnvLink>
             </FilterList.Cell>
             <FilterList.Cell>
-                <EnvLink to={`/cities/edit/${props.nearest_airport.id}`}>
-                    {props.nearest_airport.name}
+                <EnvLink to={`/cities/edit/${props.nearest_airport?.id}`}>
+                    {props.nearest_airport?.name}
                 </EnvLink>
             </FilterList.Cell>
         </React.Fragment>
