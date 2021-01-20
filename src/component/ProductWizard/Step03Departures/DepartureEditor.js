@@ -14,6 +14,7 @@ import {
     FormFieldButtonSave,
     FormFieldButtonReset,
 } from "../../FormFieldButton";
+import FormFieldLinkedSingle from "../../FormFieldLinkedSingle";
 import { FormProvider, useFormField } from "../../../hooks/useFormContext";
 import { useAPIFetch } from "../../AppContextProvider";
 
@@ -26,9 +27,17 @@ function DepartureHeader() {
     const [product] = useFormField("product", null);
     const productId = product?.id;
 
+    function AirportLinked({ name }) {
+        return <span>{name}</span>;
+    }
+
+    function AirportResult({ id, name, set }) {
+        return <li onClick={set.bind(null, id)}>{name}</li>;
+    }
+
     return (
         <React.Fragment>
-            <h3 className="form-field-grid-row-all text-lg">
+            <h3 className="text-lg form-field-grid-row-all">
                 <Button
                     className="mr-2"
                     color="red"
@@ -41,13 +50,26 @@ function DepartureHeader() {
                 </Button>
                 {dateIso ? format(date, "dd/MM/yyyy") : "loading..."}
             </h3>
+
             <FormFieldDate prop="date" label="Date" />
+
+            <FormFieldLinkedSingle
+                RenderLinked={AirportLinked}
+                RenderSearchResult={AirportResult}
+                label="From Airport"
+                prop="from_airport"
+                required
+                searchApi="/airports"
+                searchProp="name"
+            />
+            <div />
             <FormFieldButtonSave
                 nameProp="date"
                 listApi="/departures"
                 getApi={`/departures/${id}`}
                 putApi={`/departures/${id}`}
             />
+            <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
 }
@@ -130,7 +152,7 @@ function ShowDepartureItineraryItems({ sortedItineraryItems }) {
     const date = new Date(dateIso);
 
     return (
-        <ol className="list-disc pl-4">
+        <ol className="pl-4 list-disc">
             {sortedItineraryItems.map(({ id, label, startDay, endDay }, i) => (
                 <li key={"" + id + i}>
                     <span className="px-1">
@@ -150,14 +172,14 @@ function ShowDepartureItineraryItems({ sortedItineraryItems }) {
 export default function DepartureEditor({ id, sortedItineraryItems }) {
     return (
         <FormProvider>
-            <FormFieldGrid className="form-field-grid-row-input border rounded shadow p-2 m-2">
+            <FormFieldGrid className="p-2 m-2 border rounded shadow form-field-grid-row-input">
                 <FormContentLoader getApi={`/departures/${id}`} />
                 <DepartureHeader />
 
                 <div className="form-field-grid-row-label">Prices</div>
                 <PricesEditor />
 
-                <details className="form-field-grid-row-all cursor-pointer">
+                <details className="cursor-pointer form-field-grid-row-all">
                     <summary>Specific Itinarary Days</summary>
 
                     <ShowDepartureItineraryItems
