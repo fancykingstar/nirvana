@@ -76,6 +76,8 @@ export default function LoginForm() {
 
         removeToast(loginToastId);
 
+        delete response.user.audit_logs;
+
         if (response.error) {
             return addToast({
                 color: "red",
