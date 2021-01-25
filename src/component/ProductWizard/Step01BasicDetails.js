@@ -40,7 +40,7 @@ export default function Step01Description({
     },
 }) {
     return (
-        <FormFieldGrid>
+        <FormFieldGrid className="product-basic-1">
             <div className="form-field-grid-row-all">
                 <h2 className="text-xl">Step 1: Product Basic Details</h2>
             </div>
@@ -119,8 +119,9 @@ export default function Step01Description({
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldButtonBlock>
+            <FormFieldButtonBlock className="save-btn-list">
                 <FormFieldButtonSave
+                    color="orange"
                     nameProp="name"
                     listApi="/products"
                     getApi={`/products/${id}`}
@@ -130,7 +131,7 @@ export default function Step01Description({
                     {(state) => (
                         <ButtonEnvLink
                             to={`/wizard/product/${id}/itinerary`}
-                            color="blue"
+                            color="orange"
                             disabled={!requirementsMet(state)}
                         >
                             Next

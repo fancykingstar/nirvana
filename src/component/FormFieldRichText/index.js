@@ -15,7 +15,6 @@ const TextArea = classed.textarea(
     "block",
     "w-full",
     "border",
-
     "border-2",
     "border-gray-400",
 );

@@ -27,6 +27,7 @@ export default function FormFieldProductCardIncludes() {
     return (
         <FormFieldMultiple
             label="Product Card Includes"
+            color="orange"
             prop="productCardIncludes"
             addNewButton="Add New Product Card Include"
             MultipleOf={ProductCardInclude}

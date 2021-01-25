@@ -56,8 +56,8 @@ export default function FormFieldLinkedMany({
         <React.Fragment>
             <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <InputArea>
-                <h3>Current:</h3>
-                <ul className="list-disc list-deleteable pl-4">
+                <h3 className="text-orange-500">Current:</h3>
+                <ul className="list-none list-deleteable bg-list-gray">
                     {linked.map((linkedEntity) => (
                         <RenderLinked
                             key={linkedEntity.id}
@@ -69,7 +69,7 @@ export default function FormFieldLinkedMany({
 
                 <br />
 
-                <h3>Add:</h3>
+                <h3 className="text-orange-500">Add:</h3>
                 <KeyboardInputBox
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}

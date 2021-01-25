@@ -60,7 +60,7 @@ export default function ConfirmPage({ decrementPage }) {
             <hr className="form-field-grid-row-all" />
 
             <div className="form-field-grid-row-input">
-                <Button color="blue" onClick={decrementPage}>
+                <Button color="orange" onClick={decrementPage}>
                     Back
                 </Button>
 

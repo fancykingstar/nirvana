@@ -14,7 +14,6 @@ import {
     FormFieldButtonSave,
     FormFieldButtonReset,
 } from "../../FormFieldButton";
-import FormFieldLinkedSingle from "../../FormFieldLinkedSingle";
 import { FormProvider, useFormField } from "../../../hooks/useFormContext";
 import { useAPIFetch } from "../../AppContextProvider";
 
@@ -27,17 +26,9 @@ function DepartureHeader() {
     const [product] = useFormField("product", null);
     const productId = product?.id;
 
-    function AirportLinked({ name }) {
-        return <span>{name}</span>;
-    }
-
-    function AirportResult({ id, name, set }) {
-        return <li onClick={set.bind(null, id)}>{name}</li>;
-    }
-
     return (
         <React.Fragment>
-            <h3 className="text-lg form-field-grid-row-all">
+            <h3 className="form-field-grid-row-all text-lg close-button">
                 <Button
                     className="mr-2"
                     color="red"
@@ -50,26 +41,13 @@ function DepartureHeader() {
                 </Button>
                 {dateIso ? format(date, "dd/MM/yyyy") : "loading..."}
             </h3>
-
             <FormFieldDate prop="date" label="Date" />
-
-            <FormFieldLinkedSingle
-                RenderLinked={AirportLinked}
-                RenderSearchResult={AirportResult}
-                label="From Airport"
-                prop="from_airport"
-                required
-                searchApi="/airports"
-                searchProp="name"
-            />
-            <div />
             <FormFieldButtonSave
                 nameProp="date"
                 listApi="/departures"
                 getApi={`/departures/${id}`}
                 putApi={`/departures/${id}`}
             />
-            <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
 }
@@ -79,7 +57,7 @@ function PriceEditor({ id }) {
         <FormProvider>
             <FormContentLoader getApi={`/prices/${id}`} />
 
-            <div className="pr-2">
+            <div className="pr-2 text-orange-500">
                 <FormFieldRenderState>
                     {({ accommodation_grade: accommodationGrade }) =>
                         accommodationGrade?.label ?? ""
@@ -87,23 +65,23 @@ function PriceEditor({ id }) {
                 </FormFieldRenderState>
             </div>
 
-            <div>
+            <div className="text-orange-500">
                 <FormFieldNumber prop="now_price" />
             </div>
 
-            <div>
+            <div className="text-orange-500">
                 <FormFieldNumber prop="was_price" />
             </div>
 
-            <div>
+            <div className="text-orange-500">
                 <FormFieldBoolean prop="sold_out" />
             </div>
 
-            <div>
+            <div className="text-orange-500">
                 <FormFieldBoolean prop="generic_price" />
             </div>
 
-            <div>
+            <div className="td-save-btn">
                 <FormFieldButtonSave
                     nameProp="now_price"
                     listApi="/prices"
@@ -119,7 +97,7 @@ function PriceEditor({ id }) {
 }
 
 function PricesEditor() {
-    const [prices] = useFormField("prices", []);
+    const [prices] = useFormField("prices ", []);
 
     return (
         <div
@@ -129,14 +107,14 @@ function PricesEditor() {
                 "grid",
                 "grid-cols-6-auto",
                 "items-center",
-                "justify-items-center",
+                "justify-items-start",
             )}
         >
-            <div>Accommodation Grade</div>
-            <div>Now Price</div>
-            <div>Was Price</div>
-            <div>Sold Out</div>
-            <div>Generic Price</div>
+            <div className="text-orange-500">Accommodation Grade</div>
+            <div className="text-orange-500">Now Price</div>
+            <div className="text-orange-500">Was Price</div>
+            <div className="text-orange-500">Sold Out</div>
+            <div className="text-orange-500">Generic Price</div>
 
             <hr className="col-span-full justify-self-stretch" />
 
@@ -152,7 +130,7 @@ function ShowDepartureItineraryItems({ sortedItineraryItems }) {
     const date = new Date(dateIso);
 
     return (
-        <ol className="pl-4 list-disc">
+        <ol className="list-disc pl-4">
             {sortedItineraryItems.map(({ id, label, startDay, endDay }, i) => (
                 <li key={"" + id + i}>
                     <span className="px-1">
@@ -172,14 +150,14 @@ function ShowDepartureItineraryItems({ sortedItineraryItems }) {
 export default function DepartureEditor({ id, sortedItineraryItems }) {
     return (
         <FormProvider>
-            <FormFieldGrid className="p-2 m-2 border rounded shadow form-field-grid-row-input">
+            <FormFieldGrid className="form-field-grid-row-input border rounded shadow p-2 m-2">
                 <FormContentLoader getApi={`/departures/${id}`} />
                 <DepartureHeader />
 
                 <div className="form-field-grid-row-label">Prices</div>
                 <PricesEditor />
 
-                <details className="cursor-pointer form-field-grid-row-all">
+                <details className="form-field-grid-row-all cursor-pointer">
                     <summary>Specific Itinarary Days</summary>
 
                     <ShowDepartureItineraryItems

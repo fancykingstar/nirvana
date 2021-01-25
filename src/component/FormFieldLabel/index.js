@@ -2,12 +2,16 @@ import React from "react";
 
 import classed from "../ClassedComponent";
 
-const FieldLabel = classed.label("pr-2", "form-field-grid-row-label");
+const FieldLabel = classed.label(
+    "pr-2",
+    "form-field-grid-row-label text-orange-500",
+);
 
 const RequiredMarker = classed.div(
-    "text-red-700",
     "form-field-grid-row-required",
     "w-3",
+    "text-orange-700",
+    "text-md",
 );
 
 export default function FormFieldLabel({ required, children, htmlFor }) {

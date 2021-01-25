@@ -87,8 +87,8 @@ export function FormAccommodationGradesEdit({
                     <FormFieldGrid>
                         <FormFields />
 
-                        <FormFieldButtonBlock>
-                            <FormFieldButtonReset />
+                        <FormFieldButtonBlock className="save-btn-list">
+                            <FormFieldButtonReset className="bg-orange-500" />
                             <FormFieldButtonSave
                                 nameProp="name"
                                 putApi={putApi}

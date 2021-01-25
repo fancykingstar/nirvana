@@ -125,7 +125,7 @@ export function FormOrganisationEdit({
             <TitleBox>
                 <TitleBox.Header>Edit Organisation</TitleBox.Header>
                 <TitleBox.Body>
-                    <FormFieldGrid>
+                    <FormFieldGrid className="organisation-block-bx">
                         <FormFields />
 
                         <FormFieldLinkedMany
@@ -154,9 +154,10 @@ export function FormOrganisationEdit({
                             }}
                         />
 
-                        <FormFieldButtonBlock>
+                        <FormFieldButtonBlock className="save-btn-list">
                             <FormFieldButtonReset />
                             <FormFieldButtonSave
+                                color="orange"
                                 nameProp="name"
                                 putApi={putApi}
                                 getApi={getApi}

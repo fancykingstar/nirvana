@@ -43,10 +43,10 @@ export default function Step01Description({
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldButtonBlock>
+            <FormFieldButtonBlock className="save-btn-list gap-4">
                 <ButtonEnvLink
                     to={`/wizard/product/${id}/departures`}
-                    color="blue"
+                    color="orange"
                 >
                     Back
                 </ButtonEnvLink>

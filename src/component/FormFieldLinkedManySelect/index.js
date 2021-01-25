@@ -69,10 +69,10 @@ export default function FormFieldLinkedManySelect({
             <FormFieldLabel htmlFor={id} required={required}>
                 {label}
             </FormFieldLabel>
-            <div className="form-field-grid-row-input">
-                <ul className="list-disc pl-4">
+            <div className="form-field-grid-row-input bg-list-selected">
+                <ul className="">
                     {selectedOptions.map(({ id, [nameProp]: name }) => (
-                        <li key={id}>
+                        <li className="close-button" key={id}>
                             <Button
                                 className="m-1"
                                 color="red"
@@ -87,7 +87,7 @@ export default function FormFieldLinkedManySelect({
                         </li>
                     ))}
                 </ul>
-                <div className="flex">
+                <div className="flex gap-4 select-option">
                     <Select
                         id={id}
                         value={selectToAdd}
@@ -103,8 +103,12 @@ export default function FormFieldLinkedManySelect({
                             </option>
                         ))}
                     </Select>
-                    <Button color="green" onClick={addSelectedToLinked}>
-                        Add
+                    <Button
+                        color="orange"
+                        className="w-16"
+                        onClick={addSelectedToLinked}
+                    >
+                        <i className="fa fa-plus"></i>
                     </Button>
                 </div>
             </div>

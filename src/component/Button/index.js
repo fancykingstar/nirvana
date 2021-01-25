@@ -1,17 +1,15 @@
 import classed from "../ClassedComponent";
 
 export default classed.button(
-    "bg-gray-600",
+    "bg-orange-500",
     "cursor-pointer",
     "no-underline",
-    "px-2",
-    "py-1",
-    "rounded",
-    "shadow",
+    "p-3",
     "text-base",
     "text-white",
-
-    "hover:bg-gray-700",
+    "h-50",
+    "my-2",
+    "hover:bg-orange-700",
     "hover:shadow-md",
     "hover:text-gray-100",
 

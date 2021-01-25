@@ -16,7 +16,7 @@ export default function TitleBoxModalWithVisibilityButton({
 
     return (
         <React.Fragment>
-            <Button onClick={setShowModal.bind(null, true)} color="blue">
+            <Button onClick={setShowModal.bind(null, true)} color="orange">
                 {buttonText}
             </Button>
 

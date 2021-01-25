@@ -2,39 +2,15 @@ import React from "react";
 
 import { useAppContext } from "../AppContextProvider";
 import classed from "../ClassedComponent";
-
-import packageJson from "../../../package.json";
+import logo from "./../../images/logo.png";
 
 const HeaderContainer = classed.header(
     "items-center",
     "bg-blue-200",
     "text-black",
     "flex",
-    "p-4",
     "shadow",
-);
-
-const Title = classed.h1("flex-1", "text-3xl", "relative");
-
-const UnderConstruction = classed.span(
-    "absolute",
-    "bg-white",
-    "block",
-    "border-2",
-    "border-red-500",
-    "left-0",
-    "rounded",
-    "shadow",
-    "text-center",
-    "text-lg",
-    "text-red-500",
-    "top-0",
-    "w-32",
-
-    "transform",
-    "rotate-12",
-    "translate-x-10",
-    "-translate-y-2",
+    "border-orange-500",
 );
 
 const EnvSelectorContainer = classed.div("p-1");
@@ -43,16 +19,16 @@ export default function Header() {
     const { env: apiEnv, setEnv } = useAppContext();
 
     return (
-        <HeaderContainer>
-            <Title>
-                Nirvana
-                <UnderConstruction>Alpha Version</UnderConstruction>
-                <span className="text-xl pl-16">{packageJson.version}</span>
-            </Title>
+        <HeaderContainer className="header-top-banner">
+            <div className="header-img">
+                <a href="">
+                    <img src={logo} />
+                </a>
+            </div>
 
             {window.location.hostname ===
             "prod.nirvana.imaginecruising.net" ? null : (
-                <EnvSelectorContainer>
+                <EnvSelectorContainer className="absolute right-0">
                     environment:
                     <select
                         className="ml-2"

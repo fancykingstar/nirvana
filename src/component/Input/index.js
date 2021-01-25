@@ -1,22 +1,22 @@
 import classed from "../ClassedComponent";
 
 export const KeyboardInputBox = classed.input(
-    "border-2",
-    "border-gray-400",
-    "p-1",
-    "rounded",
+    "p-3",
+    "bg-gray-100",
+    "outline-none",
+    "text-sm",
 );
 
 export const TextArea = classed.textarea(
-    "border-2",
-    "border-gray-400",
-    "p-1",
-    "rounded",
+    "p-3",
+    "bg-gray-100",
+    "outline-none",
+    "text-sm",
 );
 
 export const Select = classed.select(
-    "border-2",
-    "border-gray-400",
-    "py-1",
-    "rounded",
+    "p-3",
+    "bg-gray-100",
+    "outline-none",
+    "text-sm",
 );

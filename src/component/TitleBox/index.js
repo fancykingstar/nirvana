@@ -13,7 +13,7 @@ export default function TitleBox({ children }) {
                     "flex-col",
                     "items-stretch",
                     "rounded",
-                    "shadow-lg",
+                    //"shadow-lg",
                 )}
             >
                 {children}
@@ -23,15 +23,15 @@ export default function TitleBox({ children }) {
 }
 
 TitleBox.Header = classed.h1(
-    "bg-blue-200",
-    "bg-white",
+    "bg-nevy-500",
+    "text-white",
     "flex",
     "items-center",
     "px-2",
     "py-1",
     "rounded-t",
     "sticky",
-    "text-3xl",
+    "text-2xl",
     "text-black",
     "top-0",
 );

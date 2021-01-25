@@ -41,7 +41,7 @@ function ProductItineraries() {
                 </React.Fragment>
             ))}
 
-            <FormFieldButtonBlock>
+            <FormFieldButtonBlock className="save-btn-list">
                 <ItinerarySearchByName productId={productId} />
                 <ItinerarySearchByProduct productId={productId} />
             </FormFieldButtonBlock>
@@ -64,22 +64,24 @@ export default function Step02Itinerary({
 
             <hr className="form-field-grid-row-all" />
 
-            <h3 className="form-field-grid-row-label">Itineraries</h3>
+            <h3 className="form-field-grid-row-label text-orange-500">
+                Itineraries
+            </h3>
 
             <ProductItineraries />
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldButtonBlock>
+            <FormFieldButtonBlock className="gap-4">
                 <ButtonEnvLink
                     to={`/wizard/product/${id}/basic-details`}
-                    color="blue"
+                    color="orange"
                 >
                     Back
                 </ButtonEnvLink>
                 <ButtonEnvLink
                     to={`/wizard/product/${id}/departures`}
-                    color="blue"
+                    color="orange"
                 >
                     Next
                 </ButtonEnvLink>

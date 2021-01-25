@@ -25,7 +25,7 @@ export default function Step03Departures({
     } = useSWR(accommodation ? `/accommodations/${accommodation.id}` : null);
 
     return (
-        <FormFieldGrid>
+        <FormFieldGrid className="formfieldgrid-step3">
             <div className="form-field-grid-row-all">
                 <h2 className="text-xl">Step 3: Departures</h2>
             </div>
@@ -54,16 +54,16 @@ export default function Step03Departures({
 
             <hr className="form-field-grid-row-all" />
 
-            <FormFieldButtonBlock>
+            <FormFieldButtonBlock className="gap-4">
                 <ButtonEnvLink
                     to={`/wizard/product/${id}/itinerary`}
-                    color="blue"
+                    color="orange"
                 >
                     Back
                 </ButtonEnvLink>
                 <ButtonEnvLink
                     to={`/wizard/product/${id}/meta-groups`}
-                    color="blue"
+                    color="orange"
                 >
                     Next
                 </ButtonEnvLink>

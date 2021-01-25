@@ -12,7 +12,6 @@ function formNoop(e) {
 }
 
 const LoginContainer = classed.div(
-    "flex",
     "flex-col",
     "flex-1",
     "items-center",
@@ -33,22 +32,9 @@ const UnderConstruction = classed.div(
     "text-red-500",
 );
 
-const LoginPane = classed.div(
-    "p-2",
-    "border",
-    "border-gray-500",
-    "rounded",
-    "shadow",
-);
+const LoginPane = classed.div();
 
-const Title = classed.h3(
-    "text-xl",
-    "font-bold",
-    "px-2",
-    "py-1",
-    "border",
-    "border-gray-500",
-);
+const Title = classed.h3("text-lg", "font-bold", "p-2", "border-gray-500");
 
 const Form = classed.form("pt-1", "flex", "flex-col", "itmes-end");
 
@@ -76,8 +62,6 @@ export default function LoginForm() {
 
         removeToast(loginToastId);
 
-        delete response.user.audit_logs;
-
         if (response.error) {
             return addToast({
                 color: "red",
@@ -103,16 +87,18 @@ export default function LoginForm() {
 
     return (
         <LoginContainer>
-            <UnderConstruction>
+            <UnderConstruction className="hidden">
                 This is the <strong>Alpha</strong> version of Nirvana.
                 <br />
                 Lots of the functionality and design is subject to change, and
                 will be updated based on user requirements
             </UnderConstruction>
-            <LoginPane>
-                <Title>Login</Title>
-                <Form onSubmit={formNoop}>
-                    <Field>
+            <LoginPane className="login-form-bx rounded-lg mt-5 mb-5">
+                <Title className="text-left text-black rounded-t-lg">
+                    Login
+                </Title>
+                <Form className="p-3 mt-20" onSubmit={formNoop}>
+                    <Field className="my-2">
                         <label className="pr-2">Username</label>
                         <KeyboardInputBox
                             type="text"
@@ -120,7 +106,7 @@ export default function LoginForm() {
                             onChange={(e) => setIdentifier(e.target.value)}
                         />
                     </Field>
-                    <Field>
+                    <Field className="my-2">
                         <label className="pr-2">Password</label>
                         <KeyboardInputBox
                             type="password"
@@ -129,7 +115,7 @@ export default function LoginForm() {
                         />
                     </Field>
                     <Field>
-                        <Button color="green" onClick={requestJWT}>
+                        <Button color="orange" onClick={requestJWT}>
                             Login
                         </Button>
                     </Field>
