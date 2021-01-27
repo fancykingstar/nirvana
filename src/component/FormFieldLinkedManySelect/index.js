@@ -72,9 +72,12 @@ export default function FormFieldLinkedManySelect({
             <div className="form-field-grid-row-input bg-list-selected">
                 <ul className="">
                     {selectedOptions.map(({ id, [nameProp]: name }) => (
-                        <li className="close-button" key={id}>
+                        <li
+                            className="close-button bg-gray-100 rounded-3xl text-sm mx-0 mt-0 mb-2 py-2 px-6 relative"
+                            key={id}
+                        >
                             <Button
-                                className="m-1"
+                                className="m-1 h-8 p-0 w-8 bg-red-500 absolute rounded-3xl right-2"
                                 color="red"
                                 onClick={removeSelectedFromLinked.bind(
                                     null,

@@ -93,22 +93,28 @@ export default function LoginForm() {
                 Lots of the functionality and design is subject to change, and
                 will be updated based on user requirements
             </UnderConstruction>
-            <LoginPane className="login-form-bx rounded-lg mt-5 mb-5">
+            <LoginPane className="login-form-bx rounded-lg mt-5 mb-5 ">
                 <Title className="text-left text-black rounded-t-lg">
                     Login
                 </Title>
-                <Form className="p-3 mt-20" onSubmit={formNoop}>
+                <Form className="p-3 mt-20 w-full max-w-sm" onSubmit={formNoop}>
                     <Field className="my-2">
-                        <label className="pr-2">Username</label>
+                        <label className="pr-2 mx-0 mt-0 mb-3 text-orange-500">
+                            Username
+                        </label>
                         <KeyboardInputBox
+                            className="border-orange-500 border-solid border-b-2 h-12 w-full"
                             type="text"
                             value={identifier}
                             onChange={(e) => setIdentifier(e.target.value)}
                         />
                     </Field>
                     <Field className="my-2">
-                        <label className="pr-2">Password</label>
+                        <label className="pr-2 mx-0 mt-0 mb-3 text-orange-500">
+                            Password
+                        </label>
                         <KeyboardInputBox
+                            className="border-orange-500 border-solid border-b-2 h-12 w-full"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}

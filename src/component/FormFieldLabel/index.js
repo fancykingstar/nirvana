@@ -2,10 +2,7 @@ import React from "react";
 
 import classed from "../ClassedComponent";
 
-const FieldLabel = classed.label(
-    "pr-2",
-    "form-field-grid-row-label text-orange-500",
-);
+const FieldLabel = classed.label("pr-2", "text-orange-500");
 
 const RequiredMarker = classed.div(
     "form-field-grid-row-required",

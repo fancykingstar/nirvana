@@ -79,54 +79,6 @@ hr {
     list-style-type: "\2705";
 }
 
-.ql-toolbar.ql-snow {
-    background: #003950;
-}
-div.ql-snow.ql-toolbar button {
-    color: #fff;
-    background: #f8962d;
-    margin: 0 3px 0 0;
-}
-.ql-snow.ql-toolbar button svg path,
-.ql-snow.ql-toolbar button svg line,
-.ql-snow.ql-toolbar button svg rect {
-    stroke: #fff;
-}
-.ql-snow .ql-fill,
-.ql-snow .ql-stroke.ql-fill {
-    fill: #fff;
-}
-.login-form-bx form input {
-    height: 50px;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #ed8936;
-}
-
-.bg-nevy-500 {
-    background: #003950;
-}
-div.ql-snow .ql-stroke {
-    stroke: #fff;
-}
-
-.ql-toolbar.ql-snow .ql-formats > span {
-    background: #f8962d;
-    height: 26px;
-}
-div.ql-snow .ql-fill,
-div.ql-snow .ql-stroke.ql-fill {
-    fill: #fff;
-}
-.ql-snow .ql-picker-label::before {
-    display: inline-block;
-    line-height: 22px;
-    color: #fff;
-    position: relative;
-    top: -3px;
-    font-weight: 600;
-    font-size: 13px;
-}
 .bg-list-gray li {
     background: #f3f4f6;
     margin: 0 0 10px;
@@ -139,7 +91,6 @@ div.ql-snow .ql-stroke.ql-fill {
     font-size: 0;
 }
 .bg-list-gray li:after {
-    /* content: "\f105"; */
     position: absolute;
     right: 10px;
     font-family: FontAwesome;
@@ -155,38 +106,10 @@ div.ql-snow .ql-stroke.ql-fill {
     line-height: 24px;
 }
 
-.login-form-bx label {
-    color: #ed8936;
-    margin: 0 0 12px;
-}
-.login-form-bx form {
-    max-width: 400px;
-    width: 100%;
-}
-.header-top-banner {
-    border-bottom: 3px solid #ed8936;
-}
 .save-btn-list button.bg-gray-600 {
     height: 48px;
     margin: 8px 10px 0 0;
     border-radius: 0;
-}
-.save-btn-list button[color="blue"].bg-gray-600 {
-    background: #023950;
-}
-
-.header-img {
-    position: absolute;
-    top: 0;
-    left: 50px;
-}
-.header-img img {
-    width: 160px;
-}
-.form-field-grid-row-input button.bg-green-500 {
-    height: 50px;
-    border-radius: 0;
-    box-shadow: inherit;
 }
 
 .product-basic-1 select.form-field-grid-row-input,
@@ -221,24 +144,16 @@ input.form-field-grid-row-input[type="radio"] {
 }
 .close-button button {
     padding: 0;
-    width: 30px;
+     width: 30px;
     height: 30px;
     border-radius: 100px;
     background: #f56565;
 }
+ 
 .header-top-banner {
     background-image: url("./images/header-bg");
-    height: 230px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
-.sidebar {
-    padding: 50px 30px;
-}
-.sidebar-menu-left ul li {
-    margin: 0 0 15px;
-}
+
 .sidebar-menu-left ul li a {
     color: #ed8936;
     text-decoration: none;
@@ -247,44 +162,10 @@ input.form-field-grid-row-input[type="radio"] {
 
 .sidebar-menu-left ul li a:hover {
     color: #fff;
-}
-ul.submenu-drop {
-    padding: 8px 0 0 20px;
-}
-.logout-menu {
-    margin: 50px 0 0;
-}
-.logout-menu h5 {
-    color: #fff;
-    margin: 0 0 15px;
-}
-.logout-menu ul li a {
-    color: #ed8936;
-}
+} 
 
-.select-option button.my-2 {
-    margin: 0;
-}
-.bg-list-selected ul li {
-    background: #f3f4f6;
-    margin: 0 0 10px;
-    padding: 10px 23px;
-    border-radius: 100px;
-    font-size: 15px;
-    position: relative;
-}
 .bg-list-selected .close-button button {
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    border-radius: 100px;
-    background: #f56565;
-    position: absolute;
-    right: 5px;
     top: -2px;
-}
-label.form-field-grid-row-label {
-    color: #ed8936;
 }
 .formfieldgrid-step3 button[color="blue"] {
     height: 50px;
@@ -293,9 +174,7 @@ label.form-field-grid-row-label {
     padding: 0 20px;
     background: #023950;
 }
-.form-field-grid-row-label {
-    color: #ed8936;
-}
+
 .organisation-block-bx .form-field-grid-row-input button.bg-gray-600 {
     height: 50px;
     box-shadow: inherit;

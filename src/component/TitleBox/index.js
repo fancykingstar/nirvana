@@ -13,7 +13,6 @@ export default function TitleBox({ children }) {
                     "flex-col",
                     "items-stretch",
                     "rounded",
-                    //"shadow-lg",
                 )}
             >
                 {children}

@@ -35,14 +35,14 @@ const links = [
 
 const Sidebar = () => {
     return (
-        <div className="sidebar">
+        <div className="px-8 py-12">
             <div className="sidebar-menu-left">
                 <ul>
-                    <li>
+                    <li className="mx-0 mt-0 mb-4">
                         <EnvLink to="/wizard/product">Manage Product</EnvLink>
                     </li>
                     {links.map(({ to, label, className }) => (
-                        <li key={to}>
+                        <li className="mx-0 mt-0 mb-4" key={to}>
                             <EnvLink className={className} to={to}>
                                 {label}
                             </EnvLink>

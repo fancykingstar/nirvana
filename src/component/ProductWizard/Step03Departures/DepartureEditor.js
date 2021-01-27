@@ -14,6 +14,7 @@ import {
     FormFieldButtonSave,
     FormFieldButtonReset,
 } from "../../FormFieldButton";
+import FormFieldLinkedSingle from "../../FormFieldLinkedSingle";
 import { FormProvider, useFormField } from "../../../hooks/useFormContext";
 import { useAPIFetch } from "../../AppContextProvider";
 
@@ -25,6 +26,14 @@ function DepartureHeader() {
 
     const [product] = useFormField("product", null);
     const productId = product?.id;
+
+    function AirportLinked({ name }) {
+        return <span>{name}</span>;
+    }
+
+    function AirportResult({ id, name, set }) {
+        return <li onClick={set.bind(null, id)}>{name}</li>;
+    }
 
     return (
         <React.Fragment>
@@ -42,12 +51,26 @@ function DepartureHeader() {
                 {dateIso ? format(date, "dd/MM/yyyy") : "loading..."}
             </h3>
             <FormFieldDate prop="date" label="Date" />
+
+            <FormFieldLinkedSingle
+                RenderLinked={AirportLinked}
+                RenderSearchResult={AirportResult}
+                label="From Airport"
+                prop="from_airport"
+                required
+                searchApi="/airports"
+                searchProp="name"
+            />
+
+            <div />
+
             <FormFieldButtonSave
                 nameProp="date"
                 listApi="/departures"
                 getApi={`/departures/${id}`}
                 putApi={`/departures/${id}`}
             />
+            <hr className="form-field-grid-row-all" />
         </React.Fragment>
     );
 }
@@ -97,7 +120,7 @@ function PriceEditor({ id }) {
 }
 
 function PricesEditor() {
-    const [prices] = useFormField("prices ", []);
+    const [prices] = useFormField("prices", []);
 
     return (
         <div
@@ -154,7 +177,7 @@ export default function DepartureEditor({ id, sortedItineraryItems }) {
                 <FormContentLoader getApi={`/departures/${id}`} />
                 <DepartureHeader />
 
-                <div className="form-field-grid-row-label">Prices</div>
+                <div className="text-orange-500">Prices</div>
                 <PricesEditor />
 
                 <details className="form-field-grid-row-all cursor-pointer">

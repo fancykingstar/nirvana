@@ -64,9 +64,7 @@ export default function Step02Itinerary({
 
             <hr className="form-field-grid-row-all" />
 
-            <h3 className="form-field-grid-row-label text-orange-500">
-                Itineraries
-            </h3>
+            <h3 className="text-orange-500">Itineraries</h3>
 
             <ProductItineraries />
 

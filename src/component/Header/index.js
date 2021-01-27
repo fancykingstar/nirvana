@@ -19,8 +19,8 @@ export default function Header() {
     const { env: apiEnv, setEnv } = useAppContext();
 
     return (
-        <HeaderContainer className="header-top-banner">
-            <div className="header-img">
+        <HeaderContainer className="header-top-banner bg-center bg-no-repeat bg-cover border-orange-500 border-solid border-b-2 h-56">
+            <div className="absolute top-0 w-40">
                 <a href="">
                     <img src={logo} />
                 </a>

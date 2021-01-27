@@ -1,0 +1,51 @@
+/* bg-blue-900*/
+.ql-toolbar.ql-snow {
+    background: #003950;
+}
+/*"my-0 ml-0 mr-1 text-white bg-yellow-500"*/
+div.ql-snow.ql-toolbar button {
+    color: #fff;
+    background: #f8962d;
+    margin: 0 3px 0 0;
+}
+/* "stroke-current white" */
+.ql-snow.ql-toolbar button svg path,
+.ql-snow.ql-toolbar button svg line,
+.ql-snow.ql-toolbar button svg rect {
+    stroke: #fff;
+}
+/* "fill-current white" */
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+    fill: #fff;
+}
+
+/* bg-blue-900*/
+.bg-nevy-500 {
+    background: #003950;
+}
+
+/* "stroke-current white" */
+div.ql-snow .ql-stroke {
+    stroke: #fff;
+}
+/* "h-6 bg-yellow-500" */
+.ql-toolbar.ql-snow .ql-formats > span {
+    background: #f8962d;
+    height: 26px;
+}
+/* "fill-current white" */
+div.ql-snow .ql-fill,
+div.ql-snow .ql-stroke.ql-fill {
+    fill: #fff;
+}
+/* "inline-block font-semibold text-xs leading-5 relative text-white" */
+.ql-snow .ql-picker-label::before {
+    display: inline-block;
+    line-height: 22px;
+    color: #fff;
+    position: relative;
+    top: -3px;/* Use regular css for this*/
+    font-weight: 600;
+    font-size: 13px;
+}
