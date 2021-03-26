@@ -72,8 +72,8 @@ export default function FilterListPort() {
             HeaderComponent={PortHeader}
             FooterComponent={PortHeader}
             RowComponent={PortRow}
-            rows={4}
-            searchFilterColName="name"
+            cols={4}
+            searchFilterColNames="name"
         />
     );
 }

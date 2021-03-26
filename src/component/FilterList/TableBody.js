@@ -5,7 +5,7 @@ import { Cell, LoadingCell } from "./styled";
 export default function TableBody({
     data,
     pageSize,
-    rows,
+    cols,
     checked,
     setChecked,
     RowComponent,
@@ -30,7 +30,7 @@ export default function TableBody({
           ))
         : new Array(pageSize).fill(null).map((_, i) => (
               <tr key={i}>
-                  {new Array(rows + 1).fill(null).map((_, i) => (
+                  {new Array(cols + 1).fill(null).map((_, i) => (
                       <LoadingCell key={i}>&nbsp;</LoadingCell>
                   ))}
               </tr>

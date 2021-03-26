@@ -88,8 +88,8 @@ export default function FilterListPrice() {
             HeaderComponent={PriceHeader}
             FooterComponent={PriceHeader}
             RowComponent={PriceRow}
-            rows={6}
-            searchFilterColName="currency"
+            cols={6}
+            searchFilterColNames="currency"
         />
     );
 }

@@ -65,8 +65,8 @@ export default function FilterListCountries() {
             HeaderComponent={CountryHeader}
             FooterComponent={CountryHeader}
             RowComponent={CountryRow}
-            rows={5}
-            searchFilterColName="name"
+            cols={5}
+            searchFilterColNames="name"
         />
     );
 }

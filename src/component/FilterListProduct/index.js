@@ -14,7 +14,7 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
                 Id
             </FilterList.ControlCell>
 
-            <FilterList.ControlCell width="10%">Index</FilterList.ControlCell>
+            <FilterList.ControlCell width="5%">Index</FilterList.ControlCell>
 
             <FilterList.ControlCell
                 width="10%"
@@ -31,11 +31,41 @@ function ProductHeader({ onChangeSort, sortBy, sortDirection }) {
             >
                 Name
             </FilterList.ControlCell>
+            <FilterList.ControlCell
+                width="10%"
+                onClick={onChangeSort.bind(null, "operator.name")}
+                arrowDirection={
+                    sortBy === "operator.name" ? sortDirection : null
+                }
+            >
+                Operator
+            </FilterList.ControlCell>
+            <FilterList.ControlCell
+                width="15%"
+                onClick={onChangeSort.bind(null, "primary_accommodation.name")}
+                arrowDirection={
+                    sortBy === "primary_accommodation.name"
+                        ? sortDirection
+                        : null
+                }
+            >
+                Primary Accommodation
+            </FilterList.ControlCell>
+
+            <FilterList.ControlCell width="10%">APIs</FilterList.ControlCell>
         </React.Fragment>
     );
 }
 
-function ProductRow({ id, code, i, name }) {
+function ProductRow({
+    id,
+    code,
+    i,
+    name,
+    apis,
+    operator,
+    primary_accommodation,
+}) {
     return (
         <React.Fragment>
             <FilterList.Cell>
@@ -45,6 +75,21 @@ function ProductRow({ id, code, i, name }) {
             <FilterList.Cell>{i}</FilterList.Cell>
             <FilterList.Cell>{code}</FilterList.Cell>
             <FilterList.Cell>{name}</FilterList.Cell>
+            <FilterList.Cell>
+                <EnvLink to={`/organisations/edit/${operator.id}`}>
+                    {operator.name}
+                </EnvLink>
+            </FilterList.Cell>
+            <FilterList.Cell>
+                <EnvLink
+                    to={`/accommodations/edit/${primary_accommodation.id}`}
+                >
+                    {primary_accommodation.name}
+                </EnvLink>
+            </FilterList.Cell>
+            <FilterList.Cell>
+                {apis.map((api) => api.code).join(", ")}
+            </FilterList.Cell>
         </React.Fragment>
     );
 }
@@ -59,8 +104,8 @@ export default function FilterListProduct() {
             HeaderComponent={ProductHeader}
             FooterComponent={ProductHeader}
             RowComponent={ProductRow}
-            rows={4}
-            searchFilterColName="name"
+            cols={7}
+            searchFilterColNames="name,code,id,apis.code,operator.name,primary_accommodation.name"
         />
     );
 }

@@ -1,13 +1,18 @@
 import React from "react";
 
-import { SubFormProvider } from "@imagine-developer/utopia-forms";
+import {
+    FormFieldAsset,
+    FormFieldMultiple,
+} from "@imagine-developer/utopia-forms";
 
 import ButtonEnvLink from "../ButtonEnvLink";
+import CopyItems from "../FormProduct/CopyItems";
 import FormContentLoader from "../FormContentLoader";
+import FormFieldBoolean from "../FormFieldBoolean";
+import FormFieldEnum from "../FormFieldEnum";
 import FormFieldGrid from "../FormFieldGrid";
 import FormFieldLinkedMany from "../FormFieldLinkedMany";
 import FormFieldLinkedSingleSelect from "../FormFieldLinkedSingleSelect";
-import FormFieldProductCardIncludes from "../FormFieldProductCardIncludes";
 import FormFieldProductCode from "../FormFieldProductCode";
 import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
@@ -34,7 +39,7 @@ function requirementsMet(state) {
     return true;
 }
 
-export default function Step01Description({
+export default function Step01BasicDetails({
     match: {
         params: { id },
     },
@@ -53,12 +58,55 @@ export default function Step01Description({
 
             <hr className="form-field-grid-row-all" />
 
+            <FormFieldBoolean
+                prop="exclude_from_search"
+                label="Exclude From Search"
+            />
+
+            <FormFieldEnum
+                prop="product_template"
+                label="Product Template"
+                defaultValue="operated"
+            >
+                <FormFieldEnum.Option value="operated">
+                    Operated
+                </FormFieldEnum.Option>
+
+                <FormFieldEnum.Option value="imported">
+                    Imported
+                </FormFieldEnum.Option>
+            </FormFieldEnum>
+
+            <FormFieldEnum prop="status" label="Status" defaultValue="draft">
+                <FormFieldEnum.Option value="live">Live</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="draft">Draft</FormFieldEnum.Option>
+            </FormFieldEnum>
+
+            <hr className="form-field-grid-row-all" />
+
+            <FormFieldRichText prop="description" label="Description" />
+
+            <hr className="form-field-grid-row-all" />
+
+            <FormFieldRichText
+                prop="product_includes"
+                label="Product Includes"
+            />
+
+            <hr className="form-field-grid-row-all" />
+
+            <CopyItems />
+
+            <hr className="form-field-grid-row-all" />
+
             <FormFieldLinkedSingleSelect
                 label="Primary Operator"
                 nameProp="name"
                 prop="operator"
                 searchApi="/organisations"
             />
+
+            <hr className="form-field-grid-row-all" />
 
             <FormFieldRenderState>
                 {({ operator }) => (
@@ -99,23 +147,13 @@ export default function Step01Description({
                     return <li onClick={add.bind(null, id)}>{name}</li>;
                 }}
             />
-
             <hr className="form-field-grid-row-all" />
-
-            <SubFormProvider prop="copy_items" defaultValue={{}}>
-                <FormFieldString label="USP Top" prop="uspTop" />
-                <FormFieldString label="USP Bottom" prop="uspBottom" />
-            </SubFormProvider>
-
-            <FormFieldRichText prop="description" label="Description" />
-            <FormFieldRichText
-                prop="product_includes"
-                label="Product Includes"
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
             />
-
-            <SubFormProvider prop="copy_items" defaultValue={{}}>
-                <FormFieldProductCardIncludes />
-            </SubFormProvider>
 
             <hr className="form-field-grid-row-all" />
 

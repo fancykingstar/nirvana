@@ -63,8 +63,8 @@ export default function FilterListDeparture() {
             HeaderComponent={DepartureHeader}
             FooterComponent={DepartureHeader}
             RowComponent={DepartureRow}
-            rows={4}
-            searchFilterColName="date"
+            cols={4}
+            searchFilterColNames="date"
         />
     );
 }

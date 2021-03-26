@@ -55,8 +55,8 @@ export default function FilterListOrganisation() {
             HeaderComponent={OrganisationHeader}
             FooterComponent={OrganisationHeader}
             RowComponent={OrganisationRow}
-            rows={5}
-            searchFilterColName="name"
+            cols={5}
+            searchFilterColNames="name"
         />
     );
 }

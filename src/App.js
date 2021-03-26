@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import AuthenticationGate from "./component/AuthenticationGate";
 
 import Header from "./component/Header";
 import Main from "./component/Main";
 import Sidebar from "./component/Sidebar";
+import Footer from "./component/Footer";
+import Quill from "quill";
+import CruiseTheme from "./Quill";
 
 export default function App() {
+    useEffect(() => {
+        Quill.register(
+            {
+                "themes/cruise": CruiseTheme,
+            },
+            true,
+        );
+    }, []);
     return (
         <React.Fragment>
             <Header />
@@ -20,6 +31,7 @@ export default function App() {
                     <AuthenticationGate>
                         <Main />
                     </AuthenticationGate>
+                    <Footer />
                 </div>
             </div>
         </React.Fragment>

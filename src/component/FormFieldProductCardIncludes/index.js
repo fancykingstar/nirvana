@@ -11,11 +11,16 @@ function ProductCardInclude({ prop }) {
     return (
         <SubFormProvider prop={prop} defaultValue={{}}>
             <FormFieldEnum prop="icon" label="Icon" defaultValue="PLANE">
-                <FormFieldEnum.Option value="PLANE">Plane</FormFieldEnum.Option>
-                <FormFieldEnum.Option value="TRAIN">Train</FormFieldEnum.Option>
                 <FormFieldEnum.Option value="AUTOMOBILE">
                     Automobile
                 </FormFieldEnum.Option>
+                <FormFieldEnum.Option value="HOTEL">Hotel</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="PLANE">Plane</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="SHIP">
+                    Cruise Ship
+                </FormFieldEnum.Option>
+                <FormFieldEnum.Option value="TRAIN">Train</FormFieldEnum.Option>
+                <FormFieldEnum.Option value="TOUR">Tour</FormFieldEnum.Option>
             </FormFieldEnum>
 
             <FormFieldString prop="text" label="Text" />

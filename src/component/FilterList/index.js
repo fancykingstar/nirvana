@@ -69,19 +69,19 @@ function useSetSearchFilter(setState) {
             setState((state) => ({
                 ...state,
                 searchFilter,
-                pageNumber: 0,
+                pageNumber: 1,
             })),
         [setState],
     );
 }
 
 export default function FilterList({
-    rows,
+    cols,
     title,
 
     listApi,
     getDeleteApi,
-    searchFilterColName,
+    searchFilterColNames,
 
     createRoute,
 
@@ -92,7 +92,7 @@ export default function FilterList({
     const [state, setState] = useQueryStringState();
 
     const {
-        pageNumber = 0,
+        pageNumber = 1,
         pageSize = 20,
         searchFilter = null,
         sortBy,
@@ -108,18 +108,24 @@ export default function FilterList({
         setChecked({});
     }
 
+    const colsToSearch = searchFilterColNames?.split(",") ?? [];
+
+    const queryObj = {
+        _where: { _or: [] },
+    };
+
+    colsToSearch.map((colName) => {
+        const colNameContains = `${colName}_contains`;
+        queryObj._where._or.push({ [colNameContains]: searchFilter });
+    });
+
     //query utopia
-    const searchFilterColNameContains = `${searchFilterColName}_contains`;
     const { data, error } = useSWR(
         `${listApi}?${qs.stringify({
             _limit: pageSize,
-            _start: pageNumber * pageSize,
+            _start: (pageNumber - 1) * pageSize,
 
-            ...(searchFilter
-                ? {
-                      _where: [{ [searchFilterColNameContains]: searchFilter }],
-                  }
-                : null),
+            ...(searchFilter ? queryObj : null),
 
             ...(sortBy
                 ? {
@@ -131,11 +137,7 @@ export default function FilterList({
 
     const { data: count } = useSWR(
         `${listApi}/count?${qs.stringify({
-            ...(searchFilter
-                ? {
-                      _where: [{ [searchFilterColNameContains]: searchFilter }],
-                  }
-                : null),
+            ...(searchFilter ? queryObj : null),
         })}`,
     );
 
@@ -178,7 +180,7 @@ export default function FilterList({
                         <tbody>
                             <TableBody
                                 {...{
-                                    rows,
+                                    cols,
                                     data,
                                     checked,
                                     setChecked,

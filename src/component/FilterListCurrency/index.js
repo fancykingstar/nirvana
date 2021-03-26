@@ -58,8 +58,8 @@ export default function FilterListCurrency() {
             HeaderComponent={CurrencyHeader}
             FooterComponent={CurrencyHeader}
             RowComponent={CurrencyRow}
-            rows={3}
-            searchFilterColName="currency_code"
+            cols={3}
+            searchFilterColNames="currency_code"
         />
     );
 }

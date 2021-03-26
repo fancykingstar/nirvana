@@ -16,6 +16,11 @@ import {
     FormFieldButtonSave,
 } from "../FormFieldButton";
 
+import {
+    FormFieldMultiple,
+    FormFieldAsset,
+} from "@imagine-developer/utopia-forms";
+
 export function FormFields() {
     return (
         <React.Fragment>
@@ -25,6 +30,12 @@ export function FormFields() {
                 required
                 prop="description"
                 label="Description"
+            />
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
             />
         </React.Fragment>
     );

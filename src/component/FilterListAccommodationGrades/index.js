@@ -50,7 +50,7 @@ export default function FilterListAccommodationGrades() {
             HeaderComponent={AccommodationGradesHeader}
             FooterComponent={AccommodationGradesHeader}
             RowComponent={AccommodationGradesRow}
-            rows={4}
+            cols={4}
         />
     );
 }

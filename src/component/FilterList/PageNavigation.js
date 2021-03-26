@@ -11,7 +11,7 @@ const PageNavigationLink = classed.span(
 );
 
 export default function PageNavigation({
-    pageNumber = 0,
+    pageNumber = 1,
     pageSize = 1,
     count = 0,
     setPageNumber,
@@ -20,7 +20,7 @@ export default function PageNavigation({
         return null;
     }
 
-    const firstPage = 0;
+    const firstPage = 1;
     const lastPage = Math.floor(count / pageSize);
 
     const localPages = new Array(5)

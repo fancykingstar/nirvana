@@ -75,8 +75,8 @@ export default function FilterListAccommodation() {
             HeaderComponent={AccommodationHeader}
             FooterComponent={AccommodationHeader}
             RowComponent={AccommodationRow}
-            rows={5}
-            searchFilterColName="name"
+            cols={5}
+            searchFilterColNames="name"
         />
     );
 }

@@ -1,6 +1,10 @@
 import React from "react";
 
-import { SubFormProvider, FormProvider } from "@imagine-developer/utopia-forms";
+import {
+    FormProvider,
+    FormFieldMultiple,
+    FormFieldAsset,
+} from "@imagine-developer/utopia-forms";
 
 import FormContentLoader from "../FormContentLoader";
 import FormFieldGrid from "../FormFieldGrid";
@@ -8,7 +12,6 @@ import TitleBox from "../TitleBox";
 
 import FormFieldBoolean from "../FormFieldBoolean";
 import FormFieldEnum from "../FormFieldEnum";
-import FormFieldProductCardIncludes from "../FormFieldProductCardIncludes";
 import FormFieldRenderState from "../FormFieldRenderState";
 import FormFieldRichText from "../FormFieldRichText";
 import FormFieldString from "../FormFieldString";
@@ -51,7 +54,6 @@ function FormFields() {
                 <FormFieldEnum.Option value="operated">
                     Operated
                 </FormFieldEnum.Option>
-
                 <FormFieldEnum.Option value="imported">
                     Imported
                 </FormFieldEnum.Option>
@@ -64,33 +66,36 @@ function FormFields() {
 
             <hr className="form-field-grid-row-all" />
 
-            <SubFormProvider prop="copy_items" defaultValue={{}}>
-                <FormFieldString label="USP Top" prop="uspTop" />
-                <FormFieldString label="USP Bottom" prop="uspBottom" />
-            </SubFormProvider>
-
             <FormFieldRichText prop="description" label="Description" />
+
+            <hr className="form-field-grid-row-all" />
+
             <FormFieldRichText
                 prop="product_includes"
                 label="Product Includes"
             />
 
-            <SubFormProvider prop="copy_items" defaultValue={{}}>
-                <FormFieldProductCardIncludes />
-            </SubFormProvider>
-
             <hr className="form-field-grid-row-all" />
+
             <CopyItems />
+
             <hr className="form-field-grid-row-all" />
             <OperatorField />
             <hr className="form-field-grid-row-all" />
-            <AccommodationField />
+            <AccommodationField primaryOnly={false} />
             <hr className="form-field-grid-row-all" />
             <ApisField />
             <hr className="form-field-grid-row-all" />
             <CategoriesField />
             <hr className="form-field-grid-row-all" />
             <RegionsField />
+            <hr className="form-field-grid-row-all" />
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
+            />
             <hr className="form-field-grid-row-all" />
             <RelatedProductsField />
             <hr className="form-field-grid-row-all" />

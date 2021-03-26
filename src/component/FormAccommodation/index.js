@@ -79,6 +79,13 @@ export function FormFields() {
 
             <FormFieldRichText prop="description" label="Description" />
 
+            <FormFieldMultiple
+                label="Media"
+                prop="media"
+                addNewButton="Add New Image"
+                MultipleOf={FormFieldAsset}
+            />
+
             <hr className="form-field-grid-row-all" />
 
             <SubFormProvider prop="copy_items" defaultValue={{}}>
@@ -232,6 +239,7 @@ export function FormAccommodationEdit({
                             listApi="/accommodation-grades"
                             parentId={id}
                             parentProp="accommodations"
+                            mutateApis={[`/accommodations/${id}`]}
                         />
 
                         <FormFieldButtonBlock>

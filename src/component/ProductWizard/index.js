@@ -6,9 +6,9 @@ import { FormProvider } from "../../hooks/useFormContext";
 
 import SelectProduct from "./SelectProduct";
 import Step01BasicDetails from "./Step01BasicDetails";
-import Step02Itinerary from "./Step02Itinerary";
-import Step03Departures from "./Step03Departures";
-import Step04MetaGroups from "./Step04MetaGroups";
+import Step02MetaGroups from "./Step02MetaGroups";
+import Step03Itinerary from "./Step03Itinerary";
+import Step04Departures from "./Step04Departures";
 
 function StepSelector() {
     return (
@@ -19,16 +19,16 @@ function StepSelector() {
                     component={Step01BasicDetails}
                 />
                 <Route
+                    path={`/:env/wizard/product/:id/meta-groups`}
+                    component={Step02MetaGroups}
+                />
+                <Route
                     path={`/:env/wizard/product/:id/itinerary`}
-                    component={Step02Itinerary}
+                    component={Step03Itinerary}
                 />
                 <Route
                     path={`/:env/wizard/product/:id/departures`}
-                    component={Step03Departures}
-                />
-                <Route
-                    path={`/:env/wizard/product/:id/meta-groups`}
-                    component={Step04MetaGroups}
+                    component={Step04Departures}
                 />
             </Switch>
         </FormProvider>

@@ -5,12 +5,12 @@ import { useFormField } from "../../hooks/useFormContext";
 
 import FormFieldLabel from "../FormFieldLabel";
 
-export default function FormFieldCloudinary({ prop, label }) {
+export default function FormFieldCloudinary({ prop, label, required }) {
     const [state, setState] = useFormField(prop, null);
 
     return (
         <React.Fragment>
-            <FormFieldLabel>{label}</FormFieldLabel>
+            <FormFieldLabel required={required}>{label}</FormFieldLabel>
             <div className="form-field-grid-row-input">
                 {state ? (
                     <img

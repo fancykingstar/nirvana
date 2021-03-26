@@ -1,51 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* bg-blue-900*/
 .ql-toolbar.ql-snow {
-    background: #003950;
+    @apply bg-blue-900;
 }
 /*"my-0 ml-0 mr-1 text-white bg-yellow-500"*/
 div.ql-snow.ql-toolbar button {
-    color: #fff;
-    background: #f8962d;
-    margin: 0 3px 0 0;
+    @apply my-0 ml-0 mr-1 text-white bg-yellow-500;
 }
 /* "stroke-current white" */
 .ql-snow.ql-toolbar button svg path,
 .ql-snow.ql-toolbar button svg line,
 .ql-snow.ql-toolbar button svg rect {
-    stroke: #fff;
+    @apply stroke-white;
 }
 /* "fill-current white" */
 .ql-snow .ql-fill,
 .ql-snow .ql-stroke.ql-fill {
-    fill: #fff;
+    @apply fill-white;
 }
 
 /* bg-blue-900*/
 .bg-nevy-500 {
-    background: #003950;
+    @apply bg-blue-900;
 }
 
 /* "stroke-current white" */
 div.ql-snow .ql-stroke {
-    stroke: #fff;
+    @apply stroke-white;
 }
 /* "h-6 bg-yellow-500" */
 .ql-toolbar.ql-snow .ql-formats > span {
-    background: #f8962d;
-    height: 26px;
+    @apply h-6 bg-yellow-500;
 }
 /* "fill-current white" */
 div.ql-snow .ql-fill,
 div.ql-snow .ql-stroke.ql-fill {
-    fill: #fff;
+    @apply fill-white;
 }
 /* "inline-block font-semibold text-xs leading-5 relative text-white" */
 .ql-snow .ql-picker-label::before {
-    display: inline-block;
-    line-height: 22px;
-    color: #fff;
-    position: relative;
-    top: -3px;/* Use regular css for this*/
-    font-weight: 600;
-    font-size: 13px;
+    @apply inline-block font-semibold text-xs leading-5 relative text-white;
 }

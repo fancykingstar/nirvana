@@ -3,7 +3,9 @@ import * as React from "react";
 import FormFieldLinkedSingle from "../FormFieldLinkedSingle";
 import FormFieldLinkedMany from "../FormFieldLinkedMany";
 
-export default function AccommodationField() {
+export default function AccommodationField({ primaryOnly }) {
+    const displayAdditional = primaryOnly ?? true;
+
     return (
         <React.Fragment>
             <FormFieldLinkedSingle
@@ -24,28 +26,34 @@ export default function AccommodationField() {
                 }}
             />
 
-            <hr className="form-field-grid-row-input" />
+            {!displayAdditional && (
+                <React.Fragment>
+                    <hr className="form-field-grid-row-input" />
 
-            <FormFieldLinkedMany
-                label="Secondary Accomodations"
-                prop="additional_accommodations"
-                searchProp="name"
-                searchApi="/accommodations"
-                RenderLinked={function LinkedAccomodation({
-                    name,
-                    id,
-                    remove,
-                }) {
-                    return <li onClick={remove.bind(null, id)}>{name}</li>;
-                }}
-                RenderSearchResult={function ResultAccomodation({
-                    id,
-                    name,
-                    add,
-                }) {
-                    return <li onClick={add.bind(null, id)}>{name}</li>;
-                }}
-            />
+                    <FormFieldLinkedMany
+                        label="Secondary Accomodations"
+                        prop="additional_accommodations"
+                        searchProp="name"
+                        searchApi="/accommodations"
+                        RenderLinked={function LinkedAccomodation({
+                            name,
+                            id,
+                            remove,
+                        }) {
+                            return (
+                                <li onClick={remove.bind(null, id)}>{name}</li>
+                            );
+                        }}
+                        RenderSearchResult={function ResultAccomodation({
+                            id,
+                            name,
+                            add,
+                        }) {
+                            return <li onClick={add.bind(null, id)}>{name}</li>;
+                        }}
+                    />
+                </React.Fragment>
+            )}
         </React.Fragment>
     );
 }

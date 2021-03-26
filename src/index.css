@@ -3,66 +3,58 @@
 @tailwind utilities;
 
 * {
-    margin: 0;
+    @apply m-0;
 }
 
 html {
-    font-size: 16px;
-    font-family: sans-serif;
+    @apply text-base font-sans;
 }
 
 html,
 body {
-    height: 100%;
+    @apply h-full;
 }
 
 html,
 body,
 #root {
-    min-height: 100%;
+    @apply min-h-full;
 }
 
 body {
-    position: relative;
+    @apply relative;
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
 }
 
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col flex-1;
 }
 
 button {
-    border: none;
+    @apply border-0;
 }
 
 .form-field-grid-container {
-    align-items: center;
-    column-gap: 0.5rem;
-    display: grid;
-    grid-template-columns: [label] auto [required] auto [input] 1fr [updated] auto [end];
-    row-gap: 0.5rem;
+    @apply items-center grid gap-x-2 gap-y-2 grid-cols-form-field-container;
 }
 
 .form-field-grid-row-label {
-    grid-column: label / label;
+    @apply col-label-label;
 }
 .form-field-grid-row-required {
-    grid-column: required / required;
+    @apply col-required-required;
 }
 .form-field-grid-row-input {
-    grid-column: input / input;
+    @apply col-input-input;
 }
 .form-field-grid-row-updated {
-    grid-column: updated / updated;
+    @apply col-updated-updated;
 }
 .form-field-grid-row-all {
-    grid-column: label / end;
+    @apply col-label-end;
 }
 
 hr {
@@ -71,83 +63,51 @@ hr {
 }
 
 .list-deleteable li:hover {
-    cursor: pointer;
-    list-style-type: "\274C";
+    @apply cursor-pointer list-close;
 }
 .list-addable li:hover {
-    cursor: pointer;
-    list-style-type: "\2705";
+    @apply cursor-pointer list-checked;
 }
 
 .bg-list-gray li {
-    background: #f3f4f6;
-    margin: 0 0 10px;
-    padding: 10px 23px;
-    border-radius: 100px;
-    font-size: 15px;
-    position: relative;
+    @apply bg-gray-140 mx-0 mt-0 mb-2 px-6 py-2 rounded-full relative text-base;
 }
 .bg-list-gray li::marker {
-    font-size: 0;
+    @apply text-none;
 }
 .bg-list-gray li:after {
-    position: absolute;
     right: 10px;
     font-family: FontAwesome;
-    font-size: 15px;
-    background: #e33b27;
-    color: #fff;
     content: "\f00d";
-    width: 25px;
-    height: 25px;
-    border-radius: 100px;
-    text-align: center;
     top: 8px;
-    line-height: 24px;
+    @apply absolute text-base text-white bg-dark-red text-center rounded-full leading-6 h-6 w-6;
 }
 
 .save-btn-list button.bg-gray-600 {
-    height: 48px;
-    margin: 8px 10px 0 0;
-    border-radius: 0;
+    @apply h-12 mt-2 mr-2 ml-0 mb-0 rounded-none;
 }
 
 .product-basic-1 select.form-field-grid-row-input,
 input.form-field-grid-row-input {
-    height: 50px;
-    background: #f2f2f2;
-    border-radius: 0;
-    padding: 0 5px;
-    margin: 0 17px 0 0;
-    border: none;
+    @apply bg-gray-150 border-0 my-0 mr-4 ml-0 py-0 px-1 rounded-none h-12;
 }
 
 input.form-field-grid-row-input[type="checkbox"],
 input.form-field-grid-row-input[type="radio"] {
-    height: auto;
+    @apply h-auto;
 }
 
 .product-basic-1 .form-field-grid-row-input .pr-2 button[color="red"] {
-    border-radius: 100px;
-    height: 30px;
-    width: 30px;
+    @apply h-8 w-8 rounded-full;
 }
 .td-save-btn button {
-    margin: 0 10px 0 0;
-    height: 50px;
-    padding: 0 15px;
-    box-shadow: inherit;
-    border-radius: 0;
+    @apply shadow-none rounded-none py-0 px-4 h-12 my-0 mr-2 ml-0;
 }
 .td-save-btn button[color="blue"] {
-    background: #023950;
+    @apply bg-dark-blue;
 }
 .close-button button {
-    padding: 0;
-     width: 30px;
-    height: 30px;
-    border-radius: 100px;
-    background: #f56565;
+    @apply bg-red-500 p-0 h-8 w-8 rounded-full;
 }
  
 .header-top-banner {
@@ -155,35 +115,25 @@ input.form-field-grid-row-input[type="radio"] {
 }
 
 .sidebar-menu-left ul li a {
-    color: #ed8936;
-    text-decoration: none;
-    text-transform: capitalize;
+    @apply text-orange-500 no-underline capitalize;
 }
 
 .sidebar-menu-left ul li a:hover {
-    color: #fff;
+    @apply text-white;
 } 
 
 .bg-list-selected .close-button button {
     top: -2px;
 }
 .formfieldgrid-step3 button[color="blue"] {
-    height: 50px;
-    border-radius: 0;
-    box-shadow: inherit;
-    padding: 0 20px;
-    background: #023950;
+    /*height: 50px;*/
+    @apply bg-dark-blue rounded-none shadow-none py-0 px-5 h-12;
 }
 
 .organisation-block-bx .form-field-grid-row-input button.bg-gray-600 {
-    height: 50px;
-    box-shadow: inherit;
-    border-radius: 0;
-    padding: 0 20px;
-    background: #f8962d;
+    /*height: 50px;*/
+    @apply bg-dark-orange rounded-none shadow-none py-0 px-5 h-12;
 }
-.organisation-block-bx
-    .form-field-grid-row-input
-    button[color="blue"].bg-gray-600 {
-    background: #023950;
+.organisation-block-bx .form-field-grid-row-input button[color="blue"].bg-gray-600 {
+    @apply bg-dark-blue;
 }
